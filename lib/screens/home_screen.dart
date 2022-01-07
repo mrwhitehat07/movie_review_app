@@ -1,5 +1,9 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:movie_review/screens/navs/discover_screen.dart';
+import 'package:movie_review/screens/navs/home_screen.dart';
+import 'package:movie_review/screens/navs/notification_screen.dart';
+import 'package:movie_review/screens/navs/profile_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -27,47 +31,43 @@ class _HomeScreenState extends State<HomeScreen> {
       body: PageView(
         controller: _pageController,
         onPageChanged: _onNavItemTapped,
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         children: <Widget>[
           WillPopScope(
             onWillPop: () async {
               setState(() {
-                // _currentIndex = 0;
                 _onNavItemTapped(_currentIndex = 0);
               });
               return false;
             },
-            child: Container(),
+            child: const HomePage(),
           ),
           WillPopScope(
             onWillPop: () async {
               setState(() {
-                // _currentIndex = 0;
                 _onNavItemTapped(_currentIndex = 0);
               });
               return false;
             },
-            child: Container(),
+            child: const DiscoverScreen(),
           ),
           WillPopScope(
             onWillPop: () async {
               setState(() {
-                // _currentIndex = 0;
                 _onNavItemTapped(_currentIndex = 0);
               });
               return false;
             },
-            child: Container(),
+            child: const NotificationScreen(),
           ),
           WillPopScope(
             onWillPop: () async {
               setState(() {
-                // _currentIndex = 0;
                 _onNavItemTapped(_currentIndex = 0);
               });
               return false;
             },
-            child: Container(),
+            child: const ProfileScreen(),
           ),
         ],
       ),
