@@ -23,11 +23,9 @@ class ProfileCardTile extends StatelessWidget {
       child: Container(
         width: size.width,
         height: 60,
-        // color: AstralColor.black,
         alignment: Alignment.center,
         padding: EdgeInsets.symmetric(horizontal: size.width * 0.03),
         child: Row(
-          // mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Icon(
