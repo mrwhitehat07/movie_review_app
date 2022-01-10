@@ -94,7 +94,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         CustomButton(
                           title: "SIGN IN",
                           callBack: () {
-                            _formKey.currentState!.validate();
+                            // _formKey.currentState!.validate();
+                            Get.to(() => const HomeScreen());
                           },
                         ),
                         const SizedBox(height: 20),
