@@ -61,7 +61,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   onTap: () {},
                   child: Container(
                     width: size.width,
-                    height: 40,
+                    height: 60,
                     padding:
                         EdgeInsets.symmetric(horizontal: size.width * 0.03),
                     decoration: BoxDecoration(
