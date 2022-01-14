@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movie_review/routes/route.dart';
+import 'package:movie_review/screens/form/change_password.dart';
 import 'package:movie_review/screens/form/profile_update.dart';
 import 'package:movie_review/screens/home_screen.dart';
 import 'package:movie_review/screens/splash/splash_screen.dart';
@@ -22,6 +23,8 @@ class MyApp extends StatelessWidget {
         GetPage(name: MyRoutes.homePage, page: () => const HomeScreen()),
         GetPage(
             name: MyRoutes.profileEdit, page: () => const ProfileUpdateForm()),
+            GetPage(
+            name: MyRoutes.changePassword, page: () => const ChangePasswordScreen()),
       ],
     );
   }

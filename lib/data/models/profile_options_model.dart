@@ -22,11 +22,11 @@ List<ProfileOptions> options = const [
   ProfileOptions(
     title: "Change Password",
     icon: EvaIcons.lock,
-    route: "/",
+    route: MyRoutes.changePassword,
   ),
   ProfileOptions(
     title: "Settings",
     icon: EvaIcons.settings,
-    route: "/",
+    route: MyRoutes.settings,
   ),
 ];

@@ -8,12 +8,14 @@ class CustomInputBox extends StatelessWidget {
     required this.hint,
     required this.fieldName,
     this.inputType = TextInputType.text,
+    this.isPassword = false,
   }) : super(key: key);
 
   final TextEditingController controller;
   final String hint;
   final String fieldName;
   final TextInputType? inputType;
+  final bool? isPassword;
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +49,7 @@ class CustomInputBox extends StatelessWidget {
               ),
               border: InputBorder.none,
             ),
+            obscureText: isPassword!,
             keyboardType: inputType,
             maxLines: 1,
             style: const TextStyle(
