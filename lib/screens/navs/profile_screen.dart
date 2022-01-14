@@ -54,7 +54,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   return ProfileCardTile(
                     title: option.title,
                     icon: option.icon,
-                    onTap: () {},
+                    onTap: () {
+                      Get.toNamed(option.route);
+                    },
                   );
                 }).toList(),
                 InkWell(

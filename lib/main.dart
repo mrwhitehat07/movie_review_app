@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:movie_review/routes/route.dart';
+import 'package:movie_review/screens/form/profile_update.dart';
+import 'package:movie_review/screens/home_screen.dart';
 import 'package:movie_review/screens/splash/splash_screen.dart';
 
 void main() {
@@ -11,10 +14,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const GetMaterialApp(
+    return GetMaterialApp(
       title: 'Movie Review',
-      home: SplashScreen(),
+      initialRoute: MyRoutes.splashPage,
+      getPages: [
+        GetPage(name: MyRoutes.splashPage, page: () => const SplashScreen()),
+        GetPage(name: MyRoutes.homePage, page: () => const HomeScreen()),
+        GetPage(
+            name: MyRoutes.profileEdit, page: () => const ProfileUpdateForm()),
+      ],
     );
   }
 }
-

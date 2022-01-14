@@ -42,13 +42,10 @@ class ProfileCardTile extends StatelessWidget {
                 ),
               ),
             ),
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                EvaIcons.arrowIosForwardOutline,
-                color: Colors.white,
-              ),
-            )
+            const Icon(
+              EvaIcons.arrowIosForwardOutline,
+              color: Colors.white,
+            ),
           ],
         ),
       ),
