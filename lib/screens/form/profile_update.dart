@@ -81,7 +81,7 @@ class _ProfileUpdateFormState extends State<ProfileUpdateForm> {
                     bottom: -10,
                     right: -10,
                     child: CircleAvatar(
-                      backgroundColor: Colors.black87,
+                      backgroundColor: MyColors.secondaryBackground,
                       child: IconButton(
                         icon: const Icon(
                           EvaIcons.edit2Outline,
@@ -113,63 +113,42 @@ class _ProfileUpdateFormState extends State<ProfileUpdateForm> {
                                       const SizedBox(
                                         height: 20.0,
                                       ),
-                                      Row(
-                                        children: [
-                                          Expanded(
-                                            flex: 1,
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              children: [
-                                                IconButton(
-                                                  onPressed: () {
-                                                    pickPhoto(
-                                                        ImageSource.camera);
-                                                  },
-                                                  icon: const Icon(
-                                                    Icons.camera_alt,
-                                                  ),
-                                                  iconSize: 40.0,
-                                                ),
-                                                const SizedBox(
-                                                  height: 10.0,
-                                                ),
-                                                Container(
-                                                  width: size.width,
-                                                  alignment: Alignment.center,
-                                                  child: const Text("Camera"),
-                                                ),
-                                              ],
-                                            ),
+                                      InkWell(
+                                        onTap: () {
+                                          pickPhoto(ImageSource.camera);
+                                        },
+                                        child: SizedBox(
+                                          height: 40,
+                                          child: Row(
+                                            children: const [
+                                              Icon(
+                                                Icons.camera_alt,
+                                                size: 20.0,
+                                              ),
+                                              SizedBox(
+                                                width: 10.0,
+                                              ),
+                                              Text("Camera"),
+                                            ],
                                           ),
-                                          Expanded(
-                                            flex: 1,
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              children: [
-                                                IconButton(
-                                                  onPressed: () {
-                                                    pickPhoto(
-                                                        ImageSource.gallery);
-                                                  },
-                                                  icon: const Icon(
-                                                    Icons.photo_album_outlined,
-                                                  ),
-                                                  iconSize: 40.0,
-                                                ),
-                                                const SizedBox(
-                                                  height: 10.0,
-                                                ),
-                                                Container(
-                                                  width: size.width,
-                                                  alignment: Alignment.center,
-                                                  child: const Text("Gallery"),
-                                                ),
-                                              ],
-                                            ),
+                                        ),
+                                      ),
+                                      InkWell(
+                                        child: SizedBox(
+                                          height: 40,
+                                          child: Row(
+                                            children: const [
+                                              Icon(
+                                                Icons.photo_album_outlined,
+                                                size: 22.0,
+                                              ),
+                                              SizedBox(
+                                                width: 10.0,
+                                              ),
+                                              Text("Gallery"),
+                                            ],
                                           ),
-                                        ],
+                                        ),
                                       ),
                                       const SizedBox(
                                         height: 20.0,
