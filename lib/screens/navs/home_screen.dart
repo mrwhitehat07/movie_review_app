@@ -11,6 +11,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List _popMovies = ["Kalle", "Vaale", "Salle", "Taale"];
 
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;

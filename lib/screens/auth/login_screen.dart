@@ -6,6 +6,7 @@ import 'package:movie_review/screens/home_screen.dart';
 import 'package:movie_review/utils/colors/colors.dart';
 import 'package:movie_review/widgets/custom_button.dart';
 import 'package:movie_review/widgets/input_box.dart';
+import 'package:http/http.dart' as http;
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -19,6 +20,12 @@ class _LoginScreenState extends State<LoginScreen> {
   final _passwordController = TextEditingController();
   bool isVisible = false;
   final _formKey = GlobalKey<FormState>();
+
+  getData() async {
+    final res = await http.get(Uri.parse(
+        'http://d7d2-2400-1a00-b040-4613-fd1b-a4fa-da26-d6c5.ngrok.io/movie/'));
+    debugPrint(res.body.toString());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +102,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           title: "SIGN IN",
                           callBack: () {
                             // _formKey.currentState!.validate();
-                            Get.to(() => const HomeScreen());
+                            // Get.to(() => const HomeScreen());
+                            debugPrint("dsasd");
+                            getData();
                           },
                         ),
                         const SizedBox(height: 20),
