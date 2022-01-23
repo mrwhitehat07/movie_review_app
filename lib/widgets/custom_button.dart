@@ -4,11 +4,11 @@ import 'package:movie_review/utils/colors/colors.dart';
 class CustomButton extends StatelessWidget {
   const CustomButton({
     Key? key,
-    required this.title,
+    required this.child,
     required this.callBack,
   }) : super(key: key);
 
-  final String title;
+  final Widget child;
   final Function callBack;
 
   @override
@@ -27,14 +27,7 @@ class CustomButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
         ),
         alignment: Alignment.center,
-        child: Text(
-          title,
-          style: const TextStyle(
-            color: Colors.black,
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
+        child: child,
       ),
     );
   }

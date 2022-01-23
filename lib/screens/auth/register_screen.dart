@@ -91,7 +91,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                       const SizedBox(height: 20),
                       CustomButton(
-                        title: "SIGN UP",
+                        child:  Text(
+          "sing up".toUpperCase(),
+          style: const TextStyle(
+            color: Colors.black,
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
                         callBack: () {
                           Get.to(() => const HomeScreen());
                         },
