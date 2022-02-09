@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:movie_review/routes/route.dart';
 import 'package:movie_review/screens/auth/login_screen.dart';
 import 'package:movie_review/screens/home_screen.dart';
 
@@ -16,7 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Timer(const Duration(seconds: 3), () {
-      Get.to(() => const LoginScreen());
+      Get.toNamed(MyRoutes.homePage);
     });
   }
 
