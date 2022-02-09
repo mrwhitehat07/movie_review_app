@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_review/utils/colors/colors.dart';
 
 class MovieCard extends StatelessWidget {
   const MovieCard({
@@ -6,16 +7,21 @@ class MovieCard extends StatelessWidget {
     required this.name,
     required this.image,
     required this.releaseDate,
+    required this.onTap,
   }) : super(key: key);
 
   final String name;
   final String releaseDate;
   final String image;
+  final Function onTap;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        onTap();
+      },
+      focusColor: MyColors.secondaryBackground,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -23,10 +29,12 @@ class MovieCard extends StatelessWidget {
             width: 160,
             height: 150,
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: MyColors.secondaryBackground,
               image: DecorationImage(
                 image: NetworkImage(image),
+                fit: BoxFit.cover,
               ),
+              borderRadius: BorderRadius.circular(10),
             ),
           ),
           const SizedBox(height: 5),
