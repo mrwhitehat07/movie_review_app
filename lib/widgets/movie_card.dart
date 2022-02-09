@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 
 class MovieCard extends StatelessWidget {
   const MovieCard({
-    Key? key, 
-    required this.name, 
+    Key? key,
+    required this.name,
+    required this.image,
     required this.releaseDate,
-  })  : 
-        super(key: key);
+  }) : super(key: key);
 
   final String name;
   final String releaseDate;
+  final String image;
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +22,11 @@ class MovieCard extends StatelessWidget {
           Container(
             width: 160,
             height: 150,
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               color: Colors.white,
+              image: DecorationImage(
+                image: NetworkImage(image),
+              ),
             ),
           ),
           const SizedBox(height: 5),

@@ -11,6 +11,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   HomeBloc() : super(HomeInitial()) {
     on<HomeEvent>((event, emit) {});
+    on<LoadHomeData>((event, emit) => getAllMovies(event, emit));
   }
 
   Future<void> getAllMovies(LoadHomeData event, Emitter<HomeState> emit) async {

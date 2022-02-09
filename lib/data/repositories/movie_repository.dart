@@ -8,7 +8,7 @@ class MovieRespository {
   Future<List<Movie>> getAllMovies() async {
     try {
       final res = await http.get(Uri.parse(API.baseUrl + API.allMovies));
-      final data = jsonDecode(res.body);
+      List data = jsonDecode(res.body);
       List<Movie> movies = data.map((movie) => Movie.fromJson(movie)).toList();
       return movies;
     } catch (e) {
