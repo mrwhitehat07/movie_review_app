@@ -8,6 +8,7 @@ class Movie {
   final String? trailer;
   final List<String>? genres;
   final List<Crew>? crew;
+  final String? description;
 
   Movie({
     this.id,
@@ -17,15 +18,15 @@ class Movie {
     this.trailer,
     this.genres,
     this.crew,
+    this.description,
   });
 
   factory Movie.fromJson(Map<String, dynamic> json) {
     return Movie(
-      id: json["id"],
-      name: json["title"],
-      poster: json["poster"],
-      releaseDate: json["release_date"]
-    );
+        id: json["id"],
+        name: json["title"],
+        poster: json["poster"],
+        releaseDate: json["release_date"]);
   }
 
   factory Movie.fromDetailJson(Map<String, dynamic> json) {
@@ -36,8 +37,8 @@ class Movie {
       trailer: json["trailer"],
       releaseDate: json["release_date"],
       genres: json["genre"],
-      crew: json["crew"]
+      description: (json["description"] != null) ? json["description"] : "",
+      crew: json["crew"],
     );
   }
-
 }

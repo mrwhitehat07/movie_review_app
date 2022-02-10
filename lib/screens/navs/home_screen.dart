@@ -82,7 +82,7 @@ class _HomePageState extends State<HomePage> {
                                       releaseDate:
                                           state.movies[index].releaseDate!,
                                       onTap: () {
-                                        Get.to(MovieDetailScreen(id: state.movies[index].id!,));
+                                        Get.to(() => MovieDetailScreen(id: state.movies[index].id!,));
                                       }),
                                 );
                               },
