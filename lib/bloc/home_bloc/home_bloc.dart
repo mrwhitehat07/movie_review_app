@@ -7,16 +7,17 @@ part 'home_event.dart';
 part 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
-  MovieRespository _movieRespository = MovieRespository();
+  MovieRespository movieRespository = MovieRespository();
 
   HomeBloc() : super(HomeInitial()) {
     on<HomeEvent>((event, emit) {});
+    on<LoadHomeData>((event, emit) => getAllMovies(event, emit));
   }
 
   Future<void> getAllMovies(LoadHomeData event, Emitter<HomeState> emit) async {
     try {
       emit(HomeLoading());
-      List<Movie> movies = await _movieRespository.getAllMovies();
+      List<Movie> movies = await movieRespository.getAllMovies();
       emit(HomeLoaded(movies: movies));
     } catch (e) {
       emit(HomeLoadFailed(message: e.toString()));

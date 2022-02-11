@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:movie_review/bloc/home_bloc/home_bloc.dart';
+import 'package:movie_review/screens/other/movie_detail_screen.dart';
+import 'package:movie_review/utils/apis/apis.dart';
 import 'package:movie_review/widgets/movie_card.dart';
+import 'package:movie_review/widgets/movie_loading_card.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -17,9 +21,11 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return BlocProvider(
-      create: (context) => HomeBloc(),
+      create: (context) => HomeBloc()..add(LoadHomeData()),
       child: BlocConsumer<HomeBloc, HomeState>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          debugPrint(state.toString());
+        },
         builder: (context, state) {
           return Scaffold(
             backgroundColor: Colors.black,
@@ -58,25 +64,49 @@ class _HomePageState extends State<HomePage> {
                             width: size.width,
                             height: 200,
                             child: ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                itemCount: _popMovies.length,
-                                itemBuilder: (context, index) {
-                                  return Padding(
-                                    padding: EdgeInsets.only(
-                                      left: (index == 0) ? 20 : 2,
-                                      right: (index == (_popMovies.length - 1))
-                                          ? 20
-                                          : 2,
-                                    ),
-                                    child: MovieCard(
-                                      name: _popMovies[index],
-                                      releaseDate: _popMovies[index],
-                                    ),
-                                  );
-                                }),
+                              physics: const BouncingScrollPhysics(),
+                              scrollDirection: Axis.horizontal,
+                              itemCount: state.movies.length,
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                  padding: EdgeInsets.only(
+                                    left: (index == 0) ? 20 : 5,
+                                    right: (index == (state.movies.length - 1))
+                                        ? 20
+                                        : 2,
+                                  ),
+                                  child: MovieCard(
+                                      name: state.movies[index].name!,
+                                      image: API.baseUrl +
+                                          state.movies[index].poster!,
+                                      releaseDate:
+                                          state.movies[index].releaseDate!,
+                                      onTap: () {
+                                        Get.to(() => MovieDetailScreen(
+                                              id: state.movies[index].id!,
+                                            ));
+                                      }),
+                                );
+                              },
+                            ),
                           )
-                        : const Center(
-                            child: CircularProgressIndicator(),
+                        : SizedBox(
+                            width: size.width,
+                            height: 200,
+                            child: ListView.builder(
+                              physics: const NeverScrollableScrollPhysics(),
+                              scrollDirection: Axis.horizontal,
+                              itemCount: 3,
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                  padding: EdgeInsets.only(
+                                    left: (index == 0) ? 20 : 8,
+                                    right: (index == (3 - 1)) ? 20 : 2,
+                                  ),
+                                  child: const MovieLoadingCard(),
+                                );
+                              },
+                            ),
                           ),
                     const SizedBox(height: 20),
                     Container(
@@ -104,12 +134,6 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
                           ),
-                          // const CircleAvatar(
-                          //   radius: 40,
-                          //   backgroundImage: AssetImage(
-                          //     "assets/images/profile.jpg",
-                          //   ),
-                          // ),
                         ],
                       ),
                     )

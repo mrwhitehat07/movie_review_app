@@ -1,28 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:movie_review/utils/colors/colors.dart';
+import 'package:intl/intl.dart';
 
 class MovieCard extends StatelessWidget {
   const MovieCard({
-    Key? key, 
-    required this.name, 
+    Key? key,
+    required this.name,
+    required this.image,
     required this.releaseDate,
-  })  : 
-        super(key: key);
+    required this.onTap,
+  }) : super(key: key);
 
   final String name;
   final String releaseDate;
+  final String image;
+  final Function onTap;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        onTap();
+      },
+      focusColor: MyColors.secondaryBackground,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
             width: 160,
             height: 150,
-            decoration: const BoxDecoration(
-              color: Colors.white,
+            decoration: BoxDecoration(
+              color: MyColors.secondaryBackground,
+              image: DecorationImage(
+                image: NetworkImage(image),
+                fit: BoxFit.cover,
+              ),
+              borderRadius: BorderRadius.circular(10),
             ),
           ),
           const SizedBox(height: 5),
@@ -37,7 +50,7 @@ class MovieCard extends StatelessWidget {
             ),
           ),
           Text(
-            releaseDate,
+            DateFormat.yMMMEd().format(DateTime.parse(releaseDate)),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: const TextStyle(

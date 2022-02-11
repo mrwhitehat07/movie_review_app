@@ -18,13 +18,15 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Movie Review',
       initialRoute: MyRoutes.splashPage,
+      debugShowCheckedModeBanner: false,
       getPages: [
         GetPage(name: MyRoutes.splashPage, page: () => const SplashScreen()),
         GetPage(name: MyRoutes.homePage, page: () => const HomeScreen()),
         GetPage(
             name: MyRoutes.profileEdit, page: () => const ProfileUpdateForm()),
-            GetPage(
-            name: MyRoutes.changePassword, page: () => const ChangePasswordScreen()),
+        GetPage(
+            name: MyRoutes.changePassword,
+            page: () => const ChangePasswordScreen()),
       ],
     );
   }

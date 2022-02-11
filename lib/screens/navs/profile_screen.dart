@@ -2,7 +2,7 @@ import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movie_review/data/models/profile_options_model.dart';
-import 'package:movie_review/utils/colors/colors.dart';
+import 'package:movie_review/routes/route.dart';
 import 'package:movie_review/widgets/profille_tile.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -60,7 +60,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   );
                 }).toList(),
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context)
+                        .pushReplacementNamed(MyRoutes.loginPage);
+                  },
                   child: Container(
                     width: size.width,
                     height: 60,
