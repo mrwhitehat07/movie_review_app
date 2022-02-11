@@ -17,18 +17,15 @@ class MovieRespository {
   }
 
   Future<Movie> getMovieById(int id) async {
-    try {
-      final res =
-          await http.get(Uri.parse(API.baseUrl + API.allMovies + "$id"));
-      final data = jsonDecode(res.body);
-      print("json");
-      print(data);
-      Movie movie = Movie.fromDetailJson(data);
-      print("dart");
-      print(movie);
-      return movie;
-    } catch (e) {
-      return Future.error(e);
-    }
+    // try {
+    final res = await http.get(Uri.parse(API.baseUrl + API.allMovies + "$id"));
+    final data = jsonDecode(res.body);
+    Movie movie = Movie.fromDetailJson(data);
+    print("object");
+    print(movie);
+    return movie;
+    // } catch (e) {
+    //   return Future.error(e);
+    // }
   }
 }

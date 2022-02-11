@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_review/utils/colors/colors.dart';
+import 'package:intl/intl.dart';
 
 class MovieCard extends StatelessWidget {
   const MovieCard({
@@ -49,7 +50,7 @@ class MovieCard extends StatelessWidget {
             ),
           ),
           Text(
-            releaseDate,
+            DateFormat.yMMMEd().format(DateTime.parse(releaseDate)),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: const TextStyle(

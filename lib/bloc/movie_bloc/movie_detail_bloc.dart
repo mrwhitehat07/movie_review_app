@@ -7,7 +7,7 @@ part 'movie_detail_event.dart';
 part 'movie_detail_state.dart';
 
 class MovieDetailBloc extends Bloc<MovieDetailEvent, MovieDetailState> {
-  MovieRespository _movieRespository = MovieRespository();
+  MovieRespository movieRespository = MovieRespository();
   MovieDetailBloc() : super(MovieDetailInitial()) {
     on<MovieDetailEvent>((event, emit) {});
     on<LoadMovieDetail>((event, emit) => getMovieDetails(event, emit));
@@ -15,14 +15,13 @@ class MovieDetailBloc extends Bloc<MovieDetailEvent, MovieDetailState> {
 
   Future<void> getMovieDetails(
       LoadMovieDetail event, Emitter<MovieDetailState> emit) async {
-    try {
+    // try {
       emit(MovieDetailLoading());
-      Movie movie = await _movieRespository.getMovieById(event.id);
-      print("bloc");
+      Movie movie = await movieRespository.getMovieById(event.id);
       print(movie);
       emit(MovieDetailLoadSuccess(movie: movie));
-    } catch (e) {
-      emit(MovieDetailLoadFailed(message: e.toString()));
-    }
+    // } catch (e) {
+    //   emit(MovieDetailLoadFailed(message: e.toString()));
+    // }
   }
 }
