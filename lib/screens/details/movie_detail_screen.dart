@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:movie_review/bloc/movie_bloc/movie_detail_bloc.dart';
-import 'package:movie_review/screens/other/movie_loading_screen.dart';
+import 'package:movie_review/screens/details/movie_loading_screen.dart';
 import 'package:movie_review/utils/apis/apis.dart';
 import 'package:movie_review/utils/colors/colors.dart';
 

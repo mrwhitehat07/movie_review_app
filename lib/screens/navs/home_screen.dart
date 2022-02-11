@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:movie_review/bloc/home_bloc/home_bloc.dart';
-import 'package:movie_review/screens/other/movie_detail_screen.dart';
+import 'package:movie_review/screens/details/movie_detail_screen.dart';
 import 'package:movie_review/utils/apis/apis.dart';
 import 'package:movie_review/widgets/movie_card.dart';
 import 'package:movie_review/widgets/movie_loading_card.dart';
@@ -122,21 +122,39 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     const SizedBox(height: 15),
-                    SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        children: [
-                          ..._popMovies.map(
-                            (e) => const CircleAvatar(
-                              radius: 40,
-                              backgroundImage: AssetImage(
-                                "assets/images/profile.jpg",
-                              ),
+                    (state is HomeLoaded)
+                        ? SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                ...state.celebs.map(
+                                  (e) => Container(
+                                    margin: const EdgeInsets.only(right: 10),
+                                    child: Column(
+                                      children: [
+                                        CircleAvatar(
+                                          radius: 40,
+                                          backgroundImage: NetworkImage(
+                                              API.baseUrl + e.image!),
+                                        ),
+                                        const SizedBox(height: 5),
+                                        Text(
+                                          "${e.fname} ${e.lname}",
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.normal,
+                                            fontSize: 14,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                )
+                              ],
                             ),
-                          ),
-                        ],
-                      ),
-                    )
+                          )
+                        : Text("data")
                   ],
                 ),
               ),

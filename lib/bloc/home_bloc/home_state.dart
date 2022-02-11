@@ -9,7 +9,11 @@ class HomeLoading extends HomeState {}
 
 class HomeLoaded extends HomeState {
   final List<Movie> movies;
-  HomeLoaded({required this.movies});
+  final List<Celebs> celebs;
+  HomeLoaded({
+    required this.movies,
+    required this.celebs,
+  });
 
   @override
   List<Object?> get props => [movies];
