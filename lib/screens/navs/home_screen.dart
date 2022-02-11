@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:movie_review/bloc/home_bloc/home_bloc.dart';
+import 'package:movie_review/screens/details/celebs_detail_screen.dart';
 import 'package:movie_review/screens/details/movie_detail_screen.dart';
 import 'package:movie_review/utils/apis/apis.dart';
 import 'package:movie_review/widgets/movie_card.dart';
@@ -15,8 +16,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List _popMovies = ["Kalle", "Vaale", "Salle", "Taale"];
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -129,25 +128,34 @@ class _HomePageState extends State<HomePage> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 ...state.celebs.map(
-                                  (e) => Container(
-                                    margin: const EdgeInsets.only(right: 10),
-                                    child: Column(
-                                      children: [
-                                        CircleAvatar(
-                                          radius: 40,
-                                          backgroundImage: NetworkImage(
-                                              API.baseUrl + e.image!),
+                                  (e) => InkWell(
+                                    onTap: () {
+                                      Get.to(
+                                        () => CelebsDetailScreen(
+                                          id: e.id!,
                                         ),
-                                        const SizedBox(height: 5),
-                                        Text(
-                                          "${e.fname} ${e.lname}",
-                                          style: const TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.normal,
-                                            fontSize: 14,
+                                      );
+                                    },
+                                    child: Container(
+                                      margin: const EdgeInsets.only(right: 10),
+                                      child: Column(
+                                        children: [
+                                          CircleAvatar(
+                                            radius: 40,
+                                            backgroundImage: NetworkImage(
+                                                API.baseUrl + e.image!),
                                           ),
-                                        ),
-                                      ],
+                                          const SizedBox(height: 5),
+                                          Text(
+                                            "${e.fname} ${e.lname}",
+                                            style: const TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.normal,
+                                              fontSize: 14,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 )

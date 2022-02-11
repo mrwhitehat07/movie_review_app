@@ -50,7 +50,7 @@ class MovieCard extends StatelessWidget {
             ),
           ),
           Text(
-            DateFormat.yMMMEd().format(DateTime.parse(releaseDate)),
+            DateFormat.yMMMd().format(DateTime.parse(releaseDate)),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: const TextStyle(

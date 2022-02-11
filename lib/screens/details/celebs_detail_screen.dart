@@ -4,10 +4,14 @@ import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:movie_review/bloc/celebs_bloc/celebs_detail_bloc.dart';
 import 'package:movie_review/bloc/movie_bloc/movie_detail_bloc.dart';
+import 'package:movie_review/screens/details/movie_detail_screen.dart';
 import 'package:movie_review/screens/details/movie_loading_screen.dart';
 import 'package:movie_review/utils/apis/apis.dart';
 import 'package:movie_review/utils/colors/colors.dart';
+import 'package:movie_review/widgets/movie_card.dart';
 
 class CelebsDetailScreen extends StatefulWidget {
   final int id;
@@ -23,14 +27,14 @@ class _CelebsDetailScreenState extends State<CelebsDetailScreen> {
     Size size = MediaQuery.of(context).size;
     return BlocProvider(
       create: (context) =>
-          MovieDetailBloc()..add(LoadMovieDetail(id: widget.id)),
-      child: BlocConsumer<MovieDetailBloc, MovieDetailState>(
+          CelebsDetailBloc()..add(LoadCelebsDetail(id: widget.id)),
+      child: BlocConsumer<CelebsDetailBloc, CelebsDetailState>(
         listener: (context, state) {
           print(state.toString());
         },
         builder: (context, state) {
-          if (state is MovieDetailLoadSuccess) {
-            final movie = state.movie;
+          if (state is CelebsDetailLoadSuccess) {
+            final celebs = state.celebs;
             return Scaffold(
               backgroundColor: MyColors.background,
               body: SafeArea(
@@ -47,7 +51,7 @@ class _CelebsDetailScreenState extends State<CelebsDetailScreen> {
                               image: DecorationImage(
                                 fit: BoxFit.cover,
                                 image:
-                                    NetworkImage(API.baseUrl + movie.poster!),
+                                    NetworkImage(API.baseUrl + celebs.image!),
                               ),
                             ),
                             child: BackdropFilter(
@@ -56,66 +60,15 @@ class _CelebsDetailScreenState extends State<CelebsDetailScreen> {
                           ),
                           Positioned(
                             top: 10,
-                            right: 10,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                IconButton(
-                                  onPressed: () {
-                                    Get.back();
-                                  },
-                                  icon: const Icon(
-                                    EvaIcons.arrowBack,
-                                    size: 30,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                IconButton(
-                                  onPressed: () {},
-                                  icon: const Icon(
-                                    EvaIcons.heart,
-                                    size: 30,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Positioned(
-                            bottom: 10,
                             left: 10,
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 10,
-                                vertical: 4,
-                              ),
-                              decoration: BoxDecoration(
-                                color: Colors.transparent,
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              child: InkWell(
-                                onTap: () {
-                                  debugPrint("Playing");
-                                },
-                                child: Row(
-                                  children: [
-                                    SizedBox(
-                                      width: 50,
-                                      height: 50,
-                                      child: Image.asset(
-                                          "assets/logos/play_icon.png"),
-                                    ),
-                                    const SizedBox(width: 10),
-                                    const Text(
-                                      "Play",
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 18,
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                            child: IconButton(
+                              onPressed: () {
+                                Get.back();
+                              },
+                              icon: const Icon(
+                                EvaIcons.arrowBack,
+                                size: 30,
+                                color: Colors.white,
                               ),
                             ),
                           ),
@@ -128,11 +81,26 @@ class _CelebsDetailScreenState extends State<CelebsDetailScreen> {
                           top: 4,
                         ),
                         child: Text(
-                          movie.name!,
+                          "${celebs.fname} ${celebs.lname}",
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 22,
                             fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          left: 18,
+                          top: 4,
+                        ),
+                        child: Text(
+                          DateFormat.yMMMd()
+                              .format(DateTime.parse(celebs.dob!)),
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.normal,
                           ),
                         ),
                       ),
@@ -143,7 +111,7 @@ class _CelebsDetailScreenState extends State<CelebsDetailScreen> {
                         ),
                         child: Row(
                           children: [
-                            ...movie.genres!.map(
+                            ...celebs.role!.map(
                               (e) => Container(
                                 padding: const EdgeInsets.symmetric(
                                   horizontal: 15,
@@ -174,7 +142,7 @@ class _CelebsDetailScreenState extends State<CelebsDetailScreen> {
                           top: 4,
                         ),
                         child: Text(
-                          movie.description!,
+                          celebs.bio!,
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 17,
@@ -190,99 +158,50 @@ class _CelebsDetailScreenState extends State<CelebsDetailScreen> {
                           top: 4,
                         ),
                         child: Text(
-                          "Crews",
+                          "Movies",
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: 17,
-                            fontWeight: FontWeight.normal,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
-                      const SizedBox(height: 15),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          left: 18,
-                        ),
-                        child: Row(
-                          children: [
-                            ...movie.crew!.map(
-                              (e) => Container(
-                                margin: const EdgeInsets.only(right: 10),
-                                child: Column(
-                                  children: [
-                                    CircleAvatar(
-                                      backgroundColor:
-                                          MyColors.secondaryBackground,
-                                      radius: 40,
-                                    ),
-                                    // Text(e.fname),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          left: 18,
-                          right: 18,
-                          top: 4,
-                        ),
-                        child: RichText(
-                          text: TextSpan(
-                              text: "Director : ",
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 14,
-                                fontWeight: FontWeight.normal,
-                              ),
-                              children: [
-                                TextSpan(
-                                  text: movie.director!,
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.normal,
-                                  ),
-                                )
-                              ]),
-                        ),
-                      ),
                       const SizedBox(height: 10),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          left: 18,
-                          right: 18,
-                          top: 4,
-                        ),
-                        child: RichText(
-                          text: TextSpan(
-                              text: "Producer : ",
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 14,
-                                fontWeight: FontWeight.normal,
+                      SizedBox(
+                        width: size.width,
+                        height: 200,
+                        child: ListView.builder(
+                          physics: const BouncingScrollPhysics(),
+                          scrollDirection: Axis.horizontal,
+                          itemCount: state.movies.length,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: EdgeInsets.only(
+                                left: (index == 0) ? 20 : 5,
+                                right: (index == (state.movies.length - 1))
+                                    ? 20
+                                    : 2,
                               ),
-                              children: [
-                                TextSpan(
-                                  text: movie.producer!,
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.normal,
-                                  ),
-                                )
-                              ]),
+                              child: MovieCard(
+                                  name: state.movies[index].name!,
+                                  image:
+                                      API.baseUrl + state.movies[index].poster!,
+                                  releaseDate: state.movies[index].releaseDate!,
+                                  onTap: () {
+                                    Get.to(() => MovieDetailScreen(
+                                          id: state.movies[index].id!,
+                                        ));
+                                  }),
+                            );
+                          },
                         ),
-                      ),
+                      )
                     ],
                   ),
                 ),
               ),
             );
-          } else if (state is MovieDetailLoadFailed) {
+          } else if (state is CelebsDetailLoadFailed) {
             return Scaffold(
               backgroundColor: MyColors.background,
               body: SafeArea(
@@ -299,11 +218,7 @@ class _CelebsDetailScreenState extends State<CelebsDetailScreen> {
                         ),
                         const SizedBox(height: 20),
                         OutlinedButton(
-                          onPressed: () {
-                            MovieDetailBloc().add(
-                              LoadMovieDetail(id: widget.id),
-                            );
-                          },
+                          onPressed: () {},
                           child: const Text(
                             "Refresh",
                             style: TextStyle(

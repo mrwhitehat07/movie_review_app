@@ -34,8 +34,6 @@ class MovieRespository {
     final res = await http.get(Uri.parse(API.baseUrl + API.allMovies + "$id"));
     final data = jsonDecode(res.body);
     Movie movie = Movie.fromDetailJson(data);
-    print("object");
-    print(movie);
     return movie;
     } catch (e) {
       return Future.error(e);
