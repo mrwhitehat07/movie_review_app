@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:movie_review/data/models/user_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:movie_review/data/repositories/secure_storage.dart';
 import 'package:movie_review/utils/apis/apis.dart';
 
 class UserRepository {
@@ -16,6 +17,7 @@ class UserRepository {
         final data = jsonDecode(res.body);
         User userd = User.fromJson(data);
         if (userd.message == "success") {
+          await TokenStorage.saveToken(userd.accessToken!);
           return userd;
         } else {
           return Future.error("Login Failed");
@@ -39,6 +41,26 @@ class UserRepository {
       if (res.statusCode == 200) {
         final data = jsonDecode(res.body);
         User userd = User.fromJson(data);
+        return userd;
+      } else {
+        return Future.error("Error occurred");
+      }
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  Future<User> getUser(String token) async {
+    try {
+      Map<String, String> headers = {"Authorization": "Bearer $token"};
+      print(headers);
+      final url = Uri.parse(API.baseUrl + API.profileUrl);
+      final res = await http.get(url, headers: headers);
+      if (res.statusCode == 200) {
+        final data = jsonDecode(res.body)["profile"];
+        print(res.body);
+        User userd = User.fromProfileJson(data);
+        print(userd);
         return userd;
       } else {
         return Future.error("Error occurred");

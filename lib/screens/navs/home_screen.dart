@@ -5,6 +5,7 @@ import 'package:movie_review/bloc/home_bloc/home_bloc.dart';
 import 'package:movie_review/screens/details/celebs_detail_screen.dart';
 import 'package:movie_review/screens/details/movie_detail_screen.dart';
 import 'package:movie_review/utils/apis/apis.dart';
+import 'package:movie_review/utils/colors/colors.dart';
 import 'package:movie_review/widgets/movie_card.dart';
 import 'package:movie_review/widgets/movie_loading_card.dart';
 
@@ -122,47 +123,73 @@ class _HomePageState extends State<HomePage> {
                     ),
                     const SizedBox(height: 15),
                     (state is HomeLoaded)
-                        ? SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                ...state.celebs.map(
-                                  (e) => InkWell(
-                                    onTap: () {
-                                      Get.to(
-                                        () => CelebsDetailScreen(
-                                          id: e.id!,
-                                        ),
-                                      );
-                                    },
-                                    child: Container(
-                                      margin: const EdgeInsets.only(right: 10),
-                                      child: Column(
-                                        children: [
-                                          CircleAvatar(
-                                            radius: 40,
-                                            backgroundImage: NetworkImage(
-                                                API.baseUrl + e.image!),
+                        ? Container(
+                            padding: const EdgeInsets.only(left: 18),
+                            width: double.infinity,
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  ...state.celebs.map(
+                                    (e) => InkWell(
+                                      onTap: () {
+                                        Get.to(
+                                          () => CelebsDetailScreen(
+                                            id: e.id!,
                                           ),
-                                          const SizedBox(height: 5),
-                                          Text(
-                                            "${e.fname} ${e.lname}",
-                                            style: const TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.normal,
-                                              fontSize: 14,
+                                        );
+                                      },
+                                      child: Container(
+                                        margin:
+                                            const EdgeInsets.only(right: 10),
+                                        child: Column(
+                                          children: [
+                                            CircleAvatar(
+                                              radius: 50,
+                                              backgroundImage: NetworkImage(
+                                                  API.baseUrl + e.image!),
                                             ),
-                                          ),
-                                        ],
+                                            const SizedBox(height: 5),
+                                            Text(
+                                              "${e.fname} ${e.lname}",
+                                              style: const TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.normal,
+                                                fontSize: 14,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                )
-                              ],
+                                  )
+                                ],
+                              ),
                             ),
                           )
-                        : Text("data")
+                        : SizedBox(
+                            width: size.width,
+                            height: 100,
+                            child: ListView.builder(
+                              physics: const NeverScrollableScrollPhysics(),
+                              scrollDirection: Axis.horizontal,
+                              itemCount: 3,
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                  padding: EdgeInsets.only(
+                                    left: (index == 0) ? 20 : 8,
+                                    right: (index == (3 - 1)) ? 20 : 2,
+                                  ),
+                                  child: const CircleAvatar(
+                                    backgroundColor:
+                                        MyColors.secondaryBackground,
+                                    radius: 40,
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
                   ],
                 ),
               ),

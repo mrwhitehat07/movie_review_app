@@ -24,3 +24,4 @@ class AuthFailed extends AuthState {
 }
 
 class NoUser extends AuthState {}
+

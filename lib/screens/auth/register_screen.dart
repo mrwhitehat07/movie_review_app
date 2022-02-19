@@ -110,33 +110,32 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             const SizedBox(height: 20),
                             CustomButton(
                               child: (state is AuthLoading)
-                                      ? const SizedBox(
-                                          width: 20,
-                                          height: 20,
-                                          child: CircularProgressIndicator(
-                                              strokeWidth: 1,
-                                              color: Colors.black),
-                                        )
-                                      : Text(
-                                          "sign up".toUpperCase(),
-                                          style: const TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.bold,
+                                  ? const SizedBox(
+                                      width: 20,
+                                      height: 20,
+                                      child: CircularProgressIndicator(
+                                          strokeWidth: 1, color: Colors.black),
+                                    )
+                                  : Text(
+                                      "sign up".toUpperCase(),
+                                      style: const TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                              callBack: () {
+                                (state is AuthLoading)
+                                    ? null
+                                    : BlocProvider.of<AuthBloc>(context).add(
+                                        RegisterBegin(
+                                          user: User(
+                                            username: _usernameController.text,
+                                            email: _emailController.text,
+                                            password: _passwordController.text,
                                           ),
                                         ),
-                              callBack: () {
-                                 (state is AuthLoading)
-                                        ? null
-                                        : BlocProvider.of<AuthBloc>(context)
-                                            .add(RegisterBegin(
-                                                user: User(
-                                                  username: _usernameController.text,
-                                                    email:
-                                                        _emailController.text,
-                                                    password:
-                                                        _passwordController
-                                                            .text)));
+                                      );
                               },
                             ),
                           ],
