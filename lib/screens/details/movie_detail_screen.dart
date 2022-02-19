@@ -210,7 +210,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                               (e) => Container(
                                 margin: const EdgeInsets.only(right: 10),
                                 child: Column(
-                                  children: [
+                                  children: const [
                                     CircleAvatar(
                                       backgroundColor:
                                           MyColors.secondaryBackground,
@@ -301,9 +301,9 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                         const SizedBox(height: 20),
                         OutlinedButton(
                           onPressed: () {
-                            MovieDetailBloc().add(
-                              LoadMovieDetail(id: widget.id),
-                            );
+                            BlocProvider.of<MovieDetailBloc>(context)
+                                .add(LoadMovieDetail(id: widget.id));
+            
                           },
                           child: const Text(
                             "Refresh",

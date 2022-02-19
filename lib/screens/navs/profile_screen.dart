@@ -6,6 +6,7 @@ import 'package:movie_review/bloc/auth_bloc/auth_bloc.dart';
 import 'package:movie_review/data/models/profile_options_model.dart';
 import 'package:movie_review/routes/route.dart';
 import 'package:movie_review/screens/auth/login_screen.dart';
+import 'package:movie_review/utils/apis/apis.dart';
 import 'package:movie_review/utils/colors/colors.dart';
 import 'package:movie_review/widgets/profille_tile.dart';
 
@@ -25,6 +26,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
       child: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
           debugPrint(state.toString());
+          if (state is LoggedOut) {
+            Get.toNamed(MyRoutes.homePage);
+            Get.snackbar(
+              "Error",
+              "Logged out",
+              snackPosition: SnackPosition.BOTTOM,
+              colorText: Colors.red,
+              duration: const Duration(seconds: 1),
+              backgroundColor: Colors.white,
+            );
+          }
         },
         builder: (context, state) {
           if (state is AuthSuccess) {
@@ -35,18 +47,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
-                        const Center(
+                        Center(
                           child: CircleAvatar(
                             radius: 45,
-                            backgroundImage: AssetImage(
-                              "assets/images/profile.jpg",
+                            backgroundImage: NetworkImage(
+                              API.baseUrl + state.user.avatar!,
                             ),
                           ),
                         ),
                         const SizedBox(height: 10),
-                        const Text(
-                          "Cho Boah",
-                          style: TextStyle(
+                        Text(
+                          "${state.user.fname} ${state.user.lname}",
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 20,
                             fontWeight: FontWeight.w500,
@@ -54,7 +66,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
                         const SizedBox(height: 5),
                         const Text(
-                          "choboah@gmail.com",
+                          "mbishal605@gmail.com",
                           style: TextStyle(
                             color: Colors.grey,
                             fontSize: 16,
@@ -73,8 +85,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         }).toList(),
                         InkWell(
                           onTap: () {
-                            Navigator.of(context)
-                                .pushReplacementNamed(MyRoutes.loginPage);
+                            BlocProvider.of<AuthBloc>(context)
+                                .add(LogoutUser());
                           },
                           child: Container(
                             width: size.width,
@@ -155,8 +167,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         }).toList(),
                         InkWell(
                           onTap: () {
-                            Navigator.of(context)
-                                .pushReplacementNamed(MyRoutes.loginPage);
+                            BlocProvider.of<AuthBloc>(context)
+                                .add(LogoutUser());
                           },
                           child: Container(
                             width: size.width,

@@ -14,3 +14,5 @@ class RegisterBegin extends AuthEvent {
 }
 
 class GetUser extends AuthEvent {}
+
+class LogoutUser extends AuthEvent {}

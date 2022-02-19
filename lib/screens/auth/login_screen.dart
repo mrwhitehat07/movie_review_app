@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:movie_review/bloc/auth_bloc/auth_bloc.dart';
 import 'package:movie_review/data/models/user_model.dart';
 import 'package:movie_review/screens/auth/register_screen.dart';
+import 'package:movie_review/screens/home_screen.dart';
 import 'package:movie_review/screens/navs/home_screen.dart';
 import 'package:movie_review/utils/colors/colors.dart';
 import 'package:movie_review/widgets/custom_button.dart';
@@ -31,7 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
       child: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state is AuthSuccess) {
-            Get.to(() => const HomePage());
+            Get.to(() => const HomeScreen());
           } else if (state is AuthFailed) {
             Get.snackbar("Error", state.message,
                 snackPosition: SnackPosition.BOTTOM,

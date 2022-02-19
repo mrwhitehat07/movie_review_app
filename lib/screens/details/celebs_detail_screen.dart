@@ -218,7 +218,10 @@ class _CelebsDetailScreenState extends State<CelebsDetailScreen> {
                         ),
                         const SizedBox(height: 20),
                         OutlinedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            BlocProvider.of<CelebsDetailBloc>(context)
+                                .add(LoadCelebsDetail(id: widget.id));
+                          },
                           child: const Text(
                             "Refresh",
                             style: TextStyle(
