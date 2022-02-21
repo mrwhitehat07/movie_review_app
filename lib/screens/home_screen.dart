@@ -29,10 +29,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: PageView(
-        controller: _pageController,
-        onPageChanged: _onNavItemTapped,
-        physics: const NeverScrollableScrollPhysics(),
+      body: IndexedStack(
+        index: _currentIndex,
         children: <Widget>[
           WillPopScope(
             onWillPop: () async {

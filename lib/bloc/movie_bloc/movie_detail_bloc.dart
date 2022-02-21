@@ -15,13 +15,13 @@ class MovieDetailBloc extends Bloc<MovieDetailEvent, MovieDetailState> {
 
   Future<void> getMovieDetails(
       LoadMovieDetail event, Emitter<MovieDetailState> emit) async {
-    // try {
+    try {
       emit(MovieDetailLoading());
       Movie movie = await movieRespository.getMovieById(event.id);
       print(movie);
       emit(MovieDetailLoadSuccess(movie: movie));
-    // } catch (e) {
-    //   emit(MovieDetailLoadFailed(message: e.toString()));
-    // }
+    } catch (e) {
+      emit(MovieDetailLoadFailed(message: e.toString()));
+    }
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:movie_review/bloc/auth_bloc/auth_bloc.dart';
+
 import 'package:movie_review/routes/route.dart';
 
 class SplashScreen extends StatefulWidget {

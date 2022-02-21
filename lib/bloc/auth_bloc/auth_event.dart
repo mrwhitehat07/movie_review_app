@@ -12,3 +12,7 @@ class RegisterBegin extends AuthEvent {
   final User user;
   RegisterBegin({ required this.user });
 }
+
+class GetUser extends AuthEvent {}
+
+class LogoutUser extends AuthEvent {}

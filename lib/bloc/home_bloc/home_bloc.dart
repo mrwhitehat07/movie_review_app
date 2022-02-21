@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:movie_review/data/models/celebs_model.dart';
 import 'package:movie_review/data/models/movie_model.dart';
 import 'package:movie_review/data/repositories/movie_repository.dart';
 
@@ -11,14 +12,15 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   HomeBloc() : super(HomeInitial()) {
     on<HomeEvent>((event, emit) {});
-    on<LoadHomeData>((event, emit) => getAllMovies(event, emit));
+    on<LoadHomeData>((event, emit) => getHomeData(event, emit));
   }
 
-  Future<void> getAllMovies(LoadHomeData event, Emitter<HomeState> emit) async {
+  Future<void> getHomeData(LoadHomeData event, Emitter<HomeState> emit) async {
     try {
       emit(HomeLoading());
       List<Movie> movies = await movieRespository.getAllMovies();
-      emit(HomeLoaded(movies: movies));
+      List<Celebs> celebs = await movieRespository.getAllCelebs();
+      emit(HomeLoaded(movies: movies, celebs: celebs));
     } catch (e) {
       emit(HomeLoadFailed(message: e.toString()));
     }

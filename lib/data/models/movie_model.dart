@@ -1,4 +1,3 @@
-import 'package:movie_review/data/models/crew_model.dart';
 
 class Movie {
   final int? id;

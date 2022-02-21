@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:movie_review/bloc/movie_bloc/movie_detail_bloc.dart';
-import 'package:movie_review/screens/other/movie_loading_screen.dart';
+import 'package:movie_review/screens/details/movie_loading_screen.dart';
 import 'package:movie_review/utils/apis/apis.dart';
 import 'package:movie_review/utils/colors/colors.dart';
 
@@ -56,6 +56,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                           ),
                           Positioned(
                             top: 10,
+                            left: 10,
                             right: 10,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -209,7 +210,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                               (e) => Container(
                                 margin: const EdgeInsets.only(right: 10),
                                 child: Column(
-                                  children: [
+                                  children: const [
                                     CircleAvatar(
                                       backgroundColor:
                                           MyColors.secondaryBackground,
@@ -300,9 +301,9 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                         const SizedBox(height: 20),
                         OutlinedButton(
                           onPressed: () {
-                            MovieDetailBloc().add(
-                              LoadMovieDetail(id: widget.id),
-                            );
+                            BlocProvider.of<MovieDetailBloc>(context)
+                                .add(LoadMovieDetail(id: widget.id));
+            
                           },
                           child: const Text(
                             "Refresh",
