@@ -8,7 +8,7 @@ class ExploreInitial extends ExploreState {}
 class ExploreLoading extends ExploreState {}
 
 class ExploreLoaded extends ExploreState {
-  final Genre genre;
+  final List<Genre> genre;
   ExploreLoaded({
     required this.genre,
   });

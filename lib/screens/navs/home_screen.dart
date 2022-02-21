@@ -21,6 +21,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return BlocProvider(
+      lazy: false,
       create: (context) => HomeBloc()..add(LoadHomeData()),
       child: BlocConsumer<HomeBloc, HomeState>(
         listener: (context, state) {
