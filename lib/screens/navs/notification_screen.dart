@@ -12,7 +12,6 @@ class _NotificationScreenState extends State<NotificationScreen> {
   Widget build(BuildContext context) {
     return const Scaffold(
       backgroundColor: Colors.black,
-
       body: Center(child: Text("Notification"),),
     );
   }

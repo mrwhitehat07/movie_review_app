@@ -78,6 +78,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                         height: 100,
                         child: ListView.builder(
                             scrollDirection: Axis.horizontal,
+                            physics: const BouncingScrollPhysics(),
                             itemCount: genres.length,
                             itemBuilder: (context, index) {
                               return Padding(

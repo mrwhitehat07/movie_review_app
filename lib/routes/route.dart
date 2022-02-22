@@ -5,5 +5,5 @@ class MyRoutes {
   static const String registerPage = '/register';
   static const String profileEdit = '/editProfile';
   static const String changePassword = '/changePassword';
-  static const String settings = '/settings/';
+  static const String settings = '/settings';
 }

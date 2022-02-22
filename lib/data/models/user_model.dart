@@ -1,4 +1,5 @@
 class User {
+  final int? id;
   final String? username;
   final String? email;
   final String? password;
@@ -10,6 +11,7 @@ class User {
   final String? avatar;
 
   User({
+    this.id,
     this.username,
     this.email,
     this.password,
@@ -37,6 +39,7 @@ class User {
 
   factory User.fromProfileJson(Map<String, dynamic> json) {
     return User(
+        id: (json['id'] != null) ? json['id'] : 0,
         fname: json['fname'],
         lname: json['lname'],
         phone: json['phone'],

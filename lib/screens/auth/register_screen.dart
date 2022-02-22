@@ -1,11 +1,9 @@
-import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:movie_review/bloc/auth_bloc/auth_bloc.dart';
 import 'package:movie_review/data/models/user_model.dart';
 import 'package:movie_review/screens/auth/login_screen.dart';
-import 'package:movie_review/screens/home_screen.dart';
 import 'package:movie_review/utils/colors/colors.dart';
 import 'package:movie_review/widgets/custom_button.dart';
 import 'package:movie_review/widgets/input_box.dart';

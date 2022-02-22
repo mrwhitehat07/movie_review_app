@@ -17,13 +17,10 @@ class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
   bool isLoggedOn = true;
 
-  final PageController _pageController = PageController();
-
   void _onNavItemTapped(int index) {
     setState(() {
       _currentIndex = index;
     });
-    _pageController.jumpToPage(index);
   }
 
   @override

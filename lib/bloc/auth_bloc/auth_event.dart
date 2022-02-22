@@ -5,14 +5,27 @@ abstract class AuthEvent {}
 
 class LoginBegin extends AuthEvent {
   final User user;
-  LoginBegin({ required this.user });
+  LoginBegin({required this.user});
 }
 
 class RegisterBegin extends AuthEvent {
   final User user;
-  RegisterBegin({ required this.user });
+  RegisterBegin({required this.user});
 }
 
 class GetUser extends AuthEvent {}
 
 class LogoutUser extends AuthEvent {}
+
+class ChangePassword extends AuthEvent {
+  final String currentPassword;
+  final String confPassword;
+  final String newPassword;
+  final int id;
+  ChangePassword({
+    required this.currentPassword,
+    required this.confPassword,
+    required this.newPassword,
+    required this.id,
+  });
+}
