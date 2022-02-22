@@ -37,21 +37,7 @@ class _ProfileUpdateFormState extends State<ProfileUpdateForm> {
       backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.black,
-        leading: IconButton(
-          icon: const Icon(
-            EvaIcons.arrowIosBack,
-            // color: Colors.black,
-          ),
-          onPressed: () {
-            Get.back();
-          },
-        ),
-        title: const Text(
-          "Profile",
-          style: TextStyle(
-              // color: Colors.black,
-              ),
-        ),
+        title: const Text("Profile"),
       ),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
@@ -114,8 +100,8 @@ class _ProfileUpdateFormState extends State<ProfileUpdateForm> {
                                         height: 20.0,
                                       ),
                                       InkWell(
-                                        onTap: () {
-                                          pickPhoto(ImageSource.camera);
+                                        onTap: () async {
+                                          await pickPhoto(ImageSource.camera);
                                         },
                                         child: SizedBox(
                                           height: 40,
@@ -134,6 +120,9 @@ class _ProfileUpdateFormState extends State<ProfileUpdateForm> {
                                         ),
                                       ),
                                       InkWell(
+                                        onTap: () async {
+                                          await pickPhoto(ImageSource.gallery);
+                                        },
                                         child: SizedBox(
                                           height: 40,
                                           child: Row(

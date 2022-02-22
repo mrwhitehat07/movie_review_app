@@ -1,6 +1,6 @@
 class API {
   static String baseUrl =
-      'http://2c2c-2400-1a00-b040-f8c5-45b4-5c18-d72b-9ad4.ngrok.io';
+      'http://5399-110-44-119-186.ngrok.io';
   static String loginUrl = '/user/login/';
   static String registerUrl = '/user/register/';
   static String profileUrl = '/user/profile/';
