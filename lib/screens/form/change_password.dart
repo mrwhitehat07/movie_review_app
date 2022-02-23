@@ -1,11 +1,7 @@
-import 'dart:io';
-
-import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:movie_review/bloc/auth_bloc/auth_bloc.dart';
-import 'package:movie_review/screens/navs/profile_screen.dart';
 import 'package:movie_review/utils/colors/colors.dart';
 import 'package:movie_review/widgets/custom_input_box.dart';
 
@@ -29,7 +25,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
       child: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state is PasswordChanged) {
-            Get.snackbar("Message", state.message,
+            Get.snackbar("Success", state.message,
                 snackPosition: SnackPosition.BOTTOM,
                 colorText: Colors.red,
                 duration: const Duration(seconds: 1),
@@ -40,7 +36,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                 colorText: Colors.red,
                 duration: const Duration(seconds: 1),
                 backgroundColor: Colors.white);
-          }
+          } 
         },
         builder: (context, state) {
           return Scaffold(

@@ -34,3 +34,11 @@ class PasswordChanged extends AuthState {
   @override
   List<Object?> get props => [message];
 }
+
+class ProfileUpdated extends AuthState {
+  final String message;
+  ProfileUpdated({required this.message});
+
+  @override
+  List<Object?> get props => [message];
+}

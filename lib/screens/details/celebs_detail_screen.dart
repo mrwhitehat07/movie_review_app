@@ -204,35 +204,31 @@ class _CelebsDetailScreenState extends State<CelebsDetailScreen> {
           } else if (state is CelebsDetailLoadFailed) {
             return Scaffold(
               backgroundColor: MyColors.background,
-              body: SafeArea(
-                child: SingleChildScrollView(
-                  child: Center(
-                    child: Column(
-                      children: [
-                        const Text(
-                          "Failed to load",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                          ),
-                        ),
-                        const SizedBox(height: 20),
-                        OutlinedButton(
-                          onPressed: () {
-                            BlocProvider.of<CelebsDetailBloc>(context)
-                                .add(LoadCelebsDetail(id: widget.id));
-                          },
-                          child: const Text(
-                            "Refresh",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 14,
-                            ),
-                          ),
-                        ),
-                      ],
+              body: Center(
+                child: Column(
+                  children: [
+                    const Text(
+                      "Failed to load",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                      ),
                     ),
-                  ),
+                    const SizedBox(height: 20),
+                    OutlinedButton(
+                      onPressed: () {
+                        BlocProvider.of<CelebsDetailBloc>(context)
+                            .add(LoadCelebsDetail(id: widget.id));
+                      },
+                      child: const Text(
+                        "Refresh",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 14,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             );

@@ -7,4 +7,5 @@ class API {
   static String allCelebs = '/celebs/';
   static String genres = '/genre/';
   static String changePassword = '/user/change-password/';
+  static String updateProfile = '/user/profile-update/';
 }

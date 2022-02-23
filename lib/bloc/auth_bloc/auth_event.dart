@@ -27,3 +27,16 @@ class ChangePassword extends AuthEvent {
     required this.newPassword,
   });
 }
+
+class UpdateUser extends AuthEvent {
+  final String? fname;
+  final String? lname;
+  final int? phone;
+  final File? image;
+  UpdateUser({
+    this.fname,
+    this.lname,
+    this.phone = 0,
+    this.image,
+  });
+}

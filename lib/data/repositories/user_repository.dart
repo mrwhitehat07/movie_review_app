@@ -1,5 +1,7 @@
 import 'dart:convert';
-
+import 'dart:io';
+import 'package:dio/dio.dart';
+import 'package:movie_review/data/models/profile_options_model.dart';
 import 'package:movie_review/data/models/user_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:movie_review/data/repositories/secure_storage.dart';
@@ -86,6 +88,46 @@ class UserRepository {
         return res.body;
       } else {
         return res.body;
+      }
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  Future<String> updateUser(
+    String token, {
+    String? fname,
+    String? lname,
+    int? phone,
+    File? image,
+  }) async {
+    try {
+      Map<String, String> headers = {"Authorization": "Bearer $token"};
+      final datas = <String, dynamic>{};
+      if (fname != "") {
+        datas['fname'] = fname!;
+      }
+      if (lname != "") {
+        datas['lname'] = lname!;
+      }
+      if (phone != 0) {
+        datas['phone'] = phone;
+      }
+      if (image != null) {
+        datas['avatar'] =
+            await http.MultipartFile.fromPath('avatar', image.path);
+      }
+      var data = FormData.fromMap(datas);
+      print(data.fields);
+      Dio dio = Dio();
+      final url = API.baseUrl + API.updateProfile;
+      final res =
+          await dio.post(url, options: Options(headers: headers), data: data);
+      print(res);
+      if (res.statusCode == 200) {
+        return res.data;
+      } else {
+        return res.data;
       }
     } catch (e) {
       return Future.error(e.toString());

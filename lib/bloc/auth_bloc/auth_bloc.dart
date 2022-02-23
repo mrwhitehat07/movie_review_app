@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:movie_review/data/models/user_model.dart';
@@ -17,6 +19,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<GetUser>((event, emit) => getUser(event, emit));
     on<LogoutUser>((event, emit) => logoutUser(event, emit));
     on<ChangePassword>((event, emit) => changePassword(event, emit));
+    on<UpdateUser>((event, emit) => updateProfile(event, emit));
   }
 
   Future<void> login(LoginBegin event, Emitter<AuthState> emit) async {
@@ -76,6 +79,23 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       } else {
         emit(AuthFailed(message: "Passwords donot match"));
       }
+    } catch (e) {
+      emit(AuthFailed(message: e.toString()));
+    }
+  }
+
+  Future<void> updateProfile(UpdateUser event, Emitter<AuthState> emit) async {
+    try {
+      emit(AuthLoading());
+      String? token = await TokenStorage.readToken("token");
+      final res = await userRepository.updateUser(
+        token!,
+        fname: event.fname,
+        lname: event.lname,
+        phone: event.phone,
+        image: event.image,
+      );
+      emit(ProfileUpdated(message: res));
     } catch (e) {
       emit(AuthFailed(message: e.toString()));
     }
