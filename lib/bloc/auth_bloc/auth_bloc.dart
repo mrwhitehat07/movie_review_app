@@ -70,8 +70,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       } else if (event.newPassword == event.confPassword) {
         emit(AuthLoading());
         String? token = await TokenStorage.readToken("token");
-        final res = await userRepository.changePassword(token!, event.id,
+        final res = await userRepository.changePassword(token!,
             event.currentPassword, event.newPassword, event.confPassword);
+        emit(PasswordChanged(message: res));
       } else {
         emit(AuthFailed(message: "Passwords donot match"));
       }

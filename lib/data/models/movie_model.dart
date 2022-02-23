@@ -1,4 +1,3 @@
-
 class Movie {
   final int? id;
   final String? name;
@@ -10,6 +9,7 @@ class Movie {
   final String? description;
   final String? director;
   final String? producer;
+  final int? imdbRating;
 
   Movie({
     this.id,
@@ -22,6 +22,7 @@ class Movie {
     this.description,
     this.director,
     this.producer,
+    this.imdbRating,
   });
 
   factory Movie.fromJson(Map<String, dynamic> json) {
@@ -44,6 +45,7 @@ class Movie {
       crew: json["crew"],
       director: json["director"],
       producer: json["producer"],
+      imdbRating: json["imdb_rating"],
     );
   }
 }

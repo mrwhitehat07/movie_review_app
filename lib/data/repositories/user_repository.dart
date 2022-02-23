@@ -6,7 +6,6 @@ import 'package:movie_review/data/repositories/secure_storage.dart';
 import 'package:movie_review/utils/apis/apis.dart';
 
 class UserRepository {
-
   Future<User> login(User user) async {
     try {
       final url = Uri.parse(API.baseUrl + API.loginUrl);
@@ -72,8 +71,8 @@ class UserRepository {
     }
   }
 
-  Future changePassword(String token, int id, String curPassword,
-      String newPass, String confPass) async {
+  Future<String> changePassword(
+      String token, String curPassword, String newPass, String confPass) async {
     try {
       Map<String, String> headers = {"Authorization": "Bearer $token"};
       Map data = {
@@ -81,9 +80,11 @@ class UserRepository {
         "newPassword": newPass,
         "validatePassword": confPass,
       };
-      final url = Uri.parse(API.baseUrl + API.changePassword + "$id/");
+      final url = Uri.parse(API.baseUrl + API.changePassword);
       final res = await http.post(url, headers: headers, body: data);
       if (res.statusCode == 200) {
+        return res.body;
+      } else {
         return res.body;
       }
     } catch (e) {

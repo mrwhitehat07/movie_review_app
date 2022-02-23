@@ -27,3 +27,10 @@ class NoUser extends AuthState {}
 
 class LoggedOut extends AuthState {}
 
+class PasswordChanged extends AuthState {
+  final String message;
+  PasswordChanged({required this.message});
+
+  @override
+  List<Object?> get props => [message];
+}

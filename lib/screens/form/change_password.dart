@@ -28,8 +28,12 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
       create: (context) => AuthBloc(),
       child: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
-          if (state is AuthSuccess) {
-            Get.to(() => const ProfileScreen());
+          if (state is PasswordChanged) {
+            Get.snackbar("Message", state.message,
+                snackPosition: SnackPosition.BOTTOM,
+                colorText: Colors.red,
+                duration: const Duration(seconds: 1),
+                backgroundColor: Colors.white);
           } else if (state is AuthFailed) {
             Get.snackbar("Error", state.message,
                 snackPosition: SnackPosition.BOTTOM,
@@ -86,7 +90,6 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                       onTap: () {
                         BlocProvider.of<AuthBloc>(context).add(
                           ChangePassword(
-                            id: 1,
                             currentPassword: curPassword.text,
                             newPassword: newPassword.text,
                             confPassword: cnfPassword.text,
