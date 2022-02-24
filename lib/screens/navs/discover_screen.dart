@@ -120,7 +120,10 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
             return const Scaffold(
               backgroundColor: Colors.black,
               body: Center(
-                child: CircularProgressIndicator(),
+                child: CircularProgressIndicator(
+                  color: MyColors.primaryButtonColor,
+                  strokeWidth: 2,
+                ),
               ),
             );
           }

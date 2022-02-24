@@ -95,10 +95,15 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
         currentIndex: _currentIndex,
-        selectedItemColor: MyColors.primaryButtonColor,
+        selectedItemColor:
+            Theme.of(context).bottomNavigationBarTheme.selectedIconTheme!.color,
         type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.black,
-        unselectedItemColor: Colors.grey,
+        backgroundColor:
+            Theme.of(context).bottomNavigationBarTheme.backgroundColor,
+        unselectedItemColor: Theme.of(context)
+            .bottomNavigationBarTheme
+            .unselectedIconTheme!
+            .color,
         selectedFontSize: 0,
         unselectedFontSize: 0,
         onTap: _onNavItemTapped,

@@ -205,30 +205,34 @@ class _CelebsDetailScreenState extends State<CelebsDetailScreen> {
             return Scaffold(
               backgroundColor: MyColors.background,
               body: Center(
-                child: Column(
-                  children: [
-                    const Text(
-                      "Failed to load",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    OutlinedButton(
-                      onPressed: () {
-                        BlocProvider.of<CelebsDetailBloc>(context)
-                            .add(LoadCelebsDetail(id: widget.id));
-                      },
-                      child: const Text(
-                        "Refresh",
+                child: SizedBox(
+                  width: size.width,
+                  height: 200,
+                  child: Column(
+                    children: [
+                      const Text(
+                        "Failed to load",
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 14,
+                          fontSize: 18,
                         ),
                       ),
-                    ),
-                  ],
+                      const SizedBox(height: 20),
+                      OutlinedButton(
+                        onPressed: () {
+                          BlocProvider.of<CelebsDetailBloc>(context)
+                              .add(LoadCelebsDetail(id: widget.id));
+                        },
+                        child: const Text(
+                          "Refresh",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             );

@@ -288,30 +288,34 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
               backgroundColor: MyColors.background,
               body: SafeArea(
                 child: Center(
-                  child: Column(
-                    children: [
-                      const Text(
-                        "Failed to load",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      OutlinedButton(
-                        onPressed: () {
-                          BlocProvider.of<MovieDetailBloc>(context)
-                              .add(LoadMovieDetail(id: widget.id));
-                        },
-                        child: const Text(
-                          "Refresh",
+                  child: SizedBox(
+                    width: size.width,
+                    height: 200,
+                    child: Column(
+                      children: [
+                        const Text(
+                          "Failed to load",
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: 14,
+                            fontSize: 18,
                           ),
                         ),
-                      ),
-                    ],
+                        const SizedBox(height: 20),
+                        OutlinedButton(
+                          onPressed: () {
+                            BlocProvider.of<MovieDetailBloc>(context)
+                                .add(LoadMovieDetail(id: widget.id));
+                          },
+                          child: const Text(
+                            "Refresh",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

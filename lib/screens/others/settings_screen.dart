@@ -1,8 +1,5 @@
-import 'dart:ui';
-
-import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:movie_review/widgets/profille_tile.dart';
+import 'package:movie_review/utils/colors/colors.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({Key? key}) : super(key: key);
@@ -12,6 +9,8 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
+  bool isDark = true;
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -44,8 +43,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       ),
                     ),
                     Switch(
-                      value: true,
-                      onChanged: (value) {},
+                      value: isDark,
+                      onChanged: (value) {
+                        setState(() {
+                          isDark = !isDark;
+                        });
+                      },
+                      activeColor: MyColors.primaryButtonColor,
+                      activeTrackColor: MyColors.secondaryBackground,
+                      inactiveThumbColor: Colors.grey,
+                      inactiveTrackColor: MyColors.secondaryBackground,
                     )
                   ],
                 ),

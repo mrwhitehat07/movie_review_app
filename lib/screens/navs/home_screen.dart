@@ -261,33 +261,38 @@ class _HomePageState extends State<HomePage> {
             );
           } else {
             return Scaffold(
-              backgroundColor: MyColors.background,
+              backgroundColor: Theme.of(context).backgroundColor,
               body: SafeArea(
                 child: Center(
-                  child: Column(
-                    children: [
-                      const Text(
-                        "Failed to load",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      OutlinedButton(
-                        onPressed: () {
-                          BlocProvider.of<HomeBloc>(context)
-                              .add(LoadHomeData());
-                        },
-                        child: const Text(
-                          "Refresh",
+                  child: SizedBox(
+                    width: size.width,
+                    height: 200,
+                    child: Column(
+                      children: [
+                        Text(
+                          "Failed to load",
                           style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 14,
+                            color: Theme.of(context).textTheme.bodyText1!.color,
+                            fontSize: 18,
                           ),
                         ),
-                      ),
-                    ],
+                        const SizedBox(height: 20),
+                        OutlinedButton(
+                          onPressed: () {
+                            BlocProvider.of<HomeBloc>(context)
+                                .add(LoadHomeData());
+                          },
+                          child: Text(
+                            "Refresh",
+                            style: TextStyle(
+                              color:
+                                  Theme.of(context).textTheme.bodyText1!.color,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
