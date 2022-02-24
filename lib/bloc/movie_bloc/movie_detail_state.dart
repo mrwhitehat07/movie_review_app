@@ -9,7 +9,11 @@ class MovieDetailLoading extends MovieDetailState {}
 
 class MovieDetailLoadSuccess extends MovieDetailState {
   final Movie movie;
-  MovieDetailLoadSuccess({required this.movie});
+  final List<Celebs> crews;
+  MovieDetailLoadSuccess({
+    required this.movie,
+    required this.crews,
+  });
 
   @override
   List<Object?> get props => [movie];
@@ -22,4 +26,3 @@ class MovieDetailLoadFailed extends MovieDetailState {
   @override
   List<Object?> get props => [message];
 }
-

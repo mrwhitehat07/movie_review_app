@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:movie_review/data/models/celebs_model.dart';
 import 'package:movie_review/data/models/movie_model.dart';
 import 'package:movie_review/data/repositories/movie_repository.dart';
 
@@ -15,13 +16,17 @@ class MovieDetailBloc extends Bloc<MovieDetailEvent, MovieDetailState> {
 
   Future<void> getMovieDetails(
       LoadMovieDetail event, Emitter<MovieDetailState> emit) async {
-    try {
+    // try {
       emit(MovieDetailLoading());
       Movie movie = await movieRespository.getMovieById(event.id);
-      print(movie);
-      emit(MovieDetailLoadSuccess(movie: movie));
-    } catch (e) {
-      emit(MovieDetailLoadFailed(message: e.toString()));
-    }
+      List<Celebs> crews = await movieRespository.getMovieCrew(event.id);
+      print(movie.crew);
+      emit(MovieDetailLoadSuccess(
+        movie: movie,
+        crews: crews,
+      ));
+    // } catch (e) {
+    //   emit(MovieDetailLoadFailed(message: e.toString()));
+    // }
   }
 }

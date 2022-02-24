@@ -16,8 +16,8 @@ class Celebs {
       lname: json["lname"],
       dob: json["dob"],
       image: json['image'],
-      bio: json['bio'],
-      role: List<String>.from(json["role"]),
+      // bio: json['bio'],
+      // role: List<String>.from(json["role"]),
     );
   }
 

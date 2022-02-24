@@ -206,7 +206,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                         ),
                         child: Row(
                           children: [
-                            ...movie.crew!.map(
+                            ...state.crews.map(
                               (e) => Container(
                                 margin: const EdgeInsets.only(right: 10),
                                 child: Column(
@@ -286,32 +286,33 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
           } else if (state is MovieDetailLoadFailed) {
             return Scaffold(
               backgroundColor: MyColors.background,
-              body: Center(
-                child: Column(
-                  children: [
-                    const Text(
-                      "Failed to load",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    OutlinedButton(
-                      onPressed: () {
-                        BlocProvider.of<MovieDetailBloc>(context)
-                            .add(LoadMovieDetail(id: widget.id));
-            
-                      },
-                      child: const Text(
-                        "Refresh",
+              body: SafeArea(
+                child: Center(
+                  child: Column(
+                    children: [
+                      const Text(
+                        "Failed to load",
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 14,
+                          fontSize: 18,
                         ),
                       ),
-                    ),
-                  ],
+                      const SizedBox(height: 20),
+                      OutlinedButton(
+                        onPressed: () {
+                          BlocProvider.of<MovieDetailBloc>(context)
+                              .add(LoadMovieDetail(id: widget.id));
+                        },
+                        child: const Text(
+                          "Refresh",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             );

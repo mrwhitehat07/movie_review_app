@@ -39,4 +39,15 @@ class MovieRespository {
       return Future.error(e);
     }
   }
+
+  Future<List<Celebs>> getMovieCrew(int id) async {
+    try {
+    final res = await http.get(Uri.parse(API.baseUrl + API.allMovies + "$id/crew"));
+    List data = jsonDecode(res.body);
+    List<Celebs> crews = data.map((e) => Celebs.fromJson(e)).toList();
+    return crews;
+    } catch (e) {
+      return Future.error(e);
+    }
+  }
 }
