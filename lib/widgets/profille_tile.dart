@@ -30,21 +30,21 @@ class ProfileCardTile extends StatelessWidget {
           children: [
             Icon(
               icon,
-              color: Colors.white,
+              color: Theme.of(context).textTheme.bodyText1!.color,
             ),
             const SizedBox(width: 10),
             Expanded(
               child: Text(
                 title,
-                style: const TextStyle(
-                  color: Colors.white,
+                style: TextStyle(
+                  color: Theme.of(context).textTheme.bodyText1!.color,
                   fontSize: 16,
                 ),
               ),
             ),
-            const Icon(
+            Icon(
               EvaIcons.arrowIosForwardOutline,
-              color: Colors.white,
+              color: Theme.of(context).textTheme.bodyText1!.color,
             ),
           ],
         ),

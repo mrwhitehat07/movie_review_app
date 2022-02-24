@@ -41,7 +41,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         builder: (context, state) {
           if (state is AuthSuccess) {
             return Scaffold(
-              backgroundColor: Colors.black,
+              backgroundColor: Theme.of(context).backgroundColor,
               body: SafeArea(
                 child: Center(
                   child: SingleChildScrollView(
@@ -53,22 +53,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             backgroundImage: NetworkImage(
                               API.baseUrl + state.user.avatar!,
                             ),
+                            backgroundColor:
+                                Theme.of(context).primaryColorLight,
                           ),
                         ),
                         const SizedBox(height: 10),
                         Text(
                           "${state.user.fname} ${state.user.lname}",
-                          style: const TextStyle(
-                            color: Colors.white,
+                          style: TextStyle(
+                            color: Theme.of(context).textTheme.bodyText1!.color,
                             fontSize: 20,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
                         const SizedBox(height: 5),
-                        const Text(
+                        Text(
                           "mbishal605@gmail.com",
                           style: TextStyle(
-                            color: Colors.grey,
+                            color: Theme.of(context).textTheme.bodyText2!.color,
                             fontSize: 16,
                             fontWeight: FontWeight.normal,
                           ),
@@ -98,16 +100,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ),
                             alignment: Alignment.center,
                             child: Row(
-                              children: const [
+                              children: [
                                 Icon(
                                   EvaIcons.logOut,
-                                  color: Colors.white,
+                                  color: Theme.of(context)
+                                      .textTheme
+                                      .bodyText1!
+                                      .color,
                                 ),
-                                SizedBox(width: 10),
+                                const SizedBox(width: 10),
                                 Text(
                                   "Logout",
                                   style: TextStyle(
-                                    color: Colors.white,
+                                    color: Theme.of(context)
+                                        .textTheme
+                                        .bodyText1!
+                                        .color,
                                     fontSize: 16,
                                   ),
                                 ),
@@ -125,16 +133,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
             return const LoginScreen();
           } else {
             return Scaffold(
-              backgroundColor: Colors.black,
+              backgroundColor: Theme.of(context).backgroundColor,
               body: SafeArea(
                 child: Center(
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
-                        const Center(
+                        Center(
                           child: CircleAvatar(
                             radius: 45,
-                            backgroundColor: MyColors.secondaryBackground,
+                            backgroundColor:
+                                Theme.of(context).primaryColorLight,
                           ),
                         ),
                         const SizedBox(height: 10),

@@ -33,7 +33,7 @@ class CustomInputBox extends StatelessWidget {
         Container(
           width: size.width * 0.90,
           decoration: BoxDecoration(
-            color: MyColors.secondaryBackground,
+            color: Theme.of(context).primaryColorLight,
             borderRadius: BorderRadius.circular(5),
           ),
           padding: const EdgeInsets.symmetric(
@@ -44,16 +44,16 @@ class CustomInputBox extends StatelessWidget {
             controller: controller,
             decoration: InputDecoration(
               hintText: hint,
-              hintStyle: const TextStyle(
-                color: Colors.grey,
+              hintStyle: TextStyle(
+                color: Theme.of(context).textTheme.bodyText1!.color,
               ),
               border: InputBorder.none,
             ),
             obscureText: isPassword!,
             keyboardType: inputType,
             maxLines: 1,
-            style: const TextStyle(
-              color: Colors.white,
+            style: TextStyle(
+              color: Theme.of(context).textTheme.bodyText1!.color,
             ),
           ),
         ),

@@ -27,7 +27,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
           if (state is ExploreLoaded) {
             List<Genre> genres = state.genre;
             return Scaffold(
-              backgroundColor: Colors.black,
+              backgroundColor: Theme.of(context).backgroundColor,
               body: SafeArea(
                 child: SingleChildScrollView(
                   child: Column(
@@ -37,7 +37,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                         child: Container(
                           width: size.width * 0.90,
                           decoration: BoxDecoration(
-                            color: MyColors.secondaryBackground,
+                            color: Theme.of(context).primaryColorLight,
                             borderRadius: BorderRadius.circular(5),
                           ),
                           padding: const EdgeInsets.symmetric(
@@ -46,16 +46,20 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                           ),
                           child: TextField(
                             controller: searchController,
-                            decoration: const InputDecoration(
+                            decoration: InputDecoration(
                               hintText: "Search here...",
                               hintStyle: TextStyle(
-                                color: Colors.grey,
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .bodyText1!
+                                    .color,
                               ),
                               border: InputBorder.none,
                             ),
                             maxLines: 1,
-                            style: const TextStyle(
-                              color: Colors.white,
+                            style: TextStyle(
+                              color:
+                                  Theme.of(context).textTheme.bodyText1!.color,
                             ),
                           ),
                         ),
@@ -64,10 +68,10 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                       Container(
                         alignment: Alignment.centerLeft,
                         padding: const EdgeInsets.only(left: 20),
-                        child: const Text(
+                        child: Text(
                           "Genres",
                           style: TextStyle(
-                            color: Colors.white,
+                            color: Theme.of(context).textTheme.bodyText1!.color,
                             fontSize: 20,
                           ),
                         ),
@@ -100,8 +104,11 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                                     children: [
                                       Text(
                                         "#${genres[index].title}",
-                                        style: const TextStyle(
-                                          color: Colors.white,
+                                        style: TextStyle(
+                                          color: Theme.of(context)
+                                              .textTheme
+                                              .bodyText1!
+                                              .color,
                                         ),
                                       ),
                                     ],
@@ -117,9 +124,9 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
               ),
             );
           } else {
-            return const Scaffold(
-              backgroundColor: Colors.black,
-              body: Center(
+            return Scaffold(
+              backgroundColor: Theme.of(context).backgroundColor,
+              body: const Center(
                 child: CircularProgressIndicator(
                   color: MyColors.primaryButtonColor,
                   strokeWidth: 2,

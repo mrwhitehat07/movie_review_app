@@ -1,4 +1,6 @@
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:movie_review/utils/colors/colors.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -15,10 +17,26 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
-        title: const Text("Settings"),
-        backgroundColor: Colors.black,
+        title: Text(
+          "Settings",
+          style: TextStyle(
+            color: Theme.of(context).textTheme.bodyText1!.color,
+            fontWeight: FontWeight.w500,
+            fontSize: 18,
+          ),
+        ),
+        backgroundColor: Theme.of(context).backgroundColor,
+        leading: IconButton(
+          onPressed: () {
+            Get.back();
+          },
+          icon: Icon(
+            EvaIcons.arrowBack,
+            color: Theme.of(context).textTheme.bodyText1!.color,
+          ),
+        ),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -35,10 +53,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
+                    Text(
                       "Dark mode",
                       style: TextStyle(
-                        color: Colors.white,
+                        color: Theme.of(context).textTheme.bodyText1!.color,
                         fontSize: 16,
                       ),
                     ),

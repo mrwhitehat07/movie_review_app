@@ -58,10 +58,26 @@ class _ProfileUpdateFormState extends State<ProfileUpdateForm> {
         if (state is AuthSuccess) {
           final user = state.user;
           return Scaffold(
-            backgroundColor: Colors.black,
+            backgroundColor: Theme.of(context).backgroundColor,
             appBar: AppBar(
-              backgroundColor: Colors.black,
-              title: const Text("Profile"),
+              backgroundColor: Theme.of(context).backgroundColor,
+              title: Text(
+                "Profile",
+                style: TextStyle(
+                  color: Theme.of(context).textTheme.bodyText1!.color,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 18,
+                ),
+              ),
+              leading: IconButton(
+                onPressed: () {
+                  Get.back();
+                },
+                icon: Icon(
+                  EvaIcons.arrowBack,
+                  color: Theme.of(context).textTheme.bodyText1!.color,
+                ),
+              ),
             ),
             body: SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
@@ -80,18 +96,22 @@ class _ProfileUpdateFormState extends State<ProfileUpdateForm> {
                                 backgroundImage: NetworkImage(
                                   API.baseUrl + user.avatar!,
                                 ),
+                                backgroundColor:
+                                    Theme.of(context).primaryColorLight,
                               )
                             : CircleAvatar(
                                 radius: 60,
                                 backgroundImage: FileImage(
                                   File(_pickedImage!.path),
                                 ),
+                                backgroundColor:
+                                    Theme.of(context).primaryColorLight,
                               ),
                         Positioned(
                           bottom: -10,
                           right: -10,
                           child: CircleAvatar(
-                            backgroundColor: MyColors.secondaryBackground,
+                            backgroundColor: Colors.transparent,
                             child: IconButton(
                               icon: const Icon(
                                 EvaIcons.edit2Outline,
@@ -185,8 +205,8 @@ class _ProfileUpdateFormState extends State<ProfileUpdateForm> {
                     padding: const EdgeInsets.only(left: 20),
                     child: Text(
                       "personal details".toUpperCase(),
-                      style: const TextStyle(
-                        color: Colors.white,
+                      style: TextStyle(
+                        color: Theme.of(context).textTheme.bodyText1!.color,
                         fontWeight: FontWeight.w500,
                         fontSize: 18,
                       ),

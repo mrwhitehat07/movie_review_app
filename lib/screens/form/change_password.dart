@@ -1,3 +1,4 @@
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
@@ -36,14 +37,30 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                 colorText: Colors.red,
                 duration: const Duration(seconds: 1),
                 backgroundColor: Colors.white);
-          } 
+          }
         },
         builder: (context, state) {
           return Scaffold(
-            backgroundColor: Colors.black,
+            backgroundColor: Theme.of(context).backgroundColor,
             appBar: AppBar(
-              backgroundColor: Colors.black,
-              title: const Text("Change Password"),
+              backgroundColor: Theme.of(context).backgroundColor,
+              title: Text(
+                "Change Password",
+                style: TextStyle(
+                  color: Theme.of(context).textTheme.bodyText1!.color,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 18,
+                ),
+              ),
+              leading: IconButton(
+                onPressed: () {
+                  Get.back();
+                },
+                icon: Icon(
+                  EvaIcons.arrowBack,
+                  color: Theme.of(context).textTheme.bodyText1!.color,
+                ),
+              ),
             ),
             body: SingleChildScrollView(
               physics: const BouncingScrollPhysics(),

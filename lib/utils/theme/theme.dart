@@ -14,6 +14,11 @@ final appThemeData = {
     textTheme: const TextTheme(
       bodyText1: TextStyle(
         color: Colors.black,
+
+      ),
+      bodyText2: TextStyle(
+        color: Colors.grey,
+        
       ),
     ),
     backgroundColor: Colors.white,
@@ -33,11 +38,14 @@ final appThemeData = {
   ),
   AppTheme.primaryDark: ThemeData(
     primaryColor: Colors.black,
-    primaryColorLight: Colors.black,
+    primaryColorLight: MyColors.secondaryBackground,
     scaffoldBackgroundColor: Colors.black,
     textTheme: const TextTheme(
       bodyText1: TextStyle(
         color: Colors.white,
+      ),
+      bodyText2: TextStyle(
+        color: Colors.grey,
       ),
     ),
     backgroundColor: Colors.black,

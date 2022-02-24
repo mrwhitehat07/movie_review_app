@@ -19,7 +19,7 @@ class MovieLoadingScreen extends StatelessWidget {
                 width: double.infinity,
                 height: size.height * 0.4,
                 decoration:
-                    const BoxDecoration(color: MyColors.secondaryBackground),
+                    BoxDecoration(color: Theme.of(context).primaryColorLight),
               ),
               const SizedBox(height: 10),
               const LoadingText(width: 125),
@@ -37,24 +37,24 @@ class MovieLoadingScreen extends StatelessWidget {
                   left: 18,
                 ),
                 child: Row(
-                  children: const [
+                  children: [
                     CircleAvatar(
-                      backgroundColor: MyColors.secondaryBackground,
+                      backgroundColor: Theme.of(context).primaryColorLight,
                       radius: 40,
                     ),
-                    SizedBox(width: 5),
+                    const SizedBox(width: 5),
                     CircleAvatar(
-                      backgroundColor: MyColors.secondaryBackground,
+                      backgroundColor: Theme.of(context).primaryColorLight,
                       radius: 40,
                     ),
-                    SizedBox(width: 5),
+                    const SizedBox(width: 5),
                     CircleAvatar(
-                      backgroundColor: MyColors.secondaryBackground,
+                      backgroundColor: Theme.of(context).primaryColorLight,
                       radius: 40,
                     ),
-                    SizedBox(width: 5),
+                    const SizedBox(width: 5),
                     CircleAvatar(
-                      backgroundColor: MyColors.secondaryBackground,
+                      backgroundColor: Theme.of(context).primaryColorLight,
                       radius: 40,
                     ),
                   ],
@@ -88,7 +88,7 @@ class LoadingText extends StatelessWidget {
         width: width,
         height: 20,
         decoration: BoxDecoration(
-          color: MyColors.secondaryBackground,
+          color: Theme.of(context).primaryColorLight,
           borderRadius: BorderRadius.circular(4),
         ),
       ),

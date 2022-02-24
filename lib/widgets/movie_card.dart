@@ -22,7 +22,7 @@ class MovieCard extends StatelessWidget {
       onTap: () {
         onTap();
       },
-      focusColor: MyColors.secondaryBackground,
+      focusColor: Theme.of(context).primaryColorLight,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -43,8 +43,8 @@ class MovieCard extends StatelessWidget {
             name,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: const TextStyle(
-              color: Colors.white,
+            style: TextStyle(
+              color: Theme.of(context).textTheme.bodyText1!.color,
               fontSize: 16,
               fontWeight: FontWeight.w500,
             ),
@@ -53,8 +53,8 @@ class MovieCard extends StatelessWidget {
             DateFormat.yMMMd().format(DateTime.parse(releaseDate)),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: const TextStyle(
-              color: Colors.white,
+            style: TextStyle(
+              color: Theme.of(context).textTheme.bodyText1!.color,
               fontSize: 12,
             ),
           ),

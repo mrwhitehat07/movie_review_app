@@ -31,7 +31,7 @@ class _HomePageState extends State<HomePage> {
         builder: (context, state) {
           if (state is HomeLoaded) {
             return Scaffold(
-              backgroundColor: Colors.black,
+              backgroundColor: Theme.of(context).backgroundColor,
               body: SafeArea(
                 child: SingleChildScrollView(
                   child: Column(
@@ -41,10 +41,10 @@ class _HomePageState extends State<HomePage> {
                         width: size.width,
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: RichText(
-                          text: const TextSpan(
+                          text:  TextSpan(
                             text: "Popular Movies\n",
                             style: TextStyle(
-                              color: Colors.white,
+                              color: Theme.of(context).textTheme.bodyText1!.color,
                               fontWeight: FontWeight.bold,
                               fontSize: 22,
                             ),
@@ -52,7 +52,7 @@ class _HomePageState extends State<HomePage> {
                               TextSpan(
                                 text: "from all over the world",
                                 style: TextStyle(
-                                  color: Colors.grey,
+                                  color: Theme.of(context).textTheme.bodyText1!.color,
                                   fontWeight: FontWeight.normal,
                                   fontSize: 12,
                                 ),
@@ -116,10 +116,10 @@ class _HomePageState extends State<HomePage> {
                       Container(
                         width: size.width,
                         padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: const Text(
+                        child: Text(
                           "Your Celebs",
                           style: TextStyle(
-                            color: Colors.white,
+                            color: Theme.of(context).textTheme.bodyText1!.color,
                             fontWeight: FontWeight.bold,
                             fontSize: 22,
                           ),
@@ -153,12 +153,13 @@ class _HomePageState extends State<HomePage> {
                                                 radius: 50,
                                                 backgroundImage: NetworkImage(
                                                     API.baseUrl + e.image!),
+                                                    backgroundColor: Theme.of(context).primaryColorLight,
                                               ),
                                               const SizedBox(height: 5),
                                               Text(
                                                 "${e.fname} ${e.lname}",
-                                                style: const TextStyle(
-                                                  color: Colors.white,
+                                                style: TextStyle(
+                                                  color: Theme.of(context).textTheme.bodyText1!.color,
                                                   fontWeight: FontWeight.normal,
                                                   fontSize: 14,
                                                 ),
@@ -185,9 +186,9 @@ class _HomePageState extends State<HomePage> {
                                       left: (index == 0) ? 20 : 8,
                                       right: (index == (3 - 1)) ? 20 : 2,
                                     ),
-                                    child: const CircleAvatar(
+                                    child: CircleAvatar(
                                       backgroundColor:
-                                          MyColors.secondaryBackground,
+                                          Theme.of(context).primaryColorLight,
                                       radius: 40,
                                     ),
                                   );
@@ -201,7 +202,7 @@ class _HomePageState extends State<HomePage> {
             );
           } else if (state is HomeLoading) {
             return Scaffold(
-              backgroundColor: Colors.black,
+              backgroundColor: Theme.of(context).backgroundColor,
               body: SafeArea(
                 child: SingleChildScrollView(
                   child: Column(
@@ -246,8 +247,8 @@ class _HomePageState extends State<HomePage> {
                                 left: (index == 0) ? 20 : 8,
                                 right: (index == (3 - 1)) ? 20 : 2,
                               ),
-                              child: const CircleAvatar(
-                                backgroundColor: MyColors.secondaryBackground,
+                              child: CircleAvatar(
+                                backgroundColor: Theme.of(context).primaryColorLight,
                                 radius: 40,
                               ),
                             );
