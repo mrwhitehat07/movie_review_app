@@ -206,7 +206,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                         ),
                         child: Row(
                           children: [
-                            ...state.crews.map(
+                            ...movie.crew!.map(
                               (e) => Container(
                                 margin: const EdgeInsets.only(right: 10),
                                 child: Column(

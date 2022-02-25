@@ -9,10 +9,10 @@ class MovieDetailLoading extends MovieDetailState {}
 
 class MovieDetailLoadSuccess extends MovieDetailState {
   final Movie movie;
-  final List<Celebs> crews;
+  // final List<Celebs> crews;
   MovieDetailLoadSuccess({
     required this.movie,
-    required this.crews,
+    // required this.crews,
   });
 
   @override

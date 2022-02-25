@@ -60,6 +60,7 @@ class _ProfileUpdateFormState extends State<ProfileUpdateForm> {
           return Scaffold(
             backgroundColor: Theme.of(context).backgroundColor,
             appBar: AppBar(
+              elevation: 0,
               backgroundColor: Theme.of(context).backgroundColor,
               title: Text(
                 "Profile",
@@ -300,7 +301,7 @@ class _ProfileUpdateFormState extends State<ProfileUpdateForm> {
           );
         } else {
           return Scaffold(
-            backgroundColor: Colors.black,
+            backgroundColor: Theme.of(context).backgroundColor,
             body: Center(
               child: CircularProgressIndicator(
                 color: MyColors.primary,

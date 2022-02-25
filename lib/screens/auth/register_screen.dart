@@ -41,7 +41,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         },
         builder: (context, state) {
           return Scaffold(
-            backgroundColor: MyColors.background,
+            backgroundColor: Theme.of(context).backgroundColor,
             body: SafeArea(
               child: Center(
                 child: SingleChildScrollView(
@@ -55,7 +55,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         onPressed: () {
                           Get.back();
                         },
-                        icon: const Icon(Icons.arrow_back, color: Colors.white),
+                        icon: Icon(
+                          Icons.arrow_back,
+                          color: Theme.of(context).textTheme.bodyText1!.color,
+                        ),
                       ),
                       const SizedBox(height: 10),
                       Container(
@@ -65,14 +68,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             RichText(
-                              text: const TextSpan(
+                              text: TextSpan(
                                 text: "Create\n",
                                 style: TextStyle(
-                                  color: Colors.white,
+                                  color: Theme.of(context)
+                                      .textTheme
+                                      .bodyText1!
+                                      .color,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 24,
                                 ),
-                                children: [
+                                children: const [
                                   TextSpan(
                                     text: "Account.",
                                   ),
@@ -108,16 +114,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             const SizedBox(height: 20),
                             CustomButton(
                               child: (state is AuthLoading)
-                                  ? const SizedBox(
+                                  ? SizedBox(
                                       width: 20,
                                       height: 20,
                                       child: CircularProgressIndicator(
-                                          strokeWidth: 1, color: Colors.black),
+                                          strokeWidth: 1,
+                                          color: Theme.of(context)
+                                              .textTheme
+                                              .bodyText1!
+                                              .color),
                                     )
                                   : Text(
                                       "sign up".toUpperCase(),
-                                      style: const TextStyle(
-                                        color: Colors.black,
+                                      style: TextStyle(
+                                        color: Theme.of(context)
+                                            .textTheme
+                                            .bodyText1!
+                                            .color,
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold,
                                       ),

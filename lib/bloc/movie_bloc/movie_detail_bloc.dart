@@ -16,17 +16,17 @@ class MovieDetailBloc extends Bloc<MovieDetailEvent, MovieDetailState> {
 
   Future<void> getMovieDetails(
       LoadMovieDetail event, Emitter<MovieDetailState> emit) async {
-    // try {
+    try {
       emit(MovieDetailLoading());
       Movie movie = await movieRespository.getMovieById(event.id);
-      List<Celebs> crews = await movieRespository.getMovieCrew(event.id);
+      // List<Celebs> crews = await movieRespository.getMovieCrew(event.id);
       print(movie.crew);
       emit(MovieDetailLoadSuccess(
         movie: movie,
-        crews: crews,
+        // crews: crews,
       ));
-    // } catch (e) {
-    //   emit(MovieDetailLoadFailed(message: e.toString()));
-    // }
+    } catch (e) {
+      emit(MovieDetailLoadFailed(message: e.toString()));
+    }
   }
 }

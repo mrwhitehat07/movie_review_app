@@ -46,7 +46,7 @@ class _LoginScreenState extends State<LoginScreen> {
               return true;
             },
             child: Scaffold(
-              backgroundColor: MyColors.background,
+              backgroundColor: Theme.of(context).backgroundColor,
               body: SafeArea(
                 child: Center(
                   child: SingleChildScrollView(
@@ -60,8 +60,10 @@ class _LoginScreenState extends State<LoginScreen> {
                           onPressed: () {
                             Get.back();
                           },
-                          icon:
-                              const Icon(Icons.arrow_back, color: Colors.white),
+                          icon: Icon(
+                            Icons.arrow_back,
+                            color: Theme.of(context).textTheme.bodyText1!.color,
+                          ),
                         ),
                         const SizedBox(height: 10),
                         Container(
@@ -73,14 +75,17 @@ class _LoginScreenState extends State<LoginScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 RichText(
-                                  text: const TextSpan(
+                                  text: TextSpan(
                                     text: "Welcome\n",
                                     style: TextStyle(
-                                      color: Colors.white,
+                                      color: Theme.of(context)
+                                          .textTheme
+                                          .bodyText1!
+                                          .color,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 24,
                                     ),
-                                    children: [
+                                    children: const [
                                       TextSpan(
                                         text: "Back.",
                                       ),
@@ -103,10 +108,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                 const SizedBox(height: 20),
                                 Container(
                                   alignment: Alignment.centerRight,
-                                  child: const Text(
+                                  child: Text(
                                     "Forgot Password?",
                                     style: TextStyle(
-                                      color: Colors.white60,
+                                      color: Theme.of(context)
+                                          .textTheme
+                                          .bodyText1!
+                                          .color,
                                       fontWeight: FontWeight.w500,
                                       fontSize: 14,
                                     ),
@@ -115,17 +123,24 @@ class _LoginScreenState extends State<LoginScreen> {
                                 const SizedBox(height: 20),
                                 CustomButton(
                                   child: (state is AuthLoading)
-                                      ? const SizedBox(
+                                      ? SizedBox(
                                           width: 20,
                                           height: 20,
                                           child: CircularProgressIndicator(
-                                              strokeWidth: 1,
-                                              color: Colors.black),
+                                            strokeWidth: 1,
+                                            color: Theme.of(context)
+                                                .textTheme
+                                                .bodyText1!
+                                                .color,
+                                          ),
                                         )
                                       : Text(
                                           "sign in".toUpperCase(),
-                                          style: const TextStyle(
-                                            color: Colors.black,
+                                          style: TextStyle(
+                                            color: Theme.of(context)
+                                                .textTheme
+                                                .bodyText1!
+                                                .color,
                                             fontSize: 18,
                                             fontWeight: FontWeight.bold,
                                           ),
@@ -149,11 +164,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                     onTap: () {
                                       Get.to(() => const RegisterScreen());
                                     },
-                                    child: const Text(
+                                    child: Text(
                                       "Don't have an account",
                                       style: TextStyle(
                                         decoration: TextDecoration.underline,
-                                        color: Colors.white,
+                                        color: Theme.of(context)
+                                            .textTheme
+                                            .bodyText1!
+                                            .color,
                                         fontSize: 16,
                                         fontWeight: FontWeight.normal,
                                       ),

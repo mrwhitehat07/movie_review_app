@@ -43,6 +43,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
           return Scaffold(
             backgroundColor: Theme.of(context).backgroundColor,
             appBar: AppBar(
+              elevation: 0,
               backgroundColor: Theme.of(context).backgroundColor,
               title: Text(
                 "Change Password",

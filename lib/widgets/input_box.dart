@@ -35,8 +35,8 @@ class _InputBoxState extends State<InputBox> {
       children: [
         Text(
           widget.fieldName,
-          style: const TextStyle(
-            color: Colors.white,
+          style: TextStyle(
+            color: Theme.of(context).textTheme.bodyText1!.color,
             fontWeight: FontWeight.w500,
             fontSize: 14,
           ),
@@ -44,10 +44,10 @@ class _InputBoxState extends State<InputBox> {
         Stack(
           children: [
             Container(
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 border: Border(
                   bottom: BorderSide(
-                    color: Colors.white,
+                    color: Theme.of(context).textTheme.bodyText1!.color!,
                     width: 1,
                   ),
                 ),
@@ -57,8 +57,8 @@ class _InputBoxState extends State<InputBox> {
                 maxLines: 1,
                 obscuringCharacter: '●',
                 onChanged: (value) {},
-                style: const TextStyle(
-                  color: Colors.white,
+                style: TextStyle(
+                  color: Theme.of(context).textTheme.bodyText1!.color,
                   fontWeight: FontWeight.normal,
                   fontSize: 14,
                 ),
@@ -76,8 +76,8 @@ class _InputBoxState extends State<InputBox> {
                   //   color: Colors.red,
                   //   fontSize: 12,
                   // ),
-                  hintStyle: const TextStyle(
-                    color: Colors.grey,
+                  hintStyle: TextStyle(
+                    color: Theme.of(context).textTheme.bodyText2!.color,
                     fontSize: 14,
                   ),
                 ),
@@ -96,7 +96,7 @@ class _InputBoxState extends State<InputBox> {
                         (isPassword == true)
                             ? EvaIcons.eyeOffOutline
                             : EvaIcons.eyeOutline,
-                        color: Colors.white,
+                        color: Theme.of(context).textTheme.bodyText1!.color,
                         size: 16,
                       ),
                     )

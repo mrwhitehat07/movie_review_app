@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:movie_review/utils/colors/colors.dart';
 
 class MovieLoadingCard extends StatelessWidget {
   const MovieLoadingCard({Key? key}) : super(key: key);
@@ -7,13 +6,14 @@ class MovieLoadingCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      // crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Container(
           width: 160,
           height: 150,
           decoration: BoxDecoration(
-            color: MyColors.secondaryBackground,
+            color: Theme.of(context).primaryColorLight,
             borderRadius: BorderRadius.circular(10),
           ),
         ),
@@ -22,7 +22,7 @@ class MovieLoadingCard extends StatelessWidget {
           width: 125,
           height: 15,
           decoration: BoxDecoration(
-            color: MyColors.secondaryBackground,
+            color: Theme.of(context).primaryColorLight,
             borderRadius: BorderRadius.circular(4),
           ),
         ),
@@ -31,7 +31,7 @@ class MovieLoadingCard extends StatelessWidget {
           width: 100,
           height: 15,
           decoration: BoxDecoration(
-            color: MyColors.secondaryBackground,
+            color: Theme.of(context).primaryColorLight,
             borderRadius: BorderRadius.circular(4),
           ),
         ),

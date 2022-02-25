@@ -30,7 +30,7 @@ class MovieCard extends StatelessWidget {
             width: 160,
             height: 150,
             decoration: BoxDecoration(
-              color: MyColors.secondaryBackground,
+              color: Theme.of(context).primaryColorLight,
               image: DecorationImage(
                 image: NetworkImage(image),
                 fit: BoxFit.cover,

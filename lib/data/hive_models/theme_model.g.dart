@@ -1,14 +1,20 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
 part of 'theme_model.dart';
 
-class ThemeAdapter extends TypeAdapter<ThemeModel> {
+// **************************************************************************
+// TypeAdapterGenerator
+// **************************************************************************
+
+class ThemeModelAdapter extends TypeAdapter<ThemeModel> {
   @override
-  final typeId = 0;
+  final int typeId = 0;
 
   @override
   ThemeModel read(BinaryReader reader) {
-    var numOfFields = reader.readByte();
-    var fields = <int, dynamic>{
-      for (var i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return ThemeModel(
       isDark: fields[0] as bool,
@@ -22,4 +28,14 @@ class ThemeAdapter extends TypeAdapter<ThemeModel> {
       ..writeByte(0)
       ..write(obj.isDark);
   }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ThemeModelAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
 }

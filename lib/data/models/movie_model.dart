@@ -7,7 +7,7 @@ class Movie {
   final String? poster;
   final String? trailer;
   final List<String>? genres;
-  final List<Celebs>? crew;
+  final List? crew;
   final String? description;
   final String? director;
   final String? producer;
@@ -44,8 +44,8 @@ class Movie {
       releaseDate: json["release_date"],
       genres: List<String>.from(json["genre"]),
       description: (json["description"] != null) ? json["description"] : "",
-      // crew: json["crew"],
-      crew: List<Celebs>.from(json["crew"].map((x) => Celebs.fromJson(x))),
+      crew: json["crew"],
+      // crew: List<Celebs>.from(json["crew"].map((x) => Celebs.fromJson(x))),
       director: json["director"],
       producer: json["producer"],
       imdbRating: json["imdb_rating"],

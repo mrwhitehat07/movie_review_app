@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
-import 'package:movie_review/data/hive_models/theme_model.dart';
 import 'package:movie_review/routes/route.dart';
 import 'package:movie_review/screens/form/change_password.dart';
 import 'package:movie_review/screens/form/profile_update.dart';
@@ -16,10 +15,10 @@ import 'bloc/theme_bloc/theme_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final appDocumentDir = await path_provider.getApplicationDocumentsDirectory();
-  Hive
-    ..init(appDocumentDir.path)
-    ..registerAdapter(ThemeAdapter());
+  // final appDocumentDir = await path_provider.getApplicationDocumentsDirectory();
+  // Hive
+  //   ..init(appDocumentDir.path)
+  //   ..registerAdapter(ThemeAdapter());
   runApp(const MyApp());
 }
 
@@ -29,7 +28,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ThemeBloc(),
+      create: (context) => ThemeBloc()..add(ThemeCheckEvent()),
       child: BlocConsumer<ThemeBloc, ThemeState>(
         listener: (context, state) {
           if (state is ThemeChanged) {
