@@ -20,7 +20,6 @@ class MovieDetailBloc extends Bloc<MovieDetailEvent, MovieDetailState> {
       emit(MovieDetailLoading());
       Movie movie = await movieRespository.getMovieById(event.id);
       // List<Celebs> crews = await movieRespository.getMovieCrew(event.id);
-      print(movie.crew);
       emit(MovieDetailLoadSuccess(
         movie: movie,
         // crews: crews,

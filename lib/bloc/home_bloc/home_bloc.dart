@@ -19,8 +19,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     try {
       emit(HomeLoading());
       List<Movie> movies = await movieRespository.getAllMovies();
+      List<Movie> actionMovies = await movieRespository.getActionMovies();
       List<Celebs> celebs = await movieRespository.getAllCelebs();
-      emit(HomeLoaded(movies: movies, celebs: celebs));
+      emit(HomeLoaded(movies: movies, celebs: celebs, actionMovies: actionMovies,));
     } catch (e) {
       emit(HomeLoadFailed(message: e.toString()));
     }

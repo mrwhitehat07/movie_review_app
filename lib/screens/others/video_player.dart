@@ -20,7 +20,7 @@ class _VideoPlayerState extends State<VideoPlayer> {
   void initState() {
     super.initState();
     _chewieController = ChewieController(
-        videoPlayerController:  VideoPlayerController.network(widget.videoUrl),
+        videoPlayerController: VideoPlayerController.network(widget.videoUrl),
         autoPlay: true,
         looping: true,
         aspectRatio: 16 / 9,
@@ -38,8 +38,8 @@ class _VideoPlayerState extends State<VideoPlayer> {
   @override
   void dispose() {
     super.dispose();
-    // _chewieController._videoPlayerController.dispose();
     _chewieController.dispose();
+    _videoPlayerController.dispose();
   }
 
   @override

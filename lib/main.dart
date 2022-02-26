@@ -27,40 +27,38 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ThemeBloc()..add(ThemeCheckEvent()),
-      child: BlocConsumer<ThemeBloc, ThemeState>(
-        listener: (context, state) {
-          if (state is ThemeChanged) {
-            print("theme : " + state.themeData.toString());
-          } else {
-            print("done nothing");
-          }
-        },
-        builder: (context, state) {
-          return GetMaterialApp(
-            title: 'Movie Review',
-            initialRoute: MyRoutes.splashPage,
-            debugShowCheckedModeBanner: false,
-            theme: (state is ThemeChanged)
-                ? state.themeData
-                : appThemeData[AppTheme.primaryLight],
-            getPages: [
-              GetPage(
-                  name: MyRoutes.splashPage, page: () => const SplashScreen()),
-              GetPage(name: MyRoutes.homePage, page: () => const HomeScreen()),
-              GetPage(
-                  name: MyRoutes.profileEdit,
-                  page: () => const ProfileUpdateForm()),
-              GetPage(
-                  name: MyRoutes.changePassword,
-                  page: () => const ChangePasswordScreen()),
-              GetPage(
-                  name: MyRoutes.settings, page: () => const SettingsScreen())
-            ],
-          );
-        },
-      ),
+    // return BlocProvider(
+    //   create: (context) => ThemeBloc()..add(ThemeCheckEvent()),
+    //   child: BlocConsumer<ThemeBloc, ThemeState>(
+    //     listener: (context, state) {
+    //       if (state is ThemeChanged) {
+    //         print("theme : " + state.themeData.toString());
+    //       } else {
+    //         print("done nothing");
+    //       }
+    //     },
+    //     builder: (context, state) {
+    return GetMaterialApp(
+      title: 'Movie Review',
+      initialRoute: MyRoutes.splashPage,
+      debugShowCheckedModeBanner: false,
+      // theme: (state is ThemeChanged)
+      //     ? state.themeData
+      //     : appThemeData[AppTheme.primaryLight],
+      theme: appThemeData[AppTheme.primaryDark],
+      getPages: [
+        GetPage(name: MyRoutes.splashPage, page: () => const SplashScreen()),
+        GetPage(name: MyRoutes.homePage, page: () => const HomeScreen()),
+        GetPage(
+            name: MyRoutes.profileEdit, page: () => const ProfileUpdateForm()),
+        GetPage(
+            name: MyRoutes.changePassword,
+            page: () => const ChangePasswordScreen()),
+        GetPage(name: MyRoutes.settings, page: () => const SettingsScreen())
+      ],
     );
+    //     },
+    //   ),
+    // );
   }
 }

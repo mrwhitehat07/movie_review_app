@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:movie_review/bloc/home_bloc/home_bloc.dart';
 import 'package:movie_review/screens/details/celebs_detail_screen.dart';
 import 'package:movie_review/screens/details/movie_detail_screen.dart';
@@ -34,6 +35,7 @@ class _HomePageState extends State<HomePage> {
               backgroundColor: Theme.of(context).backgroundColor,
               body: SafeArea(
                 child: SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(),
                   child: Column(
                     children: [
                       const SizedBox(height: 20),
@@ -41,10 +43,11 @@ class _HomePageState extends State<HomePage> {
                         width: size.width,
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: RichText(
-                          text:  TextSpan(
+                          text: TextSpan(
                             text: "Popular Movies\n",
                             style: TextStyle(
-                              color: Theme.of(context).textTheme.bodyText1!.color,
+                              color:
+                                  Theme.of(context).textTheme.bodyText1!.color,
                               fontWeight: FontWeight.bold,
                               fontSize: 22,
                             ),
@@ -52,7 +55,10 @@ class _HomePageState extends State<HomePage> {
                               TextSpan(
                                 text: "from all over the world",
                                 style: TextStyle(
-                                  color: Theme.of(context).textTheme.bodyText1!.color,
+                                  color: Theme.of(context)
+                                      .textTheme
+                                      .bodyText1!
+                                      .color,
                                   fontWeight: FontWeight.normal,
                                   fontSize: 12,
                                 ),
@@ -62,56 +68,35 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                       const SizedBox(height: 15),
-                      (state is HomeLoaded)
-                          ? SizedBox(
-                              width: size.width,
-                              height: 200,
-                              child: ListView.builder(
-                                physics: const BouncingScrollPhysics(),
-                                scrollDirection: Axis.horizontal,
-                                itemCount: state.movies.length,
-                                itemBuilder: (context, index) {
-                                  return Padding(
-                                    padding: EdgeInsets.only(
-                                      left: (index == 0) ? 20 : 5,
-                                      right:
-                                          (index == (state.movies.length - 1))
-                                              ? 20
-                                              : 2,
-                                    ),
-                                    child: MovieCard(
-                                        name: state.movies[index].name!,
-                                        image: API.baseUrl +
-                                            state.movies[index].poster!,
-                                        releaseDate:
-                                            state.movies[index].releaseDate!,
-                                        onTap: () {
-                                          Get.to(() => MovieDetailScreen(
-                                                id: state.movies[index].id!,
-                                              ));
-                                        }),
-                                  );
-                                },
+                      SizedBox(
+                        width: size.width,
+                        height: 200,
+                        child: ListView.builder(
+                          physics: const BouncingScrollPhysics(),
+                          scrollDirection: Axis.horizontal,
+                          itemCount: state.movies.length,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: EdgeInsets.only(
+                                left: (index == 0) ? 20 : 5,
+                                right: (index == (state.movies.length - 1))
+                                    ? 20
+                                    : 2,
                               ),
-                            )
-                          : SizedBox(
-                              width: size.width,
-                              height: 200,
-                              child: ListView.builder(
-                                physics: const NeverScrollableScrollPhysics(),
-                                scrollDirection: Axis.horizontal,
-                                itemCount: 3,
-                                itemBuilder: (context, index) {
-                                  return Padding(
-                                    padding: EdgeInsets.only(
-                                      left: (index == 0) ? 20 : 8,
-                                      right: (index == (3 - 1)) ? 20 : 2,
-                                    ),
-                                    child: const MovieLoadingCard(),
-                                  );
-                                },
-                              ),
-                            ),
+                              child: MovieCard(
+                                  name: state.movies[index].name!,
+                                  image:
+                                      API.baseUrl + state.movies[index].poster!,
+                                  releaseDate: state.movies[index].releaseDate!,
+                                  onTap: () {
+                                    Get.to(() => MovieDetailScreen(
+                                          id: state.movies[index].id!,
+                                        ));
+                                  }),
+                            );
+                          },
+                        ),
+                      ),
                       const SizedBox(height: 20),
                       Container(
                         width: size.width,
@@ -126,75 +111,143 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                       const SizedBox(height: 15),
-                      (state is HomeLoaded)
-                          ? Container(
-                              padding: const EdgeInsets.only(left: 18),
-                              width: double.infinity,
-                              child: SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    ...state.celebs.map(
-                                      (e) => InkWell(
-                                        onTap: () {
-                                          Get.to(
-                                            () => CelebsDetailScreen(
-                                              id: e.id!,
-                                            ),
-                                          );
-                                        },
-                                        child: Container(
-                                          margin:
-                                              const EdgeInsets.only(right: 10),
-                                          child: Column(
-                                            children: [
-                                              CircleAvatar(
-                                                radius: 50,
-                                                backgroundImage: NetworkImage(
-                                                    API.baseUrl + e.image!),
-                                                    backgroundColor: Theme.of(context).primaryColorLight,
-                                              ),
-                                              const SizedBox(height: 5),
-                                              Text(
-                                                "${e.fname} ${e.lname}",
-                                                style: TextStyle(
-                                                  color: Theme.of(context).textTheme.bodyText1!.color,
-                                                  fontWeight: FontWeight.normal,
-                                                  fontSize: 14,
-                                                ),
-                                              ),
-                                            ],
+                      Container(
+                        padding: const EdgeInsets.only(left: 18),
+                        width: double.infinity,
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              ...state.celebs.map(
+                                (e) => InkWell(
+                                  onTap: () {
+                                    Get.to(
+                                      () => CelebsDetailScreen(
+                                        id: e.id!,
+                                      ),
+                                    );
+                                  },
+                                  child: Container(
+                                    margin: const EdgeInsets.only(right: 10),
+                                    child: Column(
+                                      children: [
+                                        CircleAvatar(
+                                          radius: 50,
+                                          backgroundImage: NetworkImage(
+                                              API.baseUrl + e.image!),
+                                          backgroundColor: Theme.of(context)
+                                              .primaryColorLight,
+                                        ),
+                                        const SizedBox(height: 5),
+                                        Text(
+                                          "${e.fname} ${e.lname}",
+                                          style: TextStyle(
+                                            color: Theme.of(context)
+                                                .textTheme
+                                                .bodyText1!
+                                                .color,
+                                            fontWeight: FontWeight.normal,
+                                            fontSize: 14,
                                           ),
                                         ),
-                                      ),
-                                    )
-                                  ],
+                                      ],
+                                    ),
+                                  ),
                                 ),
                               ),
-                            )
-                          : SizedBox(
-                              width: size.width,
-                              height: 100,
-                              child: ListView.builder(
-                                physics: const NeverScrollableScrollPhysics(),
-                                scrollDirection: Axis.horizontal,
-                                itemCount: 3,
-                                itemBuilder: (context, index) {
-                                  return Padding(
-                                    padding: EdgeInsets.only(
-                                      left: (index == 0) ? 20 : 8,
-                                      right: (index == (3 - 1)) ? 20 : 2,
-                                    ),
-                                    child: CircleAvatar(
-                                      backgroundColor:
-                                          Theme.of(context).primaryColorLight,
-                                      radius: 40,
-                                    ),
-                                  );
-                                },
+                            ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      Container(
+                        width: size.width,
+                        padding: const EdgeInsets.only(left: 20),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Action Movies",
+                              style: TextStyle(
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .bodyText1!
+                                    .color,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 22,
                               ),
                             ),
+                            MaterialButton(
+                              onPressed: () {},
+                              child: const Text(
+                                "See more",
+                                style: TextStyle(
+                                  color: MyColors.primaryButtonColor,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: GridView.builder(
+                          shrinkWrap: true,
+                          physics: const BouncingScrollPhysics(),
+                          gridDelegate:
+                              SliverGridDelegateWithMaxCrossAxisExtent(
+                            maxCrossAxisExtent: size.width * 0.5,
+                            mainAxisExtent: 300,
+                            childAspectRatio: 1,
+                            crossAxisSpacing: 10,
+                            mainAxisSpacing: 10,
+                          ),
+                          itemCount: state.actionMovies.length,
+                          itemBuilder: (context, index) {
+                            return InkWell(
+                              onTap: () {
+                                Get.to(() => MovieDetailScreen(
+                                    id: state.actionMovies[index].id!));
+                              },
+                              focusColor: Theme.of(context).primaryColorLight,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    width: size.width / 2,
+                                    height: 150,
+                                    decoration: BoxDecoration(
+                                      color:
+                                          Theme.of(context).primaryColorLight,
+                                      image: DecorationImage(
+                                        image: NetworkImage(API.baseUrl +
+                                            state.actionMovies[index].poster!),
+                                        fit: BoxFit.cover,
+                                      ),
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Text(
+                                    state.actionMovies[index].name!,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                      color: Theme.of(context)
+                                          .textTheme
+                                          .bodyText1!
+                                          .color,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -248,7 +301,8 @@ class _HomePageState extends State<HomePage> {
                                 right: (index == (3 - 1)) ? 20 : 2,
                               ),
                               child: CircleAvatar(
-                                backgroundColor: Theme.of(context).primaryColorLight,
+                                backgroundColor:
+                                    Theme.of(context).primaryColorLight,
                                 radius: 40,
                               ),
                             );

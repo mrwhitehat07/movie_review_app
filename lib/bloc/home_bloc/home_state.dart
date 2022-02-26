@@ -9,9 +9,11 @@ class HomeLoading extends HomeState {}
 
 class HomeLoaded extends HomeState {
   final List<Movie> movies;
+  final List<Movie> actionMovies;
   final List<Celebs> celebs;
   HomeLoaded({
     required this.movies,
+    required this.actionMovies,
     required this.celebs,
   });
 

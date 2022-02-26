@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:movie_review/bloc/movie_bloc/movie_detail_bloc.dart';
 import 'package:movie_review/screens/details/movie_loading_screen.dart';
+import 'package:movie_review/screens/others/video_player.dart';
 import 'package:movie_review/utils/apis/apis.dart';
 import 'package:movie_review/utils/colors/colors.dart';
 
@@ -100,11 +101,18 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                                 },
                                 child: Row(
                                   children: [
-                                    SizedBox(
-                                      width: 50,
-                                      height: 50,
-                                      child: Image.asset(
-                                          "assets/logos/play_icon.png"),
+                                    InkWell(
+                                      onTap: () {
+                                        Get.to(() => VideoPlayer(
+                                            videoUrl:
+                                                API.baseUrl + movie.trailer!));
+                                      },
+                                      child: SizedBox(
+                                        width: 50,
+                                        height: 50,
+                                        child: Image.asset(
+                                            "assets/logos/play_icon.png"),
+                                      ),
                                     ),
                                     const SizedBox(width: 10),
                                     const Text(

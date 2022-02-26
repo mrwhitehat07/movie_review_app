@@ -134,80 +134,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
           } else {
             return Scaffold(
               backgroundColor: Theme.of(context).backgroundColor,
-              body: SafeArea(
+              body: const SafeArea(
                 child: Center(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        Center(
-                          child: CircleAvatar(
-                            radius: 45,
-                            backgroundColor:
-                                Theme.of(context).primaryColorLight,
-                          ),
-                        ),
-                        const SizedBox(height: 10),
-                        const Text(
-                          "Cho Boah",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        const SizedBox(height: 5),
-                        const Text(
-                          "choboah@gmail.com",
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 16,
-                            fontWeight: FontWeight.normal,
-                          ),
-                        ),
-                        const SizedBox(height: 20),
-                        ...options.map((option) {
-                          return ProfileCardTile(
-                            title: option.title,
-                            icon: option.icon,
-                            onTap: () {
-                              Get.toNamed(option.route);
-                            },
-                          );
-                        }).toList(),
-                        InkWell(
-                          onTap: () {
-                            BlocProvider.of<AuthBloc>(context)
-                                .add(LogoutUser());
-                          },
-                          child: Container(
-                            width: size.width,
-                            height: 60,
-                            padding: EdgeInsets.symmetric(
-                                horizontal: size.width * 0.03),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            alignment: Alignment.center,
-                            child: Row(
-                              children: const [
-                                Icon(
-                                  EvaIcons.logOut,
-                                  color: Colors.white,
-                                ),
-                                SizedBox(width: 10),
-                                Text(
-                                  "Logout",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 16,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2,
+                    color: MyColors.primaryButtonColor,
                   ),
                 ),
               ),
