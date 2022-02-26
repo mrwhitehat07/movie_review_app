@@ -1,6 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:movie_review/data/models/celebs_model.dart';
 import 'package:movie_review/data/models/genre_model.dart';
+import 'package:movie_review/data/models/movie_model.dart';
 import 'package:movie_review/data/repositories/genre_repository.dart';
 
 part 'explore_event.dart';

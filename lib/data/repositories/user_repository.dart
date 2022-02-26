@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:dio/dio.dart';
-import 'package:movie_review/data/models/profile_options_model.dart';
 import 'package:movie_review/data/models/user_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:movie_review/data/repositories/secure_storage.dart';

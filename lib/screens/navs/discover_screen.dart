@@ -14,6 +14,28 @@ class DiscoverScreen extends StatefulWidget {
 
 class _DiscoverScreenState extends State<DiscoverScreen> {
   final searchController = TextEditingController();
+  bool isSearching = false;
+
+  searchState() {
+    searchController.addListener(() {
+      if (searchController.text.isNotEmpty) {
+        setState(() {
+          isSearching = true;
+        });
+      } else {
+        setState(() {
+          isSearching = false;
+        });
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    searchState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,10 +94,44 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                               color:
                                   Theme.of(context).textTheme.bodyText1!.color,
                             ),
-                            onSubmitted: (value) {},
+                            onChanged: (value) {
+                              BlocProvider.of<ExploreBloc>(context)
+                                  .add(Search(query: value));
+                            },
+                            onSubmitted: (value) {
+                              BlocProvider.of<ExploreBloc>(context)
+                                  .add(Search(query: value));
+                            },
                           ),
                         ),
                       ),
+                      (isSearching == true)
+                          ? Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 12, vertical: 8),
+                              decoration: BoxDecoration(
+                                color: Colors.grey,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: (searchController.text.isEmpty)
+                                  ? const Center(
+                                      child: CircularProgressIndicator(
+                                        strokeWidth: 1,
+                                        color: MyColors.primaryButtonColor,
+                                      ),
+                                    )
+                                  : SizedBox(
+                                      width: size.width * 0.8,
+                                      height: size.height * 0.4,
+                                      child: ListView.builder(
+                                        itemCount: 5,
+                                        itemBuilder: (context, index) {
+                                          return const Text("data");
+                                        },
+                                      ),
+                                    ),
+                            )
+                          : Container(),
                       const SizedBox(height: 20),
                       Container(
                         alignment: Alignment.centerLeft,
@@ -179,13 +235,51 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                 ),
               ),
             );
-          } else {
+          } else if (state is ExploreLoading) {
             return Scaffold(
               backgroundColor: Theme.of(context).backgroundColor,
               body: const Center(
                 child: CircularProgressIndicator(
                   color: MyColors.primaryButtonColor,
                   strokeWidth: 2,
+                ),
+              ),
+            );
+          } else {
+            return Scaffold(
+              backgroundColor: Theme.of(context).backgroundColor,
+              body: SafeArea(
+                child: Center(
+                  child: SizedBox(
+                    width: size.width,
+                    height: 200,
+                    child: Column(
+                      children: [
+                        Text(
+                          "Failed to load",
+                          style: TextStyle(
+                            color: Theme.of(context).textTheme.bodyText1!.color,
+                            fontSize: 18,
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        OutlinedButton(
+                          onPressed: () {
+                            BlocProvider.of<ExploreBloc>(context)
+                                .add(GetGenre());
+                          },
+                          child: Text(
+                            "Refresh",
+                            style: TextStyle(
+                              color:
+                                  Theme.of(context).textTheme.bodyText1!.color,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ),
             );

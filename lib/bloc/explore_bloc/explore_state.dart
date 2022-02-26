@@ -18,11 +18,23 @@ class ExploreLoaded extends ExploreState {
 }
 
 class ExploreFailed extends ExploreState {
-    final String message;
-    ExploreFailed({
-      required this.message,
-    });
+  final String message;
+  ExploreFailed({
+    required this.message,
+  });
 
   @override
   List<Object?> get props => [message];
+}
+
+class SearchList extends ExploreState {
+  final List<Celebs> celebs;
+  final List<Movie> movie;
+  SearchList({
+    required this.celebs,
+    required this.movie,
+  });
+
+  @override
+  List<Object?> get props => [movie, celebs];
 }
