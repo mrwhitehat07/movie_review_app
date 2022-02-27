@@ -1,5 +1,7 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:movie_review/screens/others/favourite_page.dart';
 
 class NotificationScreen extends StatefulWidget {
   const NotificationScreen({Key? key}) : super(key: key);
@@ -25,7 +27,9 @@ class _NotificationScreenState extends State<NotificationScreen> {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Get.to(() => const FavouriteScreen());
+            },
             icon: const Icon(
               EvaIcons.heart,
               color: Colors.red,

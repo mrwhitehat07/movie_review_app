@@ -7,7 +7,6 @@ import 'package:movie_review/data/models/profile_options_model.dart';
 import 'package:movie_review/routes/route.dart';
 import 'package:movie_review/screens/auth/login_screen.dart';
 import 'package:movie_review/utils/apis/apis.dart';
-import 'package:movie_review/utils/colors/colors.dart';
 import 'package:movie_review/widgets/profille_tile.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -134,11 +133,37 @@ class _ProfileScreenState extends State<ProfileScreen> {
           } else {
             return Scaffold(
               backgroundColor: Theme.of(context).backgroundColor,
-              body: const SafeArea(
+              body: SafeArea(
                 child: Center(
-                  child: CircularProgressIndicator(
-                    strokeWidth: 2,
-                    color: MyColors.primaryButtonColor,
+                  child: SizedBox(
+                    width: size.width,
+                    height: 200,
+                    child: Column(
+                      children: [
+                        Text(
+                          "Failed to load",
+                          style: TextStyle(
+                            color: Theme.of(context).textTheme.bodyText1!.color,
+                            fontSize: 18,
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        OutlinedButton(
+                          onPressed: () {
+                            BlocProvider.of<AuthBloc>(context)
+                                .add(GetUser());
+                          },
+                          child: Text(
+                            "Refresh",
+                            style: TextStyle(
+                              color:
+                                  Theme.of(context).textTheme.bodyText1!.color,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:movie_review/bloc/home_bloc/home_bloc.dart';
 import 'package:movie_review/screens/details/celebs_detail_screen.dart';
 import 'package:movie_review/screens/details/movie_detail_screen.dart';
@@ -198,7 +197,7 @@ class _HomePageState extends State<HomePage> {
                           gridDelegate:
                               SliverGridDelegateWithMaxCrossAxisExtent(
                             maxCrossAxisExtent: size.width * 0.5,
-                            mainAxisExtent: 300,
+                            mainAxisExtent: 180,
                             childAspectRatio: 1,
                             crossAxisSpacing: 10,
                             mainAxisSpacing: 10,

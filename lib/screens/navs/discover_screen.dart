@@ -1,8 +1,10 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:movie_review/bloc/explore_bloc/explore_bloc.dart';
 import 'package:movie_review/data/models/genre_model.dart';
+import 'package:movie_review/screens/others/search_screen.dart';
 import 'package:movie_review/utils/colors/colors.dart';
 
 class DiscoverScreen extends StatefulWidget {
@@ -14,28 +16,6 @@ class DiscoverScreen extends StatefulWidget {
 
 class _DiscoverScreenState extends State<DiscoverScreen> {
   final searchController = TextEditingController();
-  bool isSearching = false;
-
-  searchState() {
-    searchController.addListener(() {
-      if (searchController.text.isNotEmpty) {
-        setState(() {
-          isSearching = true;
-        });
-      } else {
-        setState(() {
-          isSearching = false;
-        });
-      }
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-
-    searchState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -94,44 +74,13 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                               color:
                                   Theme.of(context).textTheme.bodyText1!.color,
                             ),
-                            onChanged: (value) {
-                              BlocProvider.of<ExploreBloc>(context)
-                                  .add(Search(query: value));
-                            },
                             onSubmitted: (value) {
-                              BlocProvider.of<ExploreBloc>(context)
-                                  .add(Search(query: value));
+                              Get.to(() =>
+                                  SearchScreen(query: searchController.text));
                             },
                           ),
                         ),
                       ),
-                      (isSearching == true)
-                          ? Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 12, vertical: 8),
-                              decoration: BoxDecoration(
-                                color: Colors.grey,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: (searchController.text.isEmpty)
-                                  ? const Center(
-                                      child: CircularProgressIndicator(
-                                        strokeWidth: 1,
-                                        color: MyColors.primaryButtonColor,
-                                      ),
-                                    )
-                                  : SizedBox(
-                                      width: size.width * 0.8,
-                                      height: size.height * 0.4,
-                                      child: ListView.builder(
-                                        itemCount: 5,
-                                        itemBuilder: (context, index) {
-                                          return const Text("data");
-                                        },
-                                      ),
-                                    ),
-                            )
-                          : Container(),
                       const SizedBox(height: 20),
                       Container(
                         alignment: Alignment.centerLeft,
