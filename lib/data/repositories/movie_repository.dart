@@ -40,12 +40,15 @@ class MovieRespository {
     }
   }
 
-  Future<Movie> getMovieById(int id) async {
+  Future getMovieById(int id) async {
     try {
-    final res = await http.get(Uri.parse(API.baseUrl + API.allMovies + "$id"));
-    final data = jsonDecode(res.body);
-    Movie movie = Movie.fromDetailJson(data);
-    return movie;
+      final res =
+          await http.get(Uri.parse(API.baseUrl + API.allMovies + "$id"));
+      final data = jsonDecode(res.body);
+      List crew = data["crew"];
+      Movie movie = Movie.fromDetailJson(data);
+      List<Celebs> crews = crew.map((e) => Celebs.fromJson(e)).toList();
+      return [movie, crews];
     } catch (e) {
       return Future.error(e);
     }
@@ -53,10 +56,11 @@ class MovieRespository {
 
   Future<List<Celebs>> getMovieCrew(int id) async {
     try {
-    final res = await http.get(Uri.parse(API.baseUrl + API.allMovies + "$id/crew"));
-    List data = jsonDecode(res.body);
-    List<Celebs> crews = data.map((e) => Celebs.fromJson(e)).toList();
-    return crews;
+      final res =
+          await http.get(Uri.parse(API.baseUrl + API.allMovies + "$id/crew"));
+      List data = jsonDecode(res.body);
+      List<Celebs> crews = data.map((e) => Celebs.fromJson(e)).toList();
+      return crews;
     } catch (e) {
       return Future.error(e);
     }

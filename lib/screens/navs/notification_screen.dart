@@ -25,21 +25,13 @@ class _NotificationScreenState extends State<NotificationScreen> {
             color: Theme.of(context).textTheme.bodyText1!.color,
           ),
         ),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Get.to(() => const FavouriteScreen());
-            },
-            icon: const Icon(
-              EvaIcons.heart,
-              color: Colors.red,
-            ),
-          ),
-          const SizedBox(width: 10)
-        ],
       ),
       body: SingleChildScrollView(
-        child: Column(),
+        child: Column(
+          children: [
+            const SizedBox(height: 10),
+          ],
+        ),
       ),
     );
   }

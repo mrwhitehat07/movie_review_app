@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:movie_review/bloc/explore_bloc/explore_bloc.dart';
 import 'package:movie_review/data/models/genre_model.dart';
+import 'package:movie_review/screens/details/movie_grid_screen.dart';
 import 'package:movie_review/screens/others/search_screen.dart';
 import 'package:movie_review/utils/colors/colors.dart';
 
@@ -107,27 +108,33 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                                 left: (index == 0) ? 20 : 5,
                                 right: (index == (genres.length - 1)) ? 20 : 5,
                               ),
-                              child: Container(
-                                width: 150,
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    width: 3,
-                                    color: const Color(0xFF61FFEF),
-                                  ),
-                                ),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      "#${genres[index].title}",
-                                      style: TextStyle(
-                                        color: Theme.of(context)
-                                            .textTheme
-                                            .bodyText1!
-                                            .color,
-                                      ),
+                              child: InkWell(
+                                onTap: () {
+                                  Get.to(() =>
+                                      MovieGridScreen(id: genres[index].id!, title: genres[index].title!));
+                                },
+                                child: Container(
+                                  width: 150,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      width: 3,
+                                      color: const Color(0xFF61FFEF),
                                     ),
-                                  ],
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        "#${genres[index].title}",
+                                        style: TextStyle(
+                                          color: Theme.of(context)
+                                              .textTheme
+                                              .bodyText1!
+                                              .color,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             );

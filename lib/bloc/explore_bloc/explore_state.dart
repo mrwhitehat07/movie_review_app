@@ -38,3 +38,13 @@ class SearchList extends ExploreState {
   @override
   List<Object?> get props => [movie, celebs];
 }
+
+class GenreMovieList extends ExploreState {
+  final List<Movie> movie;
+  GenreMovieList({
+    required this.movie,
+  });
+
+  @override
+  List<Object?> get props => [movie];
+}

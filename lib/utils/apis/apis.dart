@@ -10,4 +10,5 @@ class API {
   static String changePassword = '/user/change-password/';
   static String updateProfile = '/user/profile-update/';
   static String searchUrl = '/search/q=';
+  static String notificationUrl = '/notifications/';
 }

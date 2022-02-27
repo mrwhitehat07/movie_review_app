@@ -18,11 +18,12 @@ class MovieDetailBloc extends Bloc<MovieDetailEvent, MovieDetailState> {
       LoadMovieDetail event, Emitter<MovieDetailState> emit) async {
     try {
       emit(MovieDetailLoading());
-      Movie movie = await movieRespository.getMovieById(event.id);
-      // List<Celebs> crews = await movieRespository.getMovieCrew(event.id);
+      final data = await movieRespository.getMovieById(event.id);
+      Movie movie = data[0];
+      List<Celebs> celebs = data[1];
       emit(MovieDetailLoadSuccess(
         movie: movie,
-        // crews: crews,
+        crews: celebs,
       ));
     } catch (e) {
       emit(MovieDetailLoadFailed(message: e.toString()));

@@ -11,3 +11,10 @@ class Search extends ExploreEvent {
     required this.query,
   });
 }
+
+class GetMovieByGenre extends ExploreEvent {
+  final int id;
+  GetMovieByGenre({
+    required this.id,
+  });
+}

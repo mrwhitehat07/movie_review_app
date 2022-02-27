@@ -3,7 +3,9 @@ import 'dart:ui';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:movie_review/bloc/movie_bloc/movie_detail_bloc.dart';
 import 'package:movie_review/screens/details/movie_loading_screen.dart';
 import 'package:movie_review/screens/others/video_player.dart';
@@ -18,7 +20,17 @@ class MovieDetailScreen extends StatefulWidget {
   _MovieDetailScreenState createState() => _MovieDetailScreenState();
 }
 
-class _MovieDetailScreenState extends State<MovieDetailScreen> {
+class _MovieDetailScreenState extends State<MovieDetailScreen>
+    with SingleTickerProviderStateMixin {
+  late TabController tabController;
+
+  @override
+  void initState() {
+    tabController = TabController(length: 3, vsync: this);
+    tabController.animateTo(2);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -131,159 +143,287 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
                         ],
                       ),
                       const SizedBox(height: 10),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          left: 18,
-                          top: 4,
-                        ),
-                        child: Text(
-                          movie.name!,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 10),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          left: 18,
-                        ),
-                        child: Row(
-                          children: [
-                            ...movie.genres!.map(
-                              (e) => Container(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 15,
-                                  vertical: 7,
-                                ),
-                                margin: const EdgeInsets.only(right: 8),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  color: MyColors.secondaryBackground,
-                                ),
-                                child: (Text(
-                                  e,
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 16,
-                                  ),
-                                )),
+                      SizedBox(
+                        width: double.infinity,
+                        height: 50,
+                        child: TabBar(
+                          controller: tabController,
+                          indicatorColor: MyColors.primaryButtonColor,
+                          labelPadding: const EdgeInsets.symmetric(vertical: 5),
+                          indicator: const BoxDecoration(),
+                          tabs: const [
+                            Text(
+                              "About",
+                              style: TextStyle(
+                                fontSize: 16,
+                              ),
+                            ),
+                            Text(
+                              "Cast & Crew",
+                              style: TextStyle(
+                                fontSize: 16,
+                              ),
+                            ),
+                            Text(
+                              "⭐ & Reviews",
+                              style: TextStyle(
+                                fontSize: 16,
                               ),
                             ),
                           ],
                         ),
                       ),
                       const SizedBox(height: 10),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          left: 18,
-                          right: 18,
-                          top: 4,
-                        ),
-                        child: Text(
-                          movie.description!,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 17,
-                            fontWeight: FontWeight.normal,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      const Padding(
-                        padding: EdgeInsets.only(
-                          left: 18,
-                          right: 18,
-                          top: 4,
-                        ),
-                        child: Text(
-                          "Crews",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 17,
-                            fontWeight: FontWeight.normal,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 15),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          left: 18,
-                        ),
-                        child: Row(
+                      SizedBox(
+                        width: double.infinity,
+                        height: size.height * 0.5,
+                        child: TabBarView(
+                          controller: tabController,
                           children: [
-                            ...movie.crew!.map(
-                              (e) => Container(
-                                margin: const EdgeInsets.only(right: 10),
-                                child: Column(
-                                  children: const [
-                                    CircleAvatar(
-                                      backgroundColor:
-                                          MyColors.secondaryBackground,
-                                      radius: 40,
+                            SingleChildScrollView(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                      left: 18,
+                                      top: 4,
                                     ),
-                                    // Text(e.fname),
-                                  ],
-                                ),
+                                    child: Text(
+                                      movie.name!,
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                      left: 18,
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        ...movie.genres!.map(
+                                          (e) => Container(
+                                            padding: const EdgeInsets.symmetric(
+                                              horizontal: 15,
+                                              vertical: 7,
+                                            ),
+                                            margin:
+                                                const EdgeInsets.only(right: 8),
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(20),
+                                              color:
+                                                  MyColors.secondaryBackground,
+                                            ),
+                                            child: (Text(
+                                              e,
+                                              style: const TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 16,
+                                              ),
+                                            )),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                      left: 18,
+                                      right: 18,
+                                      top: 4,
+                                    ),
+                                    child: Text(
+                                      movie.description!,
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.normal,
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 15),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                      left: 18,
+                                      right: 18,
+                                      top: 4,
+                                    ),
+                                    child: RichText(
+                                      text: TextSpan(
+                                          text: "Director : ",
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.normal,
+                                          ),
+                                          children: [
+                                            TextSpan(
+                                              text: movie.director!,
+                                              style: const TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.normal,
+                                              ),
+                                            )
+                                          ]),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                      left: 18,
+                                      right: 18,
+                                      top: 4,
+                                    ),
+                                    child: RichText(
+                                      text: TextSpan(
+                                          text: "Producer : ",
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.normal,
+                                          ),
+                                          children: [
+                                            TextSpan(
+                                              text: movie.producer!,
+                                              style: const TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.normal,
+                                              ),
+                                            )
+                                          ]),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 15),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                      left: 18,
+                                      right: 18,
+                                      top: 4,
+                                    ),
+                                    child: RichText(
+                                      text: TextSpan(
+                                          text: "Released : ",
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.normal,
+                                          ),
+                                          children: [
+                                            TextSpan(
+                                              text: DateFormat.yMMMd().format(
+                                                  DateTime.parse(
+                                                      movie.releaseDate!)),
+                                              style: const TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.normal,
+                                              ),
+                                            )
+                                          ]),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
+                            SingleChildScrollView(
+                              child: Column(
+                                children: [
+                                  ...state.crews.map(
+                                    (e) => Container(
+                                      margin: const EdgeInsets.only(bottom: 10),
+                                      padding: const EdgeInsets.only(left: 10),
+                                      child: Row(
+                                        children: [
+                                          CircleAvatar(
+                                            backgroundColor:
+                                                MyColors.secondaryBackground,
+                                            backgroundImage: NetworkImage(
+                                                API.baseUrl + e.image!),
+                                            radius: 30,
+                                          ),
+                                          const SizedBox(width: 10),
+                                          Text(
+                                            "${e.fname} ${e.lname}",
+                                            style: TextStyle(
+                                              color: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyText1!
+                                                  .color,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SingleChildScrollView(
+                              child: Column(
+                                children: [
+                                  RatingBar.builder(
+                                    initialRating: 3,
+                                    minRating: 1,
+                                    direction: Axis.horizontal,
+                                    allowHalfRating: true,
+                                    itemCount: 5,
+                                    itemPadding: const EdgeInsets.symmetric(
+                                      horizontal: 4.0,
+                                    ),
+                                    itemBuilder: (context, _) => const Icon(
+                                      Icons.star,
+                                      color: Colors.amber,
+                                    ),
+                                    unratedColor:
+                                        Theme.of(context).primaryColorLight,
+                                    onRatingUpdate: (rating) {
+                                      print(rating);
+                                    },
+                                  ),
+                                  const SizedBox(height: 10),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      vertical: 4.0,
+                                      horizontal: 20,
+                                    ),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color:
+                                            Theme.of(context).primaryColorLight,
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 8,
+                                        vertical: 2,
+                                      ),
+                                      child: TextField(
+                                        maxLines: 3,
+                                        decoration: InputDecoration(
+                                          hintText: "Write here...",
+                                          hintStyle: TextStyle(
+                                            color: Theme.of(context)
+                                                .textTheme
+                                                .bodyText2!
+                                                .color,
+                                          ),
+                                        ),
+                                        onSubmitted: (value) {},
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 10),
+                                ],
+                              ),
+                            )
                           ],
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          left: 18,
-                          right: 18,
-                          top: 4,
-                        ),
-                        child: RichText(
-                          text: TextSpan(
-                              text: "Director : ",
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 14,
-                                fontWeight: FontWeight.normal,
-                              ),
-                              children: [
-                                TextSpan(
-                                  text: movie.director!,
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.normal,
-                                  ),
-                                )
-                              ]),
-                        ),
-                      ),
-                      const SizedBox(height: 10),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          left: 18,
-                          right: 18,
-                          top: 4,
-                        ),
-                        child: RichText(
-                          text: TextSpan(
-                              text: "Producer : ",
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 14,
-                                fontWeight: FontWeight.normal,
-                              ),
-                              children: [
-                                TextSpan(
-                                  text: movie.producer!,
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.normal,
-                                  ),
-                                )
-                              ]),
                         ),
                       ),
                     ],
