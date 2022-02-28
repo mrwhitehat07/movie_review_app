@@ -1,4 +1,3 @@
-import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
@@ -110,8 +109,9 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                               ),
                               child: InkWell(
                                 onTap: () {
-                                  Get.to(() =>
-                                      MovieGridScreen(id: genres[index].id!, title: genres[index].title!));
+                                  Get.to(() => MovieGridScreen(
+                                      id: genres[index].id!,
+                                      title: genres[index].title!));
                                 },
                                 child: Container(
                                   width: 150,
@@ -142,50 +142,53 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                         ),
                       ),
                       const SizedBox(height: 20),
-                      Container(
-                        padding: const EdgeInsets.only(left: 20),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "Your searches",
-                              style: TextStyle(
-                                color: Theme.of(context)
-                                    .textTheme
-                                    .bodyText1!
-                                    .color,
-                                fontSize: 20,
-                              ),
-                            ),
-                            MaterialButton(
-                              onPressed: () {},
-                              child: Row(
-                                children: [
-                                  Text(
-                                    "Clear all",
-                                    style: TextStyle(
-                                      color: Theme.of(context)
-                                          .textTheme
-                                          .bodyText2!
-                                          .color,
-                                    ),
-                                  ),
-                                  const SizedBox(width: 2),
-                                  Icon(
-                                    EvaIcons.close,
-                                    color: Theme.of(context)
-                                        .textTheme
-                                        .bodyText2!
-                                        .color,
-                                    size: 16,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(height: 10),
+                      // Container(
+                      //   padding: const EdgeInsets.only(left: 20),
+                      //   child: Row(
+                      //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //     children: [
+                      //       Text(
+                      //         "Your searches",
+                      //         style: TextStyle(
+                      //           color: Theme.of(context)
+                      //               .textTheme
+                      //               .bodyText1!
+                      //               .color,
+                      //           fontSize: 20,
+                      //         ),
+                      //       ),
+                      //       MaterialButton(
+                      //         onPressed: () {},
+                      //         child: Row(
+                      //           children: [
+                      //             Text(
+                      //               "Clear all",
+                      //               style: TextStyle(
+                      //                 color: Theme.of(context)
+                      //                     .textTheme
+                      //                     .bodyText2!
+                      //                     .color,
+                      //               ),
+                      //             ),
+                      //             const SizedBox(width: 2),
+                      //             Icon(
+                      //               EvaIcons.close,
+                      //               color: Theme.of(context)
+                      //                   .textTheme
+                      //                   .bodyText2!
+                      //                   .color,
+                      //               size: 16,
+                      //             ),
+                      //           ],
+                      //         ),
+                      //       ),
+                      //     ],
+                      //   ),
+                      // ),
+                      // const SizedBox(height: 10),
+                      // ...state.data.map((e) => ListTile(
+                      //       title: e.query,
+                      //     )),
                     ],
                   ),
                 ),

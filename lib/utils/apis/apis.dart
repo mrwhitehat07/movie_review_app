@@ -1,5 +1,5 @@
 class API {
-  static String baseUrl = 'http://192.168.1.64:8000';
+  static String baseUrl = 'http://10.1.1.37:8000';
   static String loginUrl = '/user/login/';
   static String registerUrl = '/user/register/';
   static String profileUrl = '/user/profile/';

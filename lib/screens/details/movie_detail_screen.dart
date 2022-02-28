@@ -23,6 +23,8 @@ class MovieDetailScreen extends StatefulWidget {
 class _MovieDetailScreenState extends State<MovieDetailScreen>
     with SingleTickerProviderStateMixin {
   late TabController tabController;
+  final reviewController = TextEditingController();
+  double rate = 3;
 
   @override
   void initState() {
@@ -310,24 +312,25 @@ class _MovieDetailScreenState extends State<MovieDetailScreen>
                                     ),
                                     child: RichText(
                                       text: TextSpan(
-                                          text: "Released : ",
-                                          style: const TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.normal,
-                                          ),
-                                          children: [
-                                            TextSpan(
-                                              text: DateFormat.yMMMd().format(
-                                                  DateTime.parse(
-                                                      movie.releaseDate!)),
-                                              style: const TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.normal,
-                                              ),
-                                            )
-                                          ]),
+                                        text: "Released : ",
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.normal,
+                                        ),
+                                        children: [
+                                          TextSpan(
+                                            text: DateFormat.yMMMd().format(
+                                                DateTime.parse(
+                                                    movie.releaseDate!)),
+                                            style: const TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.normal,
+                                            ),
+                                          )
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -385,7 +388,9 @@ class _MovieDetailScreenState extends State<MovieDetailScreen>
                                     unratedColor:
                                         Theme.of(context).primaryColorLight,
                                     onRatingUpdate: (rating) {
-                                      print(rating);
+                                      setState(() {
+                                        rate = rating;
+                                      });
                                     },
                                   ),
                                   const SizedBox(height: 10),
@@ -406,6 +411,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen>
                                       ),
                                       child: TextField(
                                         maxLines: 3,
+                                        controller: reviewController,
                                         decoration: InputDecoration(
                                           hintText: "Write here...",
                                           hintStyle: TextStyle(
@@ -414,12 +420,89 @@ class _MovieDetailScreenState extends State<MovieDetailScreen>
                                                 .bodyText2!
                                                 .color,
                                           ),
+                                          border: InputBorder.none,
                                         ),
-                                        onSubmitted: (value) {},
+                                        style: TextStyle(
+                                          color: Theme.of(context)
+                                              .textTheme
+                                              .bodyText1!
+                                              .color,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 5),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      vertical: 4.0,
+                                      horizontal: 20,
+                                    ),
+                                    child: InkWell(
+                                      onTap: () {
+                                        BlocProvider.of<MovieDetailBloc>(
+                                                context)
+                                            .add(RateReview(
+                                          id: movie.id!,
+                                          review: reviewController.text,
+                                          rate: rate,
+                                        ));
+                                      },
+                                      child: Container(
+                                        width: size.width,
+                                        height: 40,
+                                        decoration: BoxDecoration(
+                                          color: MyColors.primaryButtonColor,
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 8,
+                                          vertical: 2,
+                                        ),
+                                        alignment: Alignment.center,
+                                        child: const Text(
+                                          "Submit",
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 16,
+                                          ),
+                                        ),
                                       ),
                                     ),
                                   ),
                                   const SizedBox(height: 10),
+                                  ...state.review[0]
+                                      .map((e) => Row(
+                                            children: [
+                                              Column(
+                                                children: [
+                                                  Text(
+                                                    e.review,
+                                                    style: TextStyle(
+                                                      color: Theme.of(context)
+                                                          .textTheme
+                                                          .bodyText1!
+                                                          .color,
+                                                    ),
+                                                  ),
+                                                  const SizedBox(height: 4),
+                                                  Text(
+                                                    DateFormat.yMMMd().format(
+                                                        DateTime.parse(
+                                                            e.timestamp)),
+                                                    style: TextStyle(
+                                                      color: Theme.of(context)
+                                                          .textTheme
+                                                          .bodyText1!
+                                                          .color,
+                                                    ),
+                                                  ),
+                                                  const SizedBox(height: 8),
+                                                ],
+                                              ),
+                                            ],
+                                          ))
+                                      .toList(),
                                 ],
                               ),
                             )

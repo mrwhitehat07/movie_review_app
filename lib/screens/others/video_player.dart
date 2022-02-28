@@ -14,7 +14,6 @@ class VideoPlayer extends StatefulWidget {
 
 class _VideoPlayerState extends State<VideoPlayer> {
   late ChewieController _chewieController;
-  late VideoPlayerController _videoPlayerController;
 
   @override
   void initState() {
@@ -37,9 +36,9 @@ class _VideoPlayerState extends State<VideoPlayer> {
 
   @override
   void dispose() {
-    super.dispose();
     _chewieController.dispose();
-    _videoPlayerController.dispose();
+
+    super.dispose();
   }
 
   @override

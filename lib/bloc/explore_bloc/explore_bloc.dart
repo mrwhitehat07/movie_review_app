@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:movie_review/data/hive_models/search_model.dart';
 import 'package:movie_review/data/models/celebs_model.dart';
 import 'package:movie_review/data/models/genre_model.dart';
 import 'package:movie_review/data/models/movie_model.dart';
@@ -26,7 +27,10 @@ class ExploreBloc extends Bloc<ExploreEvent, ExploreState> {
     try {
       emit(ExploreLoading());
       List<Genre> genres = await genreRepository.getGenreList();
-      emit(ExploreLoaded(genre: genres));
+      emit(ExploreLoaded(
+        genre: genres,
+        data: [],
+      ));
     } catch (e) {
       emit(ExploreFailed(message: e.toString()));
     }
@@ -35,6 +39,7 @@ class ExploreBloc extends Bloc<ExploreEvent, ExploreState> {
   Future<void> searches(Search event, Emitter<ExploreState> emit) async {
     try {
       emit(ExploreLoading());
+      await searchRepository.addSearchQuery(SearchModel(query: event.query));
       List result = await searchRepository.searchMovie(event.query);
       emit(SearchList(movie: result[0], celebs: result[1]));
     } catch (e) {

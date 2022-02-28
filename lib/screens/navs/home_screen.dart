@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:movie_review/bloc/home_bloc/home_bloc.dart';
 import 'package:movie_review/screens/details/celebs_detail_screen.dart';
 import 'package:movie_review/screens/details/movie_detail_screen.dart';
+import 'package:movie_review/screens/details/movie_grid_screen.dart';
 import 'package:movie_review/screens/details/movie_loading_screen.dart';
 import 'package:movie_review/utils/apis/apis.dart';
 import 'package:movie_review/utils/colors/colors.dart';
@@ -178,7 +179,10 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
                             MaterialButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Get.to(() => const MovieGridScreen(
+                                    id: 1, title: "Action"));
+                              },
                               child: const Text(
                                 "See more",
                                 style: TextStyle(

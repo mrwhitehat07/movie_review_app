@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
+import 'package:movie_review/data/hive_models/search_model.dart';
 import 'package:movie_review/routes/route.dart';
 import 'package:movie_review/screens/form/change_password.dart';
 import 'package:movie_review/screens/form/profile_update.dart';
@@ -11,14 +12,12 @@ import 'package:movie_review/screens/splash/splash_screen.dart';
 import 'package:movie_review/utils/theme/theme.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
 
-import 'bloc/theme_bloc/theme_bloc.dart';
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // final appDocumentDir = await path_provider.getApplicationDocumentsDirectory();
-  // Hive
-  //   ..init(appDocumentDir.path)
-  //   ..registerAdapter(ThemeAdapter());
+  final appDocumentDir = await path_provider.getApplicationDocumentsDirectory();
+  Hive
+    ..init(appDocumentDir.path)
+    ..registerAdapter(SearchModelAdapter());
   runApp(const MyApp());
 }
 

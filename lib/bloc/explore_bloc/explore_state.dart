@@ -9,8 +9,10 @@ class ExploreLoading extends ExploreState {}
 
 class ExploreLoaded extends ExploreState {
   final List<Genre> genre;
+  final List data;
   ExploreLoaded({
     required this.genre,
+    required this.data,
   });
 
   @override
