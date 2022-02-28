@@ -1,3 +1,4 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
@@ -18,6 +19,19 @@ void main() async {
   Hive
     ..init(appDocumentDir.path)
     ..registerAdapter(SearchModelAdapter());
+  AwesomeNotifications().initialize(null, // icon for your app notification
+      [
+        NotificationChannel(
+            channelKey: 'key1',
+            channelName: 'keyword',
+            channelDescription: "Notification example",
+            defaultColor: const Color(0XFF9050DD),
+            ledColor: Colors.white,
+            playSound: true,
+            enableLights: true,
+            importance: NotificationImportance.High,
+            enableVibration: true)
+      ]);
   runApp(const MyApp());
 }
 

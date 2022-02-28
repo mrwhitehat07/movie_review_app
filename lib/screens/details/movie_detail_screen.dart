@@ -7,6 +7,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:movie_review/bloc/movie_bloc/movie_detail_bloc.dart';
+import 'package:movie_review/data/models/review_model.dart';
 import 'package:movie_review/screens/details/movie_loading_screen.dart';
 import 'package:movie_review/screens/others/video_player.dart';
 import 'package:movie_review/utils/apis/apis.dart';
@@ -442,10 +443,11 @@ class _MovieDetailScreenState extends State<MovieDetailScreen>
                                         BlocProvider.of<MovieDetailBloc>(
                                                 context)
                                             .add(RateReview(
-                                          id: movie.id!,
-                                          review: reviewController.text,
-                                          rate: rate,
-                                        ));
+                                                id: movie.id!,
+                                                review: Review(
+                                                  review: reviewController.text,
+                                                  rating: rate,
+                                                )));
                                       },
                                       child: Container(
                                         width: size.width,

@@ -18,6 +18,7 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
       emit(NotificationLoading());
       List<Notification> notifs =
           await notificationRepository.getNotifications();
+      notificationRepository.notify();
       emit(NotificationLoaded(notif: notifs));
     } catch (e) {
       emit(NotificationLoadFailed(message: e.toString()));

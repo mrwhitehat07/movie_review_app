@@ -1,9 +1,7 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
 import 'package:movie_review/bloc/notification_bloc/notification_bloc.dart';
-import 'package:movie_review/screens/others/favourite_page.dart';
 import 'package:movie_review/utils/colors/colors.dart';
 
 class NotificationScreen extends StatefulWidget {

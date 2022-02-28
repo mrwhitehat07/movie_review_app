@@ -10,11 +10,9 @@ class LoadMovieDetail extends MovieDetailEvent {
 
 class RateReview extends MovieDetailEvent {
   final int id;
-  final String review;
-  final double rate;
+  final Review review;
   RateReview({
     required this.id,
     required this.review,
-    required this.rate,
   });
 }

@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:movie_review/data/models/celebs_model.dart';
 import 'package:movie_review/data/models/movie_model.dart';
+import 'package:movie_review/data/models/review_model.dart';
 import 'package:movie_review/data/repositories/movie_repository.dart';
 import 'package:movie_review/data/repositories/review_repository.dart';
 import 'package:movie_review/data/repositories/secure_storage.dart';
@@ -39,14 +40,14 @@ class MovieDetailBloc extends Bloc<MovieDetailEvent, MovieDetailState> {
 
   Future<void> rateReview(
       RateReview event, Emitter<MovieDetailState> emit) async {
-    try {
+    // try {
     emit(MovieReviewing());
     String? token = await TokenStorage.readToken("token");
-    final result = await reviewRepository.rateReview(
-        event.id, event.rate, event.review, token!);
+    final result =
+        await reviewRepository.rateReview(event.id, event.review, token!);
     emit(MovieReviewSuccess(message: result));
-    } catch (e) {
-      emit(MovieReviewFailed(message: e.toString()));
-    }
+    // } catch (e) {
+    //   emit(MovieReviewFailed(message: e.toString()));
+    // }
   }
 }
