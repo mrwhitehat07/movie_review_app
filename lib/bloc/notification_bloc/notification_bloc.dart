@@ -16,10 +16,11 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
   Future<void> getNotif(GetNotif event, Emitter<NotificationState> emit) async {
     try {
       emit(NotificationLoading());
-      List<Notification> notifs =
+        List<Notification> notifs =
           await notificationRepository.getNotifications();
-      notificationRepository.notify();
-      emit(NotificationLoaded(notif: notifs));
+        notificationRepository.notify();
+        emit(NotificationLoaded(notif: notifs));
+      
     } catch (e) {
       emit(NotificationLoadFailed(message: e.toString()));
     }

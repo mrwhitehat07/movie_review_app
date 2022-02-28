@@ -126,7 +126,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                                     strokeWidth: 1, color: Colors.black),
                               )
                             : Text(
-                                "change password".toUpperCase(),
+                                "change password"
+                                    .toUpperCase(),
                                 style: const TextStyle(
                                   fontWeight: FontWeight.w500,
                                   fontSize: 16,

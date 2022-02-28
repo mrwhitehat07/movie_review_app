@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:movie_review/bloc/auth_bloc/auth_bloc.dart';
 import 'package:movie_review/data/models/profile_options_model.dart';
+import 'package:movie_review/data/repositories/local_auth.dart';
 import 'package:movie_review/routes/route.dart';
 import 'package:movie_review/screens/auth/login_screen.dart';
 import 'package:movie_review/utils/apis/apis.dart';
@@ -17,6 +18,8 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  LocalAuth auth = LocalAuth();
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -79,8 +82,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           return ProfileCardTile(
                             title: option.title,
                             icon: option.icon,
-                            onTap: () {
-                              Get.toNamed(option.route);
+                            onTap: () async {
+                              bool isUser = await auth.authenticate();
+                              if (isUser == true) {
+                                Get.toNamed(option.route);
+                              } else {
+                                Get.snackbar(
+                                  "Error",
+                                  "Only owner can visit page",
+                                  snackPosition: SnackPosition.BOTTOM,
+                                  colorText: Colors.red,
+                                  duration: const Duration(seconds: 1),
+                                  backgroundColor: Colors.white,
+                                );
+                              }
                             },
                           );
                         }).toList(),
@@ -150,8 +165,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         const SizedBox(height: 20),
                         OutlinedButton(
                           onPressed: () {
-                            BlocProvider.of<AuthBloc>(context)
-                                .add(GetUser());
+                            BlocProvider.of<AuthBloc>(context).add(GetUser());
                           },
                           child: Text(
                             "Refresh",

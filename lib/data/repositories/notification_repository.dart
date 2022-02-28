@@ -26,7 +26,7 @@ class NotificationRepository {
           channelKey: 'key1',
           title: 'Just a notification',
           body: 'You just added a new blog',
-          notificationLayout: NotificationLayout.BigPicture,
+          notificationLayout: NotificationLayout.Default,
           bigPicture:
               'https://images.idgesg.net/images/article/2019/01/android-q-notification-inbox-100785464-large.jpg?auto=webp&quality=85,70'),
     );
