@@ -449,6 +449,12 @@ class _MovieDetailScreenState extends State<MovieDetailScreen>
                                                   review: reviewController.text,
                                                   rating: rate,
                                                 )));
+                                        Get.snackbar("Error", "posted",
+                                            snackPosition: SnackPosition.BOTTOM,
+                                            colorText: Colors.green,
+                                            duration:
+                                                const Duration(seconds: 1),
+                                            backgroundColor: Colors.white);
                                       },
                                       child: Container(
                                         width: size.width,

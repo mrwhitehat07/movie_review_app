@@ -14,6 +14,7 @@ class ReviewRepository {
       List data = jsonDecode(res.body);
       List<Review> reviews =
           data.map((e) => Review.fromJson(e['review'])).toList();
+      print(data);
       List<User> user =
           data.map((e) => User.fromProfileJson(e['user'])).toList();
       return [reviews, user];
