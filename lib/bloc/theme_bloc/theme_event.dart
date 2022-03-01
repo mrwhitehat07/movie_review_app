@@ -9,3 +9,5 @@ class ThemeChangedEvent extends ThemeEvent {
   final ThemeData themeData;
   ThemeChangedEvent({required this.themeData});
 }
+
+class CheckInternet extends ThemeEvent {}

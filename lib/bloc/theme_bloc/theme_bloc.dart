@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_review/data/repositories/theme_repo.dart';
 import 'package:movie_review/utils/theme/theme.dart';
@@ -18,6 +19,7 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
       await checkTheme(emit);
     });
     on<ThemeChangedEvent>((event, emit) => changeTheme(event, emit));
+    on<CheckInternet>((event, emit) => checkInternet(event, emit));
   }
 
   Future<void> checkTheme(Emitter<ThemeState> emit) async {
@@ -51,4 +53,18 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
     }
   }
 
+  Future<void> checkInternet(
+      CheckInternet event, Emitter<ThemeState> emit) async {
+    try {
+      var connectivityResult = await (Connectivity().checkConnectivity());
+      if (connectivityResult == ConnectivityResult.mobile ||
+          connectivityResult == ConnectivityResult.wifi) {
+        emit(InternetOk());
+      } else {
+        emit(NoInternet());
+      }
+    } catch (e) {
+      return Future.error(e);
+    }
+  }
 }

@@ -87,14 +87,14 @@ class _MovieDetailScreenState extends State<MovieDetailScreen>
                                     color: Colors.white,
                                   ),
                                 ),
-                                IconButton(
-                                  onPressed: () {},
-                                  icon: const Icon(
-                                    EvaIcons.heart,
-                                    size: 30,
-                                    color: Colors.white,
-                                  ),
-                                ),
+                                // IconButton(
+                                //   onPressed: () {},
+                                //   icon: const Icon(
+                                //     EvaIcons.heart,
+                                //     size: 30,
+                                //     color: Colors.white,
+                                //   ),
+                                // ),
                               ],
                             ),
                           ),
@@ -154,6 +154,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen>
                           indicatorColor: MyColors.primaryButtonColor,
                           labelPadding: const EdgeInsets.symmetric(vertical: 5),
                           indicator: const BoxDecoration(),
+                          isScrollable: false,
                           tabs: const [
                             Text(
                               "About",
@@ -374,7 +375,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen>
                               child: Column(
                                 children: [
                                   RatingBar.builder(
-                                    initialRating: 3,
+                                    initialRating: movie.imdbRating!.toDouble(),
                                     minRating: 1,
                                     direction: Axis.horizontal,
                                     allowHalfRating: true,
@@ -474,35 +475,48 @@ class _MovieDetailScreenState extends State<MovieDetailScreen>
                                   ),
                                   const SizedBox(height: 10),
                                   ...state.review[0]
-                                      .map((e) => Row(
-                                            children: [
-                                              Column(
-                                                children: [
-                                                  Text(
-                                                    e.review,
-                                                    style: TextStyle(
-                                                      color: Theme.of(context)
-                                                          .textTheme
-                                                          .bodyText1!
-                                                          .color,
+                                      .map((e) => Container(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 20),
+                                            margin: const EdgeInsets.only(
+                                                bottom: 10),
+                                            child: Row(
+                                              children: [
+                                                CircleAvatar(
+                                                  backgroundColor:
+                                                      Theme.of(context)
+                                                          .primaryColorLight,
+                                                ),
+                                                const SizedBox(width: 10),
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      e.review,
+                                                      style: TextStyle(
+                                                        color: Theme.of(context)
+                                                            .textTheme
+                                                            .bodyText1!
+                                                            .color,
+                                                      ),
                                                     ),
-                                                  ),
-                                                  const SizedBox(height: 4),
-                                                  Text(
-                                                    DateFormat.yMMMd().format(
-                                                        DateTime.parse(
-                                                            e.timestamp)),
-                                                    style: TextStyle(
-                                                      color: Theme.of(context)
-                                                          .textTheme
-                                                          .bodyText1!
-                                                          .color,
+                                                    const SizedBox(height: 4),
+                                                    Text(
+                                                      DateFormat.yMMMd().format(
+                                                          DateTime.parse(
+                                                              e.timestamp)),
+                                                      style: TextStyle(
+                                                        color: Theme.of(context)
+                                                            .textTheme
+                                                            .bodyText2!
+                                                            .color,
+                                                      ),
                                                     ),
-                                                  ),
-                                                  const SizedBox(height: 8),
-                                                ],
-                                              ),
-                                            ],
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
                                           ))
                                       .toList(),
                                 ],

@@ -23,6 +23,14 @@ class AuthFailed extends AuthState {
   List<Object?> get props => [message];
 }
 
+class RegisterSuccess extends AuthState {
+  final String message;
+  RegisterSuccess({required this.message});
+
+  @override
+  List<Object?> get props => [message];
+}
+
 class NoUser extends AuthState {}
 
 class LoggedOut extends AuthState {}

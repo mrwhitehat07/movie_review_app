@@ -16,3 +16,7 @@ class ThemeChanged extends ThemeState {
   @override
   List<Object?> get props => [themeData];
 }
+
+class InternetOk extends ThemeState {}
+
+class NoInternet extends ThemeState {}

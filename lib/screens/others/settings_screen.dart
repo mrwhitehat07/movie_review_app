@@ -23,17 +23,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
       value: BlocProvider.of<ThemeBloc>(context)..add(ThemeCheckEvent()),
       child: BlocConsumer<ThemeBloc, ThemeState>(
         listener: (context, state) {
-          if (state is ThemeChanged) {
-                if (state.themeData == appThemeData[AppTheme.primaryDark]) {
-                  setState(() {
-                    isDark = true;
-                  });
-                } else {
-                  setState(() {
-                    isDark = false;
-                  });
-                }
-              }
+          // if (state is ThemeChanged) {
+          //       if (state.themeData == appThemeData[AppTheme.primaryDark]) {
+          //         setState(() {
+          //           isDark = true;
+          //         });
+          //       } else {
+          //         setState(() {
+          //           isDark = false;
+          //         });
+          //       }
+          //     }
         },
         builder: (context, state) {
           return Scaffold(
@@ -62,54 +62,54 @@ class _SettingsScreenState extends State<SettingsScreen> {
             body: SafeArea(
               child: SingleChildScrollView(
                 child: Column(
-                  children: [
-                    Container(
-                      width: size.width,
-                      height: 60,
-                      padding:
-                          EdgeInsets.symmetric(horizontal: size.width * 0.04),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      alignment: Alignment.center,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "Dark mode",
-                            style: TextStyle(
-                              color:
-                                  Theme.of(context).textTheme.bodyText1!.color,
-                              fontSize: 16,
-                            ),
-                          ),
-                          Switch(
-                            value: isDark,
-                            onChanged: (value) {
-                              if (isDark) {
-                            BlocProvider.of<ThemeBloc>(context)
-                              .add(
-                                ThemeChangedEvent(
-                                    themeData:
-                                        appThemeData[AppTheme.primaryLight]!),
-                              );
-                          } else {
-                            BlocProvider.of<ThemeBloc>(context)
-                              .add(
-                                ThemeChangedEvent(
-                                    themeData:
-                                        appThemeData[AppTheme.primaryDark]!),
-                              );
-                          }
-                            },
-                            activeColor: MyColors.primaryButtonColor,
-                            activeTrackColor: MyColors.secondaryBackground,
-                            inactiveThumbColor: Colors.grey,
-                            inactiveTrackColor: MyColors.secondaryBackground,
-                          )
-                        ],
-                      ),
-                    ),
+                  children: const [
+                    // Container(
+                    //   width: size.width,
+                    //   height: 60,
+                    //   padding:
+                    //       EdgeInsets.symmetric(horizontal: size.width * 0.04),
+                    //   decoration: BoxDecoration(
+                    //     borderRadius: BorderRadius.circular(10),
+                    //   ),
+                    //   alignment: Alignment.center,
+                    //   child: Row(
+                    //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //     children: [
+                    //       Text(
+                    //         "Dark mode",
+                    //         style: TextStyle(
+                    //           color:
+                    //               Theme.of(context).textTheme.bodyText1!.color,
+                    //           fontSize: 16,
+                    //         ),
+                    //       ),
+                    //       Switch(
+                    //         value: isDark,
+                    //         onChanged: (value) {
+                    //           if (isDark) {
+                    //         BlocProvider.of<ThemeBloc>(context)
+                    //           .add(
+                    //             ThemeChangedEvent(
+                    //                 themeData:
+                    //                     appThemeData[AppTheme.primaryLight]!),
+                    //           );
+                    //       } else {
+                    //         BlocProvider.of<ThemeBloc>(context)
+                    //           .add(
+                    //             ThemeChangedEvent(
+                    //                 themeData:
+                    //                     appThemeData[AppTheme.primaryDark]!),
+                    //           );
+                    //       }
+                    //         },
+                    //         activeColor: MyColors.primaryButtonColor,
+                    //         activeTrackColor: MyColors.secondaryBackground,
+                    //         inactiveThumbColor: Colors.grey,
+                    //         inactiveTrackColor: MyColors.secondaryBackground,
+                    //       )
+                    //     ],
+                    //   ),
+                    // ),
                   ],
                 ),
               ),

@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:movie_review/bloc/auth_bloc/auth_bloc.dart';
 import 'package:movie_review/data/models/user_model.dart';
 import 'package:movie_review/screens/auth/login_screen.dart';
-import 'package:movie_review/utils/colors/colors.dart';
 import 'package:movie_review/widgets/custom_button.dart';
 import 'package:movie_review/widgets/input_box.dart';
 
@@ -29,7 +28,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       create: (context) => AuthBloc(),
       child: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
-          if (state is AuthSuccess) {
+          if (state is RegisterSuccess) {
             Get.to(() => const LoginScreen());
           } else if (state is AuthFailed) {
             Get.snackbar("Error", state.message,

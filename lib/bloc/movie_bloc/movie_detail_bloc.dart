@@ -41,11 +41,12 @@ class MovieDetailBloc extends Bloc<MovieDetailEvent, MovieDetailState> {
   Future<void> rateReview(
       RateReview event, Emitter<MovieDetailState> emit) async {
     // try {
-    emit(MovieReviewing());
+    // emit(MovieReviewing());
     String? token = await TokenStorage.readToken("token");
     final result =
-        await reviewRepository.rateReview(event.id, event.review, token!);
-    emit(MovieReviewSuccess(message: result));
+        await reviewRepository.rateReviewMovie(event.id, event.review, token!);
+    print(result);
+    // emit(MovieReviewSuccess(message: result));
     // } catch (e) {
     //   emit(MovieReviewFailed(message: e.toString()));
     // }

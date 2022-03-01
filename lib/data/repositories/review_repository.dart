@@ -22,27 +22,28 @@ class ReviewRepository {
     }
   }
 
-  Future<String> rateReview(int id, Review review, String token) async {
-    // try {
-    final url = Uri.parse(API.baseUrl + '/movie/$id/reviews/post');
-    Map<String, dynamic> data = {
-      "rating": review.rating!.toDouble(),
-      "review": review.review,
-    };
-    final res = await http.post(
-      url,
-      headers: {
-        "Authorization": "Bearer $token",
-      },
-      body: data,
-    );
-    if (res.statusCode == 200) {
-      return "success";
-    } else {
-      return "failed";
+  Future<String> rateReviewMovie(int id, Review review, String token) async {
+    try {
+      final url = Uri.parse(API.baseUrl + '/movie/$id/reviews/post');
+      Map<String, dynamic> data = {
+        "rating": review.rating!.toString(),
+        "review": review.review,
+      };
+      final res = await http.post(
+        url,
+        headers: {
+          "Authorization": "Bearer $token",
+        },
+        body: data,
+      );
+      print(res.body);
+      if (res.statusCode == 200) {
+        return "success";
+      } else {
+        return "failed";
+      }
+    } catch (e) {
+      return Future.error(e.toString());
     }
-    // } catch (e) {
-    //   return Future.error(e.toString());
-    // }
   }
 }

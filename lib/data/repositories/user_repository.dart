@@ -30,7 +30,7 @@ class UserRepository {
     }
   }
 
-  Future<User> register(User user) async {
+  Future<String> register(User user) async {
     try {
       final url = Uri.parse(API.baseUrl + API.registerUrl);
       final res = await http.post(url, body: {
@@ -40,8 +40,7 @@ class UserRepository {
       });
       if (res.statusCode == 200) {
         final data = jsonDecode(res.body);
-        User userd = User.fromJson(data);
-        return userd;
+        return data[0];
       } else {
         return Future.error("Error occurred");
       }

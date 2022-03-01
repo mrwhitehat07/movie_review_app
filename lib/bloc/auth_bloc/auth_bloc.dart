@@ -35,8 +35,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   Future<void> register(RegisterBegin event, Emitter<AuthState> emit) async {
     try {
       emit(AuthLoading());
-      User user = await userRepository.register(event.user);
-      emit(AuthSuccess(user: user));
+      String user = await userRepository.register(event.user);
+      emit(RegisterSuccess(message: user));
     } catch (e) {
       emit(AuthFailed(message: e.toString()));
     }
@@ -46,6 +46,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     emit(AuthLoading());
     await userRepository.logout();
     emit(LoggedOut());
+    emit(NoUser());
   }
 
   Future<void> getUser(GetUser event, Emitter<AuthState> emit) async {
