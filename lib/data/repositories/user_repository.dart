@@ -19,6 +19,7 @@ class UserRepository {
       );
       if (res.statusCode == 200) {
         final data = jsonDecode(res.body);
+        print(res.body);
         User userd = User.fromJson(data);
         await TokenStorage.saveToken(userd.accessToken!);
         return userd;
@@ -33,11 +34,12 @@ class UserRepository {
   Future<String> register(User user) async {
     try {
       final url = Uri.parse(API.baseUrl + API.registerUrl);
-      final res = await http.post(url, body: {
-        "username": user.username,
-        "email": user.email,
-        "password": user.password,
-      });
+      final res = await http.post(url,
+          body: jsonEncode({
+            "username": user.username,
+            "email": user.email,
+            "password": user.password,
+          }));
       print(res.body);
       if (res.statusCode == 200) {
         final data = jsonDecode(res.body);
