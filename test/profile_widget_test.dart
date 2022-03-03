@@ -10,6 +10,6 @@ void main() {
     await tester.pumpWidget(const MaterialApp(home: ProfileScreen()));
 
     expect(text, findsNWidgets(2));
-    expect(tile, findsNWidgets(3));
+    expect(tile, findsNothing);
   });
 }

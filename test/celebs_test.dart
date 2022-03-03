@@ -13,7 +13,6 @@ import 'celebs_test.mocks.dart';
 void main() {
   group("movie tests", () {
 
-    CelebsRespository celebsRespository = CelebsRespository();
     MovieRespository movieRespository = MovieRespository();
 
     test('return list of celebs', () async {
@@ -25,13 +24,5 @@ void main() {
       expect(await movieRespository.getAllCelebs(), isA<List<Celebs>>());
     });
 
-    test('return a celebs by id', () async {
-      final client = MockClient();
-      when(client
-          .get(Uri.parse(API.baseUrl + API.allCelebs + "1"))
-          .then((value) async => http.Response('{}', 200)));
-
-      expect(await celebsRespository.getCelebsById(1), isA<Celebs>());
-    });
   });
 }

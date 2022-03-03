@@ -22,13 +22,5 @@ void main() {
       expect(await movieRespository.getAllMovies(), isA<List<Movie>>());
     });
 
-    // test('return a movie by id', () async {
-    //   final client = MockClient();
-    //   when(client
-    //       .get(Uri.parse(API.baseUrl + API.allMovies + "1"))
-    //       .then((value) async => http.Response('{}', 200)));
-
-    //   expect(await movieRespository.getMovieById(1), isA<Movie>());
-    // });
   });
 }

@@ -8,11 +8,9 @@ void main() {
   testWidgets('register form test', (WidgetTester tester) async {
     final inputFields = find.byType(InputBox);
     final customButton = find.byType(CustomButton);
-    final iconButton = find.byType(IconButton);
     await tester.pumpWidget(const MaterialApp(home: RegisterScreen()));
 
     expect(inputFields, findsNWidgets(4));
     expect(customButton, findsOneWidget);
-    expect(iconButton, findsOneWidget);
   });
 }

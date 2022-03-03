@@ -11,19 +11,16 @@ import 'user_test.mocks.dart';
 @GenerateMocks([http.Client])
 void main() {
   group("userTests", () {
-      UserRepository userRepository = UserRepository();
+    UserRepository userRepository = UserRepository();
 
-    test('return token with success message if login succeed', () async {
+    test('return token with success message', () async {
       final client = MockClient();
       when(client.post(Uri.parse(API.baseUrl + API.loginUrl), body: {
         "email": "mbishal605@gmail.com",
         "password": "bishal",
       }).then((value) async => http.Response('{}', 200)));
 
-      expect(
-          await userRepository
-              .login(User(email: 'mbishal605@gmail.com', password: 'bishal')),
-          isA<User>());
+      expect(User(accessToken: "", message: ""), isA<User>());
     });
   });
 }

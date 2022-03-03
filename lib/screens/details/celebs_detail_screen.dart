@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:movie_review/bloc/celebs_bloc/celebs_detail_bloc.dart';
-import 'package:movie_review/bloc/movie_bloc/movie_detail_bloc.dart';
 import 'package:movie_review/screens/details/movie_detail_screen.dart';
 import 'package:movie_review/screens/details/movie_loading_screen.dart';
 import 'package:movie_review/utils/apis/apis.dart';
