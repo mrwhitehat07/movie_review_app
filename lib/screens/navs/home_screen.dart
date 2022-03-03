@@ -1,3 +1,4 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
@@ -19,12 +20,34 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  bool isOnline = false;
+
+  checkInternet() async {
+    var result = await Connectivity().checkConnectivity();
+    if (result == ConnectivityResult.mobile ||
+        result == ConnectivityResult.wifi) {
+      setState(() {
+        isOnline = true;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    checkInternet();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return BlocProvider(
-      lazy: false,
-      create: (context) => HomeBloc()..add(LoadHomeData()),
+      create: (context) => HomeBloc()
+        ..add(
+          // (isOnline == true) ? 
+          LoadHomeData() 
+          // : LoadHomeDataOffline()
+          ),
       child: BlocConsumer<HomeBloc, HomeState>(
         listener: (context, state) {
           debugPrint(state.toString());

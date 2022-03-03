@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:hive/hive.dart';
 part 'celeb_model.g.dart';
 
@@ -10,7 +12,7 @@ class CelebsModel extends HiveObject {
   @HiveField(2)
   final String lname;
   @HiveField(3)
-  final String image;
+  final Uint8List image;
   CelebsModel({
     required this.id,
     required this.fname,

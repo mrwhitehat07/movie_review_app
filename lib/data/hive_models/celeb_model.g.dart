@@ -20,7 +20,7 @@ class CelebsModelAdapter extends TypeAdapter<CelebsModel> {
       id: fields[0] as int,
       fname: fields[1] as String,
       lname: fields[2] as String,
-      image: fields[3] as String,
+      image: fields[3] as Uint8List ,
     );
   }
 

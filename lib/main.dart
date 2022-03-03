@@ -17,7 +17,10 @@ import 'package:path_provider/path_provider.dart' as path_provider;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  
+
   final appDocumentDir = await path_provider.getApplicationDocumentsDirectory();
+
   Hive
     ..init(appDocumentDir.path)
     ..registerAdapter(MovieModelAdapter())
@@ -69,22 +72,25 @@ class MyApp extends StatelessWidget {
           }
         },
         builder: (context, state) {
-    return GetMaterialApp(
-      title: 'Movie Review',
-      initialRoute: MyRoutes.splashPage,
-      debugShowCheckedModeBanner: false,
-      theme: appThemeData[AppTheme.primaryDark],
-      getPages: [
-        GetPage(name: MyRoutes.splashPage, page: () => const SplashScreen()),
-        GetPage(name: MyRoutes.homePage, page: () => const HomeScreen()),
-        GetPage(
-            name: MyRoutes.profileEdit, page: () => const ProfileUpdateForm()),
-        GetPage(
-            name: MyRoutes.changePassword,
-            page: () => const ChangePasswordScreen()),
-        GetPage(name: MyRoutes.settings, page: () => const SettingsScreen())
-      ],
-    );
+          return GetMaterialApp(
+            title: 'Movie Review',
+            initialRoute: MyRoutes.splashPage,
+            debugShowCheckedModeBanner: false,
+            theme: appThemeData[AppTheme.primaryDark],
+            getPages: [
+              GetPage(
+                  name: MyRoutes.splashPage, page: () => const SplashScreen()),
+              GetPage(name: MyRoutes.homePage, page: () => const HomeScreen()),
+              GetPage(
+                  name: MyRoutes.profileEdit,
+                  page: () => const ProfileUpdateForm()),
+              GetPage(
+                  name: MyRoutes.changePassword,
+                  page: () => const ChangePasswordScreen()),
+              GetPage(
+                  name: MyRoutes.settings, page: () => const SettingsScreen())
+            ],
+          );
         },
       ),
     );

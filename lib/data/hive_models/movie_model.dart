@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:hive/hive.dart';
 part 'movie_model.g.dart';
 
@@ -8,7 +10,7 @@ class MovieModel extends HiveObject {
   @HiveField(1)
   final String title;
   @HiveField(2)
-  final String image;
+  final Uint8List image;
   @HiveField(3)
   final String date;
   MovieModel({
