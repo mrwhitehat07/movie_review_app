@@ -1,12 +1,11 @@
 import 'dart:convert';
 
 import 'package:movie_review/data/models/review_model.dart';
-import 'package:movie_review/data/models/user_model.dart';
 import 'package:movie_review/utils/apis/apis.dart';
 import 'package:http/http.dart' as http;
 
 class ReviewRepository {
-  Future<List> getReviews(int id) async {
+  Future<List<Review>> getReviews(int id) async {
     try {
       final url = Uri.parse(API.baseUrl + '/movie/$id/reviews');
       final res = await http.get(url);
@@ -14,10 +13,8 @@ class ReviewRepository {
       List data = jsonDecode(res.body);
       List<Review> reviews =
           data.map((e) => Review.fromJson(e['review'])).toList();
-      print(data);
-      List<User> user =
-          data.map((e) => User.fromProfileJson(e['user'])).toList();
-      return [reviews, user];
+
+      return reviews;
     } catch (e) {
       return Future.error(e.toString());
     }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:movie_review/bloc/auth_bloc/auth_bloc.dart';
+import 'package:movie_review/bloc/internet_bloc/internet_bloc.dart';
 
 import 'package:movie_review/routes/route.dart';
 
@@ -32,6 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => AuthBloc()),
+        BlocProvider(create: (context) => InternetBloc()),
       ],
       child: const Scaffold(
         backgroundColor: Colors.black,

@@ -4,10 +4,13 @@ import 'package:movie_review/screens/navs/discover_screen.dart';
 import 'package:movie_review/screens/navs/home_screen.dart';
 import 'package:movie_review/screens/navs/notification_screen.dart';
 import 'package:movie_review/screens/navs/profile_screen.dart';
-import 'package:movie_review/utils/colors/colors.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({
+    Key? key,
+    this.currentIndex = 0,
+  }) : super(key: key);
+  final int currentIndex;
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -16,6 +19,14 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
   bool isLoggedOn = true;
+
+  @override
+  void initState() {
+    setState(() {
+      _currentIndex = widget.currentIndex;
+    });
+    super.initState();
+  }
 
   void _onNavItemTapped(int index) {
     setState(() {

@@ -30,7 +30,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen>
   @override
   void initState() {
     tabController = TabController(length: 3, vsync: this);
-    tabController.animateTo(2);
+    tabController.animateTo(0);
     super.initState();
   }
 
@@ -47,6 +47,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen>
         builder: (context, state) {
           if (state is MovieDetailLoadSuccess) {
             final movie = state.movie;
+            List review = state.review;
             return Scaffold(
               backgroundColor: MyColors.background,
               body: SafeArea(
@@ -87,14 +88,6 @@ class _MovieDetailScreenState extends State<MovieDetailScreen>
                                     color: Colors.white,
                                   ),
                                 ),
-                                // IconButton(
-                                //   onPressed: () {},
-                                //   icon: const Icon(
-                                //     EvaIcons.heart,
-                                //     size: 30,
-                                //     color: Colors.white,
-                                //   ),
-                                // ),
                               ],
                             ),
                           ),
@@ -188,6 +181,31 @@ class _MovieDetailScreenState extends State<MovieDetailScreen>
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                      left: 18,
+                                      top: 4,
+                                    ),
+                                    child: Container(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 15,
+                                        vertical: 10,
+                                      ),
+                                      margin: const EdgeInsets.only(right: 4),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(20),
+                                        color: MyColors.secondaryBackground,
+                                      ),
+                                      child: (Text(
+                                        "IMDB ${movie.imdbRating}⭐'s",
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16,
+                                        ),
+                                      )),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 10),
                                   Padding(
                                     padding: const EdgeInsets.only(
                                       left: 18,
@@ -375,7 +393,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen>
                               child: Column(
                                 children: [
                                   RatingBar.builder(
-                                    initialRating: movie.imdbRating!.toDouble(),
+                                    initialRating: 3,
                                     minRating: 1,
                                     direction: Axis.horizontal,
                                     allowHalfRating: true,
@@ -447,7 +465,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen>
                                                 id: movie.id!,
                                                 review: Review(
                                                   review: reviewController.text,
-                                                  rating: rate,
+                                                  rating: rate.toString(),
                                                 )));
                                         Get.snackbar("Error", "posted",
                                             snackPosition: SnackPosition.BOTTOM,
@@ -480,51 +498,89 @@ class _MovieDetailScreenState extends State<MovieDetailScreen>
                                     ),
                                   ),
                                   const SizedBox(height: 10),
-                                  ...state.review[0]
+                                  ...review
                                       .map((e) => Container(
                                             padding: const EdgeInsets.symmetric(
                                                 horizontal: 20),
                                             margin: const EdgeInsets.only(
                                                 bottom: 10),
-                                            child: Row(
+                                            alignment: Alignment.centerLeft,
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
                                               children: [
-                                                CircleAvatar(
-                                                  backgroundColor:
-                                                      Theme.of(context)
-                                                          .primaryColorLight,
-                                                ),
-                                                const SizedBox(width: 10),
-                                                Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
+                                                Row(
                                                   children: [
                                                     Text(
-                                                      e.review,
+                                                      e.user!.username,
                                                       style: TextStyle(
                                                         color: Theme.of(context)
                                                             .textTheme
                                                             .bodyText1!
                                                             .color,
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.w500,
                                                       ),
                                                     ),
-                                                    const SizedBox(height: 4),
-                                                    Text(
-                                                      DateFormat.yMMMd().format(
-                                                          DateTime.parse(
-                                                              e.timestamp)),
-                                                      style: TextStyle(
-                                                        color: Theme.of(context)
-                                                            .textTheme
-                                                            .bodyText2!
-                                                            .color,
+                                                    const SizedBox(width: 4),
+                                                    RatingBar.builder(
+                                                      initialRating:
+                                                          double.parse(
+                                                              e.rating),
+                                                      minRating: 0,
+                                                      direction:
+                                                          Axis.horizontal,
+                                                      allowHalfRating: true,
+                                                      itemCount: 5,
+                                                      itemPadding:
+                                                          const EdgeInsets
+                                                              .symmetric(
+                                                        horizontal: 4.0,
                                                       ),
+                                                      itemSize: 12,
+                                                      itemBuilder:
+                                                          (context, _) =>
+                                                              const Icon(
+                                                        Icons.star,
+                                                        color: Colors.amber,
+                                                      ),
+                                                      unratedColor: Theme.of(
+                                                              context)
+                                                          .primaryColorLight,
+                                                      onRatingUpdate:
+                                                          (rating) {},
                                                     ),
                                                   ],
                                                 ),
+                                                const SizedBox(height: 4),
+                                                Text(
+                                                  e.review,
+                                                  style: TextStyle(
+                                                    color: Theme.of(context)
+                                                        .textTheme
+                                                        .bodyText1!
+                                                        .color,
+                                                  ),
+                                                ),
+                                                const SizedBox(height: 4),
+                                                Text(
+                                                  DateFormat.yMMMd().format(
+                                                      DateTime.parse(
+                                                          e.timestamp)),
+                                                  style: TextStyle(
+                                                    color: Theme.of(context)
+                                                        .textTheme
+                                                        .bodyText2!
+                                                        .color,
+                                                  ),
+                                                ),
+                                                const SizedBox(height: 10),
                                               ],
                                             ),
                                           ))
                                       .toList(),
+                                  const SizedBox(height: 20),
                                 ],
                               ),
                             )
@@ -537,6 +593,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen>
               ),
             );
           } else if (state is MovieDetailLoadFailed) {
+            print(state.message.toString());
             return Scaffold(
               backgroundColor: MyColors.background,
               body: SafeArea(

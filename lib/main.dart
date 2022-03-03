@@ -3,10 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
-import 'package:movie_review/bloc/theme_bloc/theme_bloc.dart';
+import 'package:movie_review/bloc/internet_bloc/internet_bloc.dart';
 import 'package:movie_review/data/hive_models/celeb_model.dart';
 import 'package:movie_review/data/hive_models/movie_model.dart';
-import 'package:movie_review/data/hive_models/theme_model.dart';
 import 'package:movie_review/routes/route.dart';
 import 'package:movie_review/screens/form/change_password.dart';
 import 'package:movie_review/screens/form/profile_update.dart';
@@ -21,7 +20,6 @@ void main() async {
   final appDocumentDir = await path_provider.getApplicationDocumentsDirectory();
   Hive
     ..init(appDocumentDir.path)
-    ..registerAdapter(ThemeModelAdapter())
     ..registerAdapter(MovieModelAdapter())
     ..registerAdapter(CelebsModelAdapter());
   AwesomeNotifications().initialize(null, // icon for your app notification
@@ -46,46 +44,47 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ThemeBloc()..add(CheckInternet()),
-      child: BlocConsumer<ThemeBloc, ThemeState>(
+      create: (context) => InternetBloc()..add(CheckInternet()),
+      child: BlocConsumer<InternetBloc, InternetState>(
         listener: (context, state) {
+          print(state.toString());
           if (state is NoInternet) {
-            Get.snackbar("Error", "No internet connection",
-                snackPosition: SnackPosition.BOTTOM,
-                colorText: Colors.red,
-                duration: const Duration(seconds: 1),
-                backgroundColor: Colors.white,);
+            Get.snackbar(
+              "Error",
+              "No internet connection",
+              snackPosition: SnackPosition.BOTTOM,
+              colorText: Colors.red,
+              duration: const Duration(seconds: 1),
+              backgroundColor: Colors.white,
+            );
           } else if (state is InternetOk) {
-            Get.snackbar("Connection", "Internet connection found",
-                snackPosition: SnackPosition.BOTTOM,
-                colorText: Colors.green,
-                duration: const Duration(seconds: 1),
-                backgroundColor: Colors.white,);
+            Get.snackbar(
+              "Connection",
+              "Internet connection found",
+              snackPosition: SnackPosition.BOTTOM,
+              colorText: Colors.green,
+              duration: const Duration(seconds: 1),
+              backgroundColor: Colors.white,
+            );
           }
         },
         builder: (context, state) {
-          return GetMaterialApp(
-            title: 'Movie Review',
-            initialRoute: MyRoutes.splashPage,
-            debugShowCheckedModeBanner: false,
-            // theme: (state is ThemeChanged)
-            //     ? state.themeData
-            //     : appThemeData[AppTheme.primaryLight],
-            theme: appThemeData[AppTheme.primaryDark],
-            getPages: [
-              GetPage(
-                  name: MyRoutes.splashPage, page: () => const SplashScreen()),
-              GetPage(name: MyRoutes.homePage, page: () => const HomeScreen()),
-              GetPage(
-                  name: MyRoutes.profileEdit,
-                  page: () => const ProfileUpdateForm()),
-              GetPage(
-                  name: MyRoutes.changePassword,
-                  page: () => const ChangePasswordScreen()),
-              GetPage(
-                  name: MyRoutes.settings, page: () => const SettingsScreen())
-            ],
-          );
+    return GetMaterialApp(
+      title: 'Movie Review',
+      initialRoute: MyRoutes.splashPage,
+      debugShowCheckedModeBanner: false,
+      theme: appThemeData[AppTheme.primaryDark],
+      getPages: [
+        GetPage(name: MyRoutes.splashPage, page: () => const SplashScreen()),
+        GetPage(name: MyRoutes.homePage, page: () => const HomeScreen()),
+        GetPage(
+            name: MyRoutes.profileEdit, page: () => const ProfileUpdateForm()),
+        GetPage(
+            name: MyRoutes.changePassword,
+            page: () => const ChangePasswordScreen()),
+        GetPage(name: MyRoutes.settings, page: () => const SettingsScreen())
+      ],
+    );
         },
       ),
     );

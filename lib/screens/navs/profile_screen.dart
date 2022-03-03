@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -5,10 +7,12 @@ import 'package:get/get.dart';
 import 'package:movie_review/bloc/auth_bloc/auth_bloc.dart';
 import 'package:movie_review/data/models/profile_options_model.dart';
 import 'package:movie_review/data/repositories/local_auth.dart';
-import 'package:movie_review/routes/route.dart';
 import 'package:movie_review/screens/auth/login_screen.dart';
+import 'package:movie_review/screens/form/profile_update.dart';
+import 'package:movie_review/screens/home_screen.dart';
 import 'package:movie_review/utils/apis/apis.dart';
 import 'package:movie_review/widgets/profille_tile.dart';
+import 'package:sensors_plus/sensors_plus.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -19,6 +23,35 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   LocalAuth auth = LocalAuth();
+  late List<double> _accelerometerValues;
+  final _streamSubscriptions = <StreamSubscription<dynamic>>[];
+
+  @override
+  void initState() {
+    super.initState();
+    _streamSubscriptions.add(
+      userAccelerometerEvents.listen(
+        (UserAccelerometerEvent event) {
+          setState(() {
+            _accelerometerValues = <double>[event.x, event.y, event.z];
+          });
+          if (_accelerometerValues.isNotEmpty) {
+            if (_accelerometerValues[1] > 1 && _accelerometerValues[1] < 3) {
+              Get.to(() => const ProfileUpdateForm());
+            }
+          }
+        },
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    for (final subscription in _streamSubscriptions) {
+      subscription.cancel();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +62,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         listener: (context, state) {
           debugPrint(state.toString());
           if (state is LoggedOut) {
-            Get.toNamed(MyRoutes.homePage);
+            Get.to(() => const HomeScreen(currentIndex: 3));
             Get.snackbar(
               "Error",
               "Logged out",
@@ -68,15 +101,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                        const SizedBox(height: 5),
-                        Text(
-                          "mbishal605@gmail.com",
-                          style: TextStyle(
-                            color: Theme.of(context).textTheme.bodyText2!.color,
-                            fontSize: 16,
-                            fontWeight: FontWeight.normal,
-                          ),
-                        ),
+                        // const SizedBox(height: 5),
+                        // Text(
+                        //   "mbishal605@gmail.com",
+                        //   style: TextStyle(
+                        //     color: Theme.of(context).textTheme.bodyText2!.color,
+                        //     fontSize: 16,
+                        //     fontWeight: FontWeight.normal,
+                        //   ),
+                        // ),
                         const SizedBox(height: 20),
                         ...options.map((option) {
                           return ProfileCardTile(

@@ -17,6 +17,7 @@ class VideoPlayer extends StatefulWidget {
 
 class _VideoPlayerState extends State<VideoPlayer> {
   late ChewieController _chewieController;
+  late VideoPlayerController _videoPlayerController;
   bool isNear = false;
   late StreamSubscription<dynamic> _streamSubscription;
 
@@ -27,35 +28,47 @@ class _VideoPlayerState extends State<VideoPlayer> {
       }
     };
     _streamSubscription = ProximitySensor.events.listen((int event) {
+      print(event);
       setState(() {
         isNear = (event > 0) ? true : false;
       });
     });
   }
 
+  void initializePlayer() async {
+    _videoPlayerController = VideoPlayerController.network(widget.videoUrl);
+
+    await Future.wait([_videoPlayerController.initialize()]);
+    setState(() {});
+  }
+
   @override
   void initState() {
     super.initState();
-    listenSensor();
+    initializePlayer();
     _chewieController = ChewieController(
-        videoPlayerController: VideoPlayerController.network(widget.videoUrl),
-        autoPlay: true,
-        looping: false,
-        aspectRatio: 4 / 3,
-        autoInitialize: true,
-        errorBuilder: (context, errorMessage) {
-          return Center(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(errorMessage),
-            ),
-          );
-        });
+      videoPlayerController: _videoPlayerController,
+      autoPlay: true,
+      looping: false,
+      aspectRatio: 4 / 3,
+      autoInitialize: true,
+      showControls: true,
+      errorBuilder: (context, errorMessage) {
+        return Center(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(errorMessage),
+          ),
+        );
+      },
+    );
+    listenSensor();
   }
 
   @override
   void dispose() {
     _chewieController.dispose();
+    _videoPlayerController.dispose();
     _streamSubscription.cancel();
     super.dispose();
   }

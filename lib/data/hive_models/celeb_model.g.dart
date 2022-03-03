@@ -8,7 +8,7 @@ part of 'celeb_model.dart';
 
 class CelebsModelAdapter extends TypeAdapter<CelebsModel> {
   @override
-  final int typeId = 2;
+  final int typeId = 1;
 
   @override
   CelebsModel read(BinaryReader reader) {

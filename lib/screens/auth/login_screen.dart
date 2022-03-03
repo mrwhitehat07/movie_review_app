@@ -30,7 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
       child: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state is AuthSuccess) {
-            Get.to(() => const HomeScreen());
+            Get.to(() => const HomeScreen(currentIndex: 3));
           } else if (state is AuthFailed) {
             Get.snackbar("Error", state.message,
                 snackPosition: SnackPosition.BOTTOM,

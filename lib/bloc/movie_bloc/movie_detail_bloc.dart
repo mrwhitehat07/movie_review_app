@@ -24,7 +24,7 @@ class MovieDetailBloc extends Bloc<MovieDetailEvent, MovieDetailState> {
     try {
       emit(MovieDetailLoading());
       final data = await movieRespository.getMovieById(event.id);
-      final review = await reviewRepository.getReviews(event.id);
+      List<Review> review = await reviewRepository.getReviews(event.id);
 
       Movie movie = data[0];
       List<Celebs> celebs = data[1];

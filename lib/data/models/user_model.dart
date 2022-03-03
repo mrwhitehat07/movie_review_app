@@ -45,4 +45,10 @@ class User {
         phone: json['phone'],
         avatar: json['avatar']);
   }
+
+  factory User.fromReviewUser(Map<String, dynamic> json) {
+    return User(
+        username: json['username'],
+    );
+  }
 }

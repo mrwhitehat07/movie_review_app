@@ -40,19 +40,25 @@ class _ProfileUpdateFormState extends State<ProfileUpdateForm> {
       create: (context) => AuthBloc()..add(GetUser()),
       child: BlocConsumer<AuthBloc, AuthState>(listener: (context, state) {
         if (state is ProfileUpdated) {
-          Get.to(() => const HomeScreen());
-          Get.snackbar("Success", state.message,
-              snackPosition: SnackPosition.BOTTOM,
-              colorText: Colors.green,
-              duration: const Duration(seconds: 1),
-              backgroundColor: Colors.white);
+          Get.to(() => const HomeScreen(currentIndex: 3));
+          Get.snackbar(
+            "Success",
+            state.message,
+            snackPosition: SnackPosition.BOTTOM,
+            colorText: Colors.green,
+            duration: const Duration(seconds: 1),
+            backgroundColor: Colors.white,
+          );
         } else if (state is ProfileUpdated) {
-          Get.to(() => const HomeScreen());
-          Get.snackbar("Error", state.message,
-              snackPosition: SnackPosition.BOTTOM,
-              colorText: Colors.red,
-              duration: const Duration(seconds: 1),
-              backgroundColor: Colors.white);
+          Get.to(() => const HomeScreen(currentIndex: 3));
+          Get.snackbar(
+            "Error",
+            state.message,
+            snackPosition: SnackPosition.BOTTOM,
+            colorText: Colors.red,
+            duration: const Duration(seconds: 1),
+            backgroundColor: Colors.white,
+          );
         }
       }, builder: (context, state) {
         if (state is AuthSuccess) {
@@ -114,8 +120,12 @@ class _ProfileUpdateFormState extends State<ProfileUpdateForm> {
                           child: CircleAvatar(
                             backgroundColor: Colors.transparent,
                             child: IconButton(
-                              icon: const Icon(
+                              icon: Icon(
                                 EvaIcons.edit2Outline,
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .bodyText1!
+                                    .color,
                               ),
                               onPressed: () {
                                 showModalBottomSheet(
@@ -283,13 +293,16 @@ class _ProfileUpdateFormState extends State<ProfileUpdateForm> {
                                 width: 20,
                                 height: 20,
                                 child: CircularProgressIndicator(
-                                    strokeWidth: 1, color: Colors.black),
+                                  strokeWidth: 1,
+                                  color: Colors.black,
+                                ),
                               )
                             : Text(
                                 "save details".toUpperCase(),
                                 style: const TextStyle(
                                   fontWeight: FontWeight.w500,
                                   fontSize: 16,
+                                  color: Colors.black,
                                 ),
                               ),
                       ),

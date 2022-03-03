@@ -38,6 +38,7 @@ class UserRepository {
         "email": user.email,
         "password": user.password,
       });
+      print(res.body);
       if (res.statusCode == 200) {
         final data = jsonDecode(res.body);
         return data[0];

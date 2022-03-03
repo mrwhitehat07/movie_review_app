@@ -1,7 +1,7 @@
 import 'package:hive/hive.dart';
 part 'celeb_model.g.dart';
 
-@HiveType(typeId: 2)
+@HiveType(typeId: 1)
 class CelebsModel extends HiveObject {
   @HiveField(0)
   final int id;
